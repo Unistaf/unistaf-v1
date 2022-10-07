@@ -16,12 +16,16 @@ const Loader = (Component) => (props) =>
 
 const routes: RouteObject[] = [
   {
+    path: '',
+    element: <BaseLayout />
+  },
+  {
     path: 'dashboard',
     element: <SidebarLayout />,
     children: [
       {
-        path: ':id',
-        element: <h1>Hello</h1>
+        path: '',
+        element: <h1>Hello - Acceuil</h1>
       },
     ]
   },
@@ -30,7 +34,7 @@ const routes: RouteObject[] = [
     element: <SidebarLayout />,
     children: [
       {
-        path: ':id',
+        path: '',
         element: <h1>Ecole</h1>
       },
     ]
