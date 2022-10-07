@@ -6,7 +6,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
-import SidebarLayout from './layouts/SidebarLayout';
 
 function App() {
   const content = useRoutes(router);
@@ -16,11 +15,6 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <CssBaseline />
         {content}
-        {/* <Routes>
-          <Route path='dashboard' element={<SidebarLayout />}>
-            <Route path='aliment' element={<h1>Hello</h1>} ></Route>
-          </Route>
-        </Routes> */}
       </LocalizationProvider>
     </ThemeProvider>
   );

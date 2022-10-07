@@ -6,6 +6,8 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import Connexion from './components/auth/Connexion';
+import Signup from './components/auth/Signup';
 
 const Loader = (Component) => (props) =>
   (
@@ -17,7 +19,11 @@ const Loader = (Component) => (props) =>
 const routes: RouteObject[] = [
   {
     path: '',
-    element: <BaseLayout />
+    element: <Connexion />
+  },
+  {
+    path: '/signup',
+    element: <Signup />
   },
   {
     path: 'dashboard',
@@ -26,6 +32,10 @@ const routes: RouteObject[] = [
       {
         path: '',
         element: <h1>Hello - Acceuil</h1>
+      },
+      {
+        path: 'mady',
+        element: <h1>Hello - Mady</h1>
       },
     ]
   },
