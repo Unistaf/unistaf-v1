@@ -2,6 +2,7 @@ import React from 'react'
 import { FormControl, styled, Grid, Box, Button, IconButton, InputAdornment, InputLabel, OutlinedInput, Link, TextField } from '@mui/material';
 import { AlternateEmail, Google, Visibility, VisibilityOff } from '@mui/icons-material';
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
+import iconGoogle from '../../assets/img/google.svg'
 
 
 
@@ -45,7 +46,7 @@ const Connexion = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12} md={6}
           sx = {{
             bgcolor: '#002984',
@@ -76,11 +77,11 @@ const Connexion = () => {
             >
               <Grid className="imgItem"
                 sx = {{
-                  width: '60px',
-                  height: '60px',
+                  width: '70px',
+                  height: '70px',
                   mx: 'auto',
                   borderRadius: '50%',
-                  bgcolor: '#d3d3d3'
+                  border: '2px solid #002984'
                 }}
               >
                 <img src={iconLogoTrans} width = "60px" alt="Logo UNISTAF" />
@@ -90,78 +91,83 @@ const Connexion = () => {
                 <p>Connectez vous pour accéder à des centaines <br /> de choix de filière</p>
               </div>
             </Grid>
-            <Grid className="formContainer"
-              sx = {{
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              <FormControl sx={{ m: 1}} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-email">Adresse Email</InputLabel>
+            <form style={{width: "70%"}}>
+              <Grid className="formContainer"
+                sx = {{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <FormControl sx={{ m: 1, p: 0}} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-email">Adresse Email</InputLabel>
+                    <OutlinedInput
+                      required
+                      id="outlined-adornment-email"
+                      value={values.email}
+                      type = 'email'
+                      onChange={handleChange('email')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            arial-label = "email"
+                            onMouseDown={handleMouseDown}
+                            edge="end"
+                          >
+                            <AlternateEmail />
+                          </IconButton>
+                        </InputAdornment>
+                    }
+                    label="Adresse email"
+                    />
+                </FormControl>
+                <FormControl sx={{ m: 1}} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
                   <OutlinedInput
-                    id="outlined-adornment-email"
-                    value={values.email}
-                    onChange={handleChange('email')}
+                    id="outlined-adornment-password"
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handleChange('password')}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
-                          arial-label = "email"
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDown}
                           edge="end"
                         >
-                          <AlternateEmail />
+                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
-                  }
-                  label="Adresse email"
-                  />
-              </FormControl>
-              <FormControl sx={{ m: 1}} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? 'text' : 'password'}
-                  value={values.password}
-                  onChange={handleChange('password')}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDown}
-                        edge="end"
-                      >
-                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Mot(s) de passe"
-                  />
-                  <Link
-                    href="#"
-                    sx={{
-                      textAlign: 'end'
-                    }}
-                  >
-                    Mot(s) de passe oublié ?
-                  </Link>
-                <Button
-                  sx = {{mt:2}}
-                  variant="contained"
-                  onClick={handleSubmit}
+                    }
+                    label="Mot(s) de passe"
+                    />
+                    <Link
+                      href="#"
+                      sx={{
+                        textAlign: 'end'
+                      }}
+                    >
+                      Mot(s) de passe oublié ?
+                    </Link>
+                  <Button
+                    sx = {{mt:2}}
+                    variant="contained"
+                    onClick={handleSubmit}
                   >
                     Connectez-vous
-                </Button>
-                <Button
-                  sx = {{mt:1}}
-                  variant="outlined"
-                  onClick={handleConnectGoogle}
-                  >
-                    <Google />
-                    <span>Connectez-vous avec Google</span>
-                </Button>
-              </FormControl>
-            </Grid>
+                  </Button>
+                  <Button
+                    sx = {{mt:1}}
+                    variant="outlined"
+                    onClick={handleConnectGoogle}
+                    >
+                      {/* <Google /> */}
+                      <img src={iconGoogle} alt="Icon Google" width={'25px'} /> <span>Connectez-vous avec Google</span>
+                  </Button>
+                </FormControl>
+              </Grid>
+            </form>
             <Grid
                sx = {{
                 position: 'absolute',
