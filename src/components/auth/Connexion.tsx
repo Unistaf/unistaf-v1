@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FormControl,
   styled,
@@ -18,6 +18,7 @@ import {
   VisibilityOff
 } from '@mui/icons-material';
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png';
+import iconGoogle from '../../assets/img/google.svg';
 import { Link } from 'react-router-dom';
 import students from '../../assets/img/students.png'
 
@@ -28,7 +29,7 @@ interface State {
 }
 
 const Connexion = () => {
-  const [values, setValues] = React.useState<State>({
+  const [values, setValues] = useState({
     email: '',
     password: '',
     showPassword: false
@@ -60,7 +61,7 @@ const Connexion = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid
           item
           xs={12}
@@ -73,7 +74,7 @@ const Connexion = () => {
             alignItems: 'center'
           }}
         >
-          <img style={{width: '90%'}} src={students} alt="Happy student" />
+          <img style={{width: '90%'}} src={students} alt="Happy students" />
         </Grid>
         <Grid
           item
@@ -98,11 +99,11 @@ const Connexion = () => {
             <Grid
               className="imgItem"
               sx={{
-                width: '60px',
-                height: '60px',
+                width: '70px',
+                height: '70px',
                 mx: 'auto',
                 borderRadius: '50%',
-                bgcolor: '#d3d3d3'
+                border: '2px solid #002984'
               }}
             >
               <img src={iconLogoTrans} width="60px" alt="Logo UNISTAF" />
@@ -115,84 +116,86 @@ const Connexion = () => {
               </p>
             </div>
           </Grid>
-          <Grid
-            className="formContainer"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
-            <FormControl sx={{ m: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">
-                Adresse Email
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-email"
-                value={values.email}
-                onChange={handleChange('email')}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      arial-label="email"
-                      onMouseDown={handleMouseDown}
-                      edge="end"
-                    >
-                      <AlternateEmail />
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Adresse email"
-              />
-            </FormControl>
-            <FormControl sx={{ m: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
-                Mot de passe
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.password}
-                onChange={handleChange('password')}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDown}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Mot(s) de passe"
-              />
-              <Link
-                to=""
-                style={{
-                  textAlign: 'right',
-                  display: 'inline-block',
-                  width: '100%',
-                  marginTop: '0.5rem',
-                  color: '#5569ff'
-                }}
-              >
-                Mot de passe oublié ?
-              </Link>
-              <Button type="submit" sx={{ mt: 2 }} variant="contained" onClick={handleSubmit}>
-                Connectez-vous
-              </Button>
-
-              <Button
-                sx={{ mt: 1 }}
-                variant="outlined"
-                onClick={handleConnectGoogle}
-              >
-                <Google />
-                <span>Connectez-vous avec Google</span>
-              </Button>
-            </FormControl>
-          </Grid>
+          <form style={{ width: '70%' }}>
+            <Grid
+              className="formContainer"
+              sx={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              <FormControl sx={{ m: 1, p: 0 }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-email">
+                  Adresse Email
+                </InputLabel>
+                <OutlinedInput
+                  required
+                  id="outlined-adornment-email"
+                  value={values.email}
+                  type="email"
+                  onChange={handleChange('email')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        arial-label="email"
+                        onMouseDown={handleMouseDown}
+                        edge="end"
+                      >
+                        <AlternateEmail />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Adresse email"
+                />
+              </FormControl>
+              <FormControl sx={{ m: 1 }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Mot(s) de passe
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDown}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Mot(s) de passe"
+                />
+                <Link style={{textAlign: 'right', marginTop: '0.5rem', color: '#002984'}} to="/password">Mot(s) de passe oublié ?</Link>
+                <Button
+                  sx={{ mt: 2, p: 1.5 }}
+                  variant="contained"
+                  onClick={handleSubmit}
+                >
+                  Connectez-vous
+                </Button>
+                <Button
+                  sx={{ mt: 1, p: 1.5 }}
+                  variant="outlined"
+                  onClick={handleConnectGoogle}
+                >
+                  {/* <Google /> */}
+                  <img src={iconGoogle} alt="Icon Google" width={'25px'} />
+                  <span>Connectez-vous avec Google</span>
+                </Button>
+              </FormControl>
+            </Grid>
+          </form>
           <Grid
             sx={{
               position: 'absolute',
