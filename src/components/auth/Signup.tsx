@@ -9,7 +9,7 @@ interface State {
   nom: string;
   date_de_naissance: Date;
   lieu_de_naissance: string;
-  genre: string;
+  sexe: string;
   nationalite: string;
   pays_de_residence: string;
   adresse: string;
@@ -28,7 +28,7 @@ const Signup = () => {
     nom: '',
     date_de_naissance: null,
     lieu_de_naissance: '',
-    genre: '',
+    sexe: '',
     nationalite: '',
     pays_de_residence: '',
     adresse: '',
@@ -65,7 +65,7 @@ const Signup = () => {
     <Box sx = {{with:'100vw', bgcolor: '#002984'}}>
       <Grid  container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid 
-          item xs={12} md={3}
+          item xs={12} md={4}
           sx = {{
             height: '100vh',
             color: '#fff',
@@ -77,7 +77,7 @@ const Signup = () => {
           <h1>Un texte marketing ou design</h1>
         </Grid>
         <Grid 
-          item xs={12} md={9}
+          item xs={12} md={8}
           sx = {{
             display: 'flex',
             flexDirection: 'column',
@@ -118,7 +118,7 @@ const Signup = () => {
           </Grid>
           <Grid>
             <form>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-prenom">Prénom</InputLabel>
                     <OutlinedInput
                       required
@@ -140,7 +140,7 @@ const Signup = () => {
                       label="prenom"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-nom">Nom</InputLabel>
                     <OutlinedInput
                       required
@@ -162,37 +162,7 @@ const Signup = () => {
                       label="nom"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-genre">Genre</InputLabel>
-                  <Select
-                    required
-                    labelId="select-gender-label"
-                    id="outlined-adornment-genre"
-                      value={values.genre}
-                      type = 'text'
-                      onChange={handleChangeValues('genre')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "genre"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <Wc />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="genre"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="male">Masculin</MenuItem>
-                    <MenuItem value="femelle">Feminin</MenuItem>
-                    <MenuItem value="atre">Autre</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '39ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-date">Date de Naissance</InputLabel>
                     <OutlinedInput
                       required
@@ -214,73 +184,37 @@ const Signup = () => {
                       label="date de naissance"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-lieu">Lieu de Naissance</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-lieu"
-                      value={values.lieu_de_naissance}
+                <FormControl sx={{ m: 1, p: 0, width: '20ch'}} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-sexe">Sexe</InputLabel>
+                  <Select
+                    required
+                    labelId="select-sexe-label"
+                    id="outlined-adornment-sexe"
+                      value={values.sexe}
                       type = 'text'
-                      onChange={handleChangeValues('lieu_de_naissance')}
+                      onChange={handleChangeValues('sexe')}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
-                            arial-label = "lieu_de_naissance"
+                            arial-label = "sexe"
                             onMouseDown={handleMouseDown}
                             edge="end"
                           >
-                            <PersonPinCircle />
+                            <Wc />
                           </IconButton>
                         </InputAdornment>
                       }
-                      label="lieu de naissance"
-                    />
+                      label="sexe"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="male">Masculin</MenuItem>
+                    <MenuItem value="femelle">Feminin</MenuItem>
+                    <MenuItem value="autre">Autre</MenuItem>
+                  </Select>
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-nationalite">Nationalité</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-nationalite"
-                      value={values.nationalite}
-                      type = 'text'
-                      onChange={handleChangeValues('nationalite')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "nationalite"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <Flag />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="nationalite"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-pays">Pays de résidence</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-pays"
-                      value={values.pays_de_residence}
-                      type = 'text'
-                      onChange={handleChangeValues('pays_de_residence')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "pays"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <PersonPinCircle />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="pays de residence"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '39ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-adresse">Adresse de résidence</InputLabel>
                     <OutlinedInput
                       required
@@ -302,7 +236,7 @@ const Signup = () => {
                       label="adresse de residence"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-email">Adresse Email</InputLabel>
                     <OutlinedInput
                       required
@@ -324,7 +258,7 @@ const Signup = () => {
                       label="Adresse Email"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-tel">Numéro de téléphone</InputLabel>
                     <OutlinedInput
                       required
@@ -346,29 +280,7 @@ const Signup = () => {
                       label="numero de telephone"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-niveau">Niveau de Formation</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-niveau"
-                      value={values.niveau}
-                      type = 'text'
-                      onChange={handleChangeValues('niveau')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "niveau"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <School />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Niveau de formation"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-password"
@@ -390,7 +302,7 @@ const Signup = () => {
                     label="Mot(s) de passe"
                   />
                 </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '33ch'}} variant="outlined">
+                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-confirmation">Confirmation</InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-confirmation"
