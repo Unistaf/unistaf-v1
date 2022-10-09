@@ -151,19 +151,20 @@ const Connexion = () => {
                       Mot(s) de passe oublié ?
                     </Link>
                   <Button
-                    sx = {{mt:2}}
+                    sx = {{mt:2, p: 1.5}}
                     variant="contained"
                     onClick={handleSubmit}
                   >
                     Connectez-vous
                   </Button>
                   <Button
-                    sx = {{mt:1}}
+                    sx = {{mt:1, p: 1.5}}
                     variant="outlined"
                     onClick={handleConnectGoogle}
                     >
                       {/* <Google /> */}
-                      <img src={iconGoogle} alt="Icon Google" width={'25px'} /> <span>Connectez-vous avec Google</span>
+                      <img src={iconGoogle} alt="Icon Google" width={'25px'} />
+                      <span>Connectez-vous avec Google</span>
                   </Button>
                 </FormControl>
               </Grid>
