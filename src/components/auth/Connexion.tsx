@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormControl, styled, Grid, Box, Button, IconButton, InputAdornment, InputLabel, OutlinedInput, Link, TextField } from '@mui/material';
 import { AlternateEmail, Google, Visibility, VisibilityOff } from '@mui/icons-material';
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
@@ -14,7 +14,7 @@ interface State {
 
 const Connexion = () => {
 
-  const [values, setValues] = React.useState<State>({
+  const [values, setValues] = useState({
     email: '',
     password: '',
     showPassword: false,
