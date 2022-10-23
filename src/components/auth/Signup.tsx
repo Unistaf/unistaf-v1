@@ -1,5 +1,5 @@
-import { AccountBox, AccountCircle, AlternateEmail, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc,  } from "@mui/icons-material";
-import { Box, styled, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
+import { AccountBox, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc,  } from "@mui/icons-material";
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
 import { borderRadius } from "@mui/system";
 import React, { useState } from "react";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
@@ -121,7 +121,7 @@ const Signup = () => {
           </Grid>
           <Grid>
             <form>
-              <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0, sm: 2, md: 3 }} sx = {{pr: 3, pt: 3}}>
+              <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx = {{pr: 3, pt: 3}}>
                 <Grid item sm = {6} xs = {12}>
                   <FormControl sx={{width: '100%', my: 1}} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-prenom">Prénom</InputLabel>
