@@ -1,8 +1,9 @@
 import { AccountBox, AccountCircle, AlternateEmail, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc,  } from "@mui/icons-material";
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
+import { Box, styled, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
 import { borderRadius } from "@mui/system";
 import React, { useState } from "react";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
+import '../../styles.css'
 
 interface State {
   prenom: string;
@@ -65,7 +66,7 @@ const Signup = () => {
     <Box sx = {{with:'100vw', bgcolor: '#002984'}}>
       <Grid  container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid 
-          item xs={12} md={4}
+          item xs={12} sm={4}
           sx = {{
             height: '100vh',
             color: '#fff',
@@ -77,8 +78,10 @@ const Signup = () => {
           <h1>Un texte marketing ou design</h1>
         </Grid>
         <Grid 
-          item xs={12} md={8}
+          className="signup"
+          item xs={12} sm={8}
           sx = {{
+            py:5,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -118,214 +121,234 @@ const Signup = () => {
           </Grid>
           <Grid>
             <form>
-                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-prenom">Prénom</InputLabel>
-                    <OutlinedInput
+              <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0, sm: 2, md: 3 }} sx = {{pr: 3, pt: 3}}>
+                <Grid item sm = {6} xs = {12}>
+                  <FormControl sx={{width: '100%', my: 1}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-prenom">Prénom</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-prenom"
+                        value={values.prenom}
+                        type = 'text'
+                        onChange={handleChangeValues('prenom')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              arial-label = "prenom"
+                              onMouseDown={handleMouseDown}
+                              edge="end"
+                            >
+                              <AccountBox />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="prenom"
+                      />
+                  </FormControl>
+                </Grid>
+                <Grid item sm = {6} xs = {12}>
+                  <FormControl sx={{width: '100%', my: 1}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-nom">Nom</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-nom"
+                        value={values.nom}
+                        type = 'text'
+                        onChange={handleChangeValues('nom')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              arial-label = "nom"
+                              onMouseDown={handleMouseDown}
+                              edge="end"
+                            >
+                              <AccountBox />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="nom"
+                      />
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {3} md = {5}>
+                  <FormControl sx={{ my: 1, width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-date">Date de Naissance</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-date"
+                        value={values.date_de_naissance}
+                        type = 'date'
+                        onChange={handleChangeValues('date_de_naissance')}
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <IconButton
+                              arial-label = "date_de_naissance"
+                              onMouseDown={handleMouseDown}
+                              edge="start"
+                            >
+                              <PermContactCalendar />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="date de naissance"
+                      />
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {3} md = {2}>
+                  <FormControl sx={{ my: 1, width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-sexe">Sexe</InputLabel>
+                    <Select
                       required
-                      id="outlined-adornment-prenom"
-                      value={values.prenom}
-                      type = 'text'
-                      onChange={handleChangeValues('prenom')}
+                      labelId="select-sexe-label"
+                      id="outlined-adornment-sexe"
+                        value={values.sexe}
+                        type = 'text'
+                        onChange={handleChangeValues('sexe')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              arial-label = "sexe"
+                              onMouseDown={handleMouseDown}
+                              edge="end"
+                            >
+                              <Wc />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="sexe"
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value="male">Masculin</MenuItem>
+                      <MenuItem value="femelle">Feminin</MenuItem>
+                      <MenuItem value="autre">Autre</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {6} md = {5}>
+                  <FormControl sx={{ my: 1,width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-adresse">Adresse de résidence</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-adresse"
+                        value={values.adresse}
+                        type = 'text'
+                        onChange={handleChangeValues('adresse')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              arial-label = "nom"
+                              onMouseDown={handleMouseDown}
+                              edge="end"
+                            >
+                              <PersonPinCircle />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="adresse de residence"
+                      />
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {6}>
+                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-email">Adresse Email</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-email"
+                        value={values.email}
+                        type = 'email'
+                        onChange={handleChangeValues('email')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              arial-label = "email"
+                              onMouseDown={handleMouseDown}
+                              edge="end"
+                            >
+                              <ContactMail />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Adresse Email"
+                      />
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {6}>
+                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-tel">Numéro de téléphone</InputLabel>
+                      <OutlinedInput
+                        required
+                        id="outlined-adornment-tel"
+                        value={values.numero}
+                        type = 'tel'
+                        onChange={handleChangeValues('numero')}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              arial-label = "numero"
+                              onMouseDown={handleMouseDown}
+                              edge="end"
+                            >
+                              <ContactPhone />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="numero de telephone"
+                      />
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {6}>
+                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      type={values.showPassword ? 'text' : 'password'}
+                      value={values.mots_de_passe}
+                      onChange={handleChangeValues('mots_de_passe')}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
-                            arial-label = "prenom"
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
                             onMouseDown={handleMouseDown}
                             edge="end"
                           >
-                            <AccountBox />
+                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       }
-                      label="prenom"
+                      label="Mot(s) de passe"
                     />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-nom">Nom</InputLabel>
+                  </FormControl>
+                </Grid>
+                <Grid item xs = {12} sm = {6}>
+                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-confirmation">Confirmation</InputLabel>
                     <OutlinedInput
-                      required
-                      id="outlined-adornment-nom"
-                      value={values.nom}
-                      type = 'text'
-                      onChange={handleChangeValues('nom')}
+                      id="outlined-adornment-confirmation"
+                      type={values.showPassword ? 'text' : 'password'}
+                      value={values.confirmation}
+                      onChange={handleChangeValues('confirmation')}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
-                            arial-label = "nom"
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
                             onMouseDown={handleMouseDown}
                             edge="end"
                           >
-                            <AccountBox />
+                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       }
-                      label="nom"
+                      label="confirmation"
                     />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '39ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-date">Date de Naissance</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-date"
-                      value={values.date_de_naissance}
-                      type = 'date'
-                      onChange={handleChangeValues('date_de_naissance')}
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <IconButton
-                            arial-label = "date_de_naissance"
-                            onMouseDown={handleMouseDown}
-                            edge="start"
-                          >
-                            <PermContactCalendar />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="date de naissance"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '20ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-sexe">Sexe</InputLabel>
-                  <Select
-                    required
-                    labelId="select-sexe-label"
-                    id="outlined-adornment-sexe"
-                      value={values.sexe}
-                      type = 'text'
-                      onChange={handleChangeValues('sexe')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "sexe"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <Wc />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="sexe"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="male">Masculin</MenuItem>
-                    <MenuItem value="femelle">Feminin</MenuItem>
-                    <MenuItem value="autre">Autre</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '39ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-adresse">Adresse de résidence</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-adresse"
-                      value={values.adresse}
-                      type = 'text'
-                      onChange={handleChangeValues('adresse')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "nom"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <PersonPinCircle />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="adresse de residence"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-email">Adresse Email</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-email"
-                      value={values.email}
-                      type = 'email'
-                      onChange={handleChangeValues('email')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "email"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <ContactMail />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Adresse Email"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-tel">Numéro de téléphone</InputLabel>
-                    <OutlinedInput
-                      required
-                      id="outlined-adornment-tel"
-                      value={values.numero}
-                      type = 'tel'
-                      onChange={handleChangeValues('numero')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label = "numero"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <ContactPhone />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="numero de telephone"
-                    />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.mots_de_passe}
-                    onChange={handleChangeValues('mots_de_passe')}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDown}
-                          edge="end"
-                        >
-                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Mot(s) de passe"
-                  />
-                </FormControl>
-                <FormControl sx={{ m: 1, p: 0, width: '50ch'}} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-confirmation">Confirmation</InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-confirmation"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.confirmation}
-                    onChange={handleChangeValues('confirmation')}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDown}
-                          edge="end"
-                        >
-                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="confirmation"
-                  />
-                </FormControl>
-                <FormGroup sx = {{ml: 1}}>
+                  </FormControl>
+                </Grid>
+                <FormGroup>
                   <FormControlLabel
+                    sx = {{height: "100%", my: "auto", ml: 1, mt: 2}}
                     control={<Checkbox />} 
                     label="J'accepte les conditions d'utilisation" 
                   />
@@ -337,6 +360,7 @@ const Signup = () => {
                   >
                     Inscription
                   </Button>
+              </Grid>
             </form>
           </Grid>
         </Grid>
