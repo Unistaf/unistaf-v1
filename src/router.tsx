@@ -8,6 +8,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './components/auth/Connexion';
 import Signup from './components/auth/Signup';
+import AddSchool from './components/admin/AddSchool';
 
 const Loader = (Component) => (props) =>
   (
@@ -36,6 +37,20 @@ const routes: RouteObject[] = [
       {
         path: 'mady',
         element: <h1>Hello - Mady</h1>
+      },
+    ]
+  },
+  {
+    path: 'super-admin',
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: '',
+        element: <h1>Hello - Super admin</h1>
+      },
+      {
+        path: 'add-school',
+        element: <AddSchool />
       },
     ]
   },

@@ -90,7 +90,7 @@ const Signup = () => {
 
   return (
     <Box sx={{ with: '100vw', bgcolor: '#002984' }}>
-      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container columnSpacing={{xs: 1, sm: 2, md: 3}}>
         <Grid
           item
           xs={12}
