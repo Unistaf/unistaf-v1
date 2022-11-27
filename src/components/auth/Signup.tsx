@@ -1,77 +1,44 @@
-<<<<<<< HEAD
-import {
-  AccountBox,
-  AccountCircle,
-  AlternateEmail,
-  ContactMail,
-  ContactPhone,
-  Flag,
-  PermContactCalendar,
-  PersonPinCircle,
-  School,
-  Visibility,
-  VisibilityOff,
-  Wc
-} from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField
-} from '@mui/material';
-import { borderRadius } from '@mui/system';
-import React, { useState } from 'react';
-import iconLogoTrans from '../../assets/img/icon-logo-trans.png';
-=======
 import { AccountBox, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc,  } from "@mui/icons-material";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
 import { borderRadius } from "@mui/system";
+import axios from "axios";
 import React, { useState } from "react";
+import { API } from "src/api/api";
+import { SIGNUP_PATH } from "src/api/paths";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
 import '../../styles.css'
->>>>>>> 7a6b42c104db1aa48651e508a81a64ae25e6c862
 
 interface State {
-  prenom: string;
-  nom: string;
-  date_de_naissance: Date;
-  lieu_de_naissance: string;
+  firstname: string;
+  lastname: string;
+  birthdate: Date;
+  birthplace: string;
   sexe: string;
   nationalite: string;
   pays_de_residence: string;
-  adresse: string;
+  address: string;
   email: string;
-  numero: number;
-  niveau: string;
-  mots_de_passe: string;
+  phone: number;
+  level: string;
+  password: string;
   confirmation: string;
   showPassword: boolean;
 }
 
 const Signup = () => {
   const [values, setValues] = useState({
-    prenom: '',
-    nom: '',
-    date_de_naissance: null,
-    lieu_de_naissance: '',
+    firstname: '',
+    lastname: '',
+    birthdate: null,
+    birthplace: '',
     sexe: '',
     nationalite: '',
     pays_de_residence: '',
-    adresse: '',
+    address: '',
     email: '',
-    numero: null,
-    niveau: '',
-    mots_de_passe: '',
+    phone: null,
+    level: '',
+    password: '',
     confirmation: '',
     showPassword: false
   });
@@ -92,9 +59,12 @@ const Signup = () => {
     event.preventDefault();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Hello je me suis inscrit');
+    console.log(values);
+
+    await axios.post(SIGNUP_PATH, values)
+    // console.log('Hello je me suis inscrit');
   };
 
   return (
@@ -163,17 +133,17 @@ const Signup = () => {
               <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx = {{pr: 3, pt: 3}}>
                 <Grid item sm = {6} xs = {12}>
                   <FormControl sx={{width: '100%', my: 1}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-prenom">Prénom</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-firstname">Prénom</InputLabel>
                       <OutlinedInput
                         required
-                        id="outlined-adornment-prenom"
-                        value={values.prenom}
+                        id="outlined-adornment-firstname"
+                        value={values.firstname}
                         type = 'text'
-                        onChange={handleChangeValues('prenom')}
+                        onChange={handleChangeValues('firstname')}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
-                              arial-label = "prenom"
+                              arial-label = "firstname"
                               onMouseDown={handleMouseDown}
                               edge="end"
                             >
@@ -181,7 +151,7 @@ const Signup = () => {
                             </IconButton>
                           </InputAdornment>
                         }
-                        label="prenom"
+                        label="firstname"
                       />
                   </FormControl>
                 </Grid>
@@ -191,13 +161,13 @@ const Signup = () => {
                       <OutlinedInput
                         required
                         id="outlined-adornment-nom"
-                        value={values.nom}
+                        value={values.lastname}
                         type = 'text'
-                        onChange={handleChangeValues('nom')}
+                        onChange={handleChangeValues('lastname')}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
-                              arial-label = "nom"
+                              arial-label = "lastname"
                               onMouseDown={handleMouseDown}
                               edge="end"
                             >
@@ -215,13 +185,13 @@ const Signup = () => {
                       <OutlinedInput
                         required
                         id="outlined-adornment-date"
-                        value={values.date_de_naissance}
+                        value={values.birthdate}
                         type = 'date'
-                        onChange={handleChangeValues('date_de_naissance')}
+                        onChange={handleChangeValues('birthdate')}
                         startAdornment={
                           <InputAdornment position="start">
                             <IconButton
-                              arial-label = "date_de_naissance"
+                              arial-label = "birthdate"
                               onMouseDown={handleMouseDown}
                               edge="start"
                             >
@@ -267,13 +237,13 @@ const Signup = () => {
                 </Grid>
                 <Grid item xs = {12} sm = {6} md = {5}>
                   <FormControl sx={{ my: 1,width: '100%'}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-adresse">Adresse de résidence</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-address">address de résidence</InputLabel>
                       <OutlinedInput
                         required
-                        id="outlined-adornment-adresse"
-                        value={values.adresse}
+                        id="outlined-adornment-address"
+                        value={values.address}
                         type = 'text'
-                        onChange={handleChangeValues('adresse')}
+                        onChange={handleChangeValues('address')}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
@@ -285,13 +255,13 @@ const Signup = () => {
                             </IconButton>
                           </InputAdornment>
                         }
-                        label="adresse de residence"
+                        label="address de residence"
                       />
                   </FormControl>
                 </Grid>
                 <Grid item xs = {12} sm = {6}>
                   <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-email">Adresse Email</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-email">address Email</InputLabel>
                       <OutlinedInput
                         required
                         id="outlined-adornment-email"
@@ -309,7 +279,7 @@ const Signup = () => {
                             </IconButton>
                           </InputAdornment>
                         }
-                        label="Adresse Email"
+                        label="address Email"
                       />
                   </FormControl>
                 </Grid>
@@ -319,13 +289,13 @@ const Signup = () => {
                       <OutlinedInput
                         required
                         id="outlined-adornment-tel"
-                        value={values.numero}
+                        value={values.phone}
                         type = 'tel'
-                        onChange={handleChangeValues('numero')}
+                        onChange={handleChangeValues('phone')}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
-                              arial-label = "numero"
+                              arial-label = "phone"
                               onMouseDown={handleMouseDown}
                               edge="end"
                             >
@@ -333,7 +303,7 @@ const Signup = () => {
                             </IconButton>
                           </InputAdornment>
                         }
-                        label="numero de telephone"
+                        label="phone de telephone"
                       />
                   </FormControl>
                 </Grid>
@@ -343,8 +313,8 @@ const Signup = () => {
                     <OutlinedInput
                       id="outlined-adornment-password"
                       type={values.showPassword ? 'text' : 'password'}
-                      value={values.mots_de_passe}
-                      onChange={handleChangeValues('mots_de_passe')}
+                      value={values.password}
+                      onChange={handleChangeValues('password')}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
