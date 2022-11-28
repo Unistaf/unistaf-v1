@@ -23,7 +23,6 @@ interface State {
 }
 
 const Signup = () => {
-
   const [values, setValues] = useState({
     prenom: '',
     nom: '',
@@ -38,7 +37,7 @@ const Signup = () => {
     niveau: '',
     mots_de_passe: '',
     confirmation: '',
-    showPassword: false,
+    showPassword: false
   });
 
   const handleChangeValues =
@@ -49,7 +48,7 @@ const Signup = () => {
   const handleClickShowPassword = () => {
     setValues({
       ...values,
-      showPassword: !values.showPassword,
+      showPassword: !values.showPassword
     });
   };
 
@@ -59,7 +58,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Hello je me suis inscrit")
+    console.log('Hello je me suis inscrit');
   };
 
   return (
@@ -91,12 +90,12 @@ const Signup = () => {
           }}
         >
           <Grid
-            sx = {{
-              display: 'flex',
+            sx={{
+              display: 'flex'
             }}
           >
             <Grid
-              sx = {{
+              sx={{
                 width: '90px',
                 borderRadius: '5%',
                 border: '2px solid #002984',
@@ -106,17 +105,21 @@ const Signup = () => {
                 alignItems: 'center'
               }}
             >
-              <img src={iconLogoTrans} alt="Logo UNISTAF" 
+              <img
+                src={iconLogoTrans}
+                alt="Logo UNISTAF"
                 style={{
                   width: '100%',
                   height: 'auto',
-                  margin: 'auto auto',
+                  margin: 'auto auto'
                 }}
               />
             </Grid>
             <Grid>
               <h1>Bienvenue !</h1>
-              <p>Inscrivez-vous pour accéder à des centaines de choix de filière</p>
+              <p>
+                Inscrivez-vous pour accéder à des centaines de choix de filière
+              </p>
             </Grid>
           </Grid>
           <Grid>
@@ -366,7 +369,7 @@ const Signup = () => {
         </Grid>
       </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
