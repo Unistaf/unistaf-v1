@@ -11,23 +11,25 @@ interface IProps {
   id: string;
   handleMouseDown: string;
   value: string;
-  handleChangeValues;
+  handleChangeValues: () => {};
   type: string;
-  htmlFor;
-  inputLabel;
+  htmlFor: string;
+  inputLabel: string;
   label: string;
+  ariaLabel: string,
   position: string;
 }
 
 const InputRegister = ({
   id,
+  htmlFor,
   handleMouseDown,
   value,
   handleChangeValues,
   type,
-  htmlFor,
   inputLabel,
   label,
+  ariaLabel,
   position
 }) => {
   return (
@@ -38,11 +40,11 @@ const InputRegister = ({
         id={id}
         value={value}
         type={type}
-        onChange={handleChangeValues(value)}
+        onChange={handleChangeValues}
         endAdornment={
           <InputAdornment position={position}>
             <IconButton
-              arial-label={label}
+              arial-label={ariaLabel}
               onMouseDown={handleMouseDown}
               edge="end"
             >

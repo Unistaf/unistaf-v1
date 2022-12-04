@@ -1,4 +1,4 @@
-import { AccountBox, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc,  } from "@mui/icons-material";
+import { AccountBox, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc, } from "@mui/icons-material";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
 import { borderRadius } from "@mui/system";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { API } from "src/api/api";
 import { SIGNUP_PATH } from "src/api/paths";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
 import '../../styles.css'
+import InputRegister from "./InputRegister";
 
 interface State {
   firstname: string;
@@ -29,15 +30,7 @@ const Signup = () => {
   const [values, setValues] = useState({
     firstname: '',
     lastname: '',
-    birthdate: null,
-    birthplace: '',
-    sexe: '',
-    nationalite: '',
-    pays_de_residence: '',
-    address: '',
     email: '',
-    phone: null,
-    level: '',
     password: '',
     confirmation: '',
     showPassword: false
@@ -68,11 +61,11 @@ const Signup = () => {
   };
 
   return (
-    <Box sx = {{with:'100vw', bgcolor: '#002984'}}>
-      <Grid  container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid 
+    <Box sx={{ with: '100vw', bgcolor: '#002984' }}>
+      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid
           item xs={12} sm={4}
-          sx = {{
+          sx={{
             height: '100vh',
             color: '#fff',
             display: 'flex',
@@ -82,11 +75,11 @@ const Signup = () => {
         >
           <h1>Un texte marketing ou design</h1>
         </Grid>
-        <Grid 
+        <Grid
           className="signup"
           item xs={12} sm={8}
-          sx = {{
-            py:5,
+          sx={{
+            py: 5,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -130,185 +123,69 @@ const Signup = () => {
           </Grid>
           <Grid>
             <form>
-              <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx = {{pr: 3, pt: 3}}>
-                <Grid item sm = {6} xs = {12}>
-                  <FormControl sx={{width: '100%', my: 1}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-firstname">Prénom</InputLabel>
-                      <OutlinedInput
-                        required
-                        id="outlined-adornment-firstname"
-                        value={values.firstname}
-                        type = 'text'
-                        onChange={handleChangeValues('firstname')}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              arial-label = "firstname"
-                              onMouseDown={handleMouseDown}
-                              edge="end"
-                            >
-                              <AccountBox />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="firstname"
-                      />
-                  </FormControl>
+              <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx={{ pr: 3, pt: 3 }}>
+                <Grid item sm={6} xs={12}>
+                  <InputRegister
+                    ariaLabel="firstname" id="outlined-adornment-firstname"
+                    htmlFor="outlined-adornment-firstname" handleMouseDown={handleMouseDown}
+                    value={values.firstname}
+                    handleChangeValues={handleChangeValues('firstname')}
+                    type="text"
+                    inputLabel="Prénom"
+                    label="firstname"
+                    position="end"
+                  />
                 </Grid>
-                <Grid item sm = {6} xs = {12}>
-                  <FormControl sx={{width: '100%', my: 1}} variant="outlined">
+                <Grid item sm={6} xs={12}>
+                  <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-nom">Nom</InputLabel>
-                      <OutlinedInput
-                        required
-                        id="outlined-adornment-nom"
-                        value={values.lastname}
-                        type = 'text'
-                        onChange={handleChangeValues('lastname')}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              arial-label = "lastname"
-                              onMouseDown={handleMouseDown}
-                              edge="end"
-                            >
-                              <AccountBox />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="nom"
-                      />
-                  </FormControl>
-                </Grid>
-                <Grid item xs = {12} sm = {3} md = {5}>
-                  <FormControl sx={{ my: 1, width: '100%'}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-date">Date de Naissance</InputLabel>
-                      <OutlinedInput
-                        required
-                        id="outlined-adornment-date"
-                        value={values.birthdate}
-                        type = 'date'
-                        onChange={handleChangeValues('birthdate')}
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <IconButton
-                              arial-label = "birthdate"
-                              onMouseDown={handleMouseDown}
-                              edge="start"
-                            >
-                              <PermContactCalendar />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="date de naissance"
-                      />
-                  </FormControl>
-                </Grid>
-                <Grid item xs = {12} sm = {3} md = {2}>
-                  <FormControl sx={{ my: 1, width: '100%'}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-sexe">Sexe</InputLabel>
-                    <Select
+                    <OutlinedInput
                       required
-                      labelId="select-sexe-label"
-                      id="outlined-adornment-sexe"
-                        value={values.sexe}
-                        type = 'text'
-                        onChange={handleChangeValues('sexe')}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              arial-label = "sexe"
-                              onMouseDown={handleMouseDown}
-                              edge="end"
-                            >
-                              <Wc />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="sexe"
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="male">Masculin</MenuItem>
-                      <MenuItem value="femelle">Feminin</MenuItem>
-                      <MenuItem value="autre">Autre</MenuItem>
-                    </Select>
+                      id="outlined-adornment-nom"
+                      value={values.lastname}
+                      type='text'
+                      onChange={handleChangeValues('lastname')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            arial-label="lastname"
+                            onMouseDown={handleMouseDown}
+                            edge="end"
+                          >
+                            <AccountBox />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="nom"
+                    />
                   </FormControl>
                 </Grid>
-                <Grid item xs = {12} sm = {6} md = {5}>
-                  <FormControl sx={{ my: 1,width: '100%'}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-address">address de résidence</InputLabel>
-                      <OutlinedInput
-                        required
-                        id="outlined-adornment-address"
-                        value={values.address}
-                        type = 'text'
-                        onChange={handleChangeValues('address')}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              arial-label = "nom"
-                              onMouseDown={handleMouseDown}
-                              edge="end"
-                            >
-                              <PersonPinCircle />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="address de residence"
-                      />
-                  </FormControl>
-                </Grid>
-                <Grid item xs = {12} sm = {6}>
-                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                <Grid item xs={12} sm={6}>
+                  <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-email">address Email</InputLabel>
-                      <OutlinedInput
-                        required
-                        id="outlined-adornment-email"
-                        value={values.email}
-                        type = 'email'
-                        onChange={handleChangeValues('email')}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              arial-label = "email"
-                              onMouseDown={handleMouseDown}
-                              edge="end"
-                            >
-                              <ContactMail />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="address Email"
-                      />
+                    <OutlinedInput
+                      required
+                      id="outlined-adornment-email"
+                      value={values.email}
+                      type='email'
+                      onChange={handleChangeValues('email')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            arial-label="email"
+                            onMouseDown={handleMouseDown}
+                            edge="end"
+                          >
+                            <ContactMail />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="address Email"
+                    />
                   </FormControl>
                 </Grid>
-                <Grid item xs = {12} sm = {6}>
-                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-tel">Numéro de téléphone</InputLabel>
-                      <OutlinedInput
-                        required
-                        id="outlined-adornment-tel"
-                        value={values.phone}
-                        type = 'tel'
-                        onChange={handleChangeValues('phone')}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              arial-label = "phone"
-                              onMouseDown={handleMouseDown}
-                              edge="end"
-                            >
-                              <ContactPhone />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="phone de telephone"
-                      />
-                  </FormControl>
-                </Grid>
-                <Grid item xs = {12} sm = {6}>
-                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                <Grid item xs={12} sm={6}>
+                  <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password"
@@ -331,8 +208,8 @@ const Signup = () => {
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs = {12} sm = {6}>
-                  <FormControl sx={{  my: 1,width: '100%'}} variant="outlined">
+                <Grid item xs={12} sm={6}>
+                  <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-confirmation">Confirmation</InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-confirmation"
@@ -357,18 +234,18 @@ const Signup = () => {
                 </Grid>
                 <FormGroup>
                   <FormControlLabel
-                    sx = {{height: "100%", my: "auto", ml: 1, mt: 2}}
-                    control={<Checkbox />} 
-                    label="J'accepte les conditions d'utilisation" 
+                    sx={{ height: "100%", my: "auto", ml: 1, mt: 2 }}
+                    control={<Checkbox />}
+                    label="J'accepte les conditions d'utilisation"
                   />
                 </FormGroup>
                 <Button
-                    sx = {{mt:2, ml: 1, p: 1.5}}
-                    variant="contained"
-                    onClick={handleSubmit}
-                  >
-                    Inscription
-                  </Button>
+                  sx={{ mt: 2, ml: 1, p: 1.5 }}
+                  variant="contained"
+                  onClick={handleSubmit}
+                >
+                  Inscription
+                </Button>
               </Grid>
             </form>
           </Grid>
