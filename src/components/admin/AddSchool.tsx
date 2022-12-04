@@ -6,11 +6,11 @@ function AddSchool() {
   return (
     <Box sx = {{pt: 2}}>
         <Typography variant="h1" component="h2" sx = {{p:0, mx:1}}>
-            Ajoutez une école
-        </Typography>;
+            Ajoutez une école :
+        </Typography>
         <form>
             <Grid container spacing={2}>
-                <Grid item xs={12} lg={5} >
+                <Grid item xs={12} lg={4} >
                     <FormControl
                         sx={{width: '100%'}}
                         variant="outlined"
@@ -26,7 +26,7 @@ function AddSchool() {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={6} lg={2} >
+                <Grid item xs={12} md={6} lg={4} >
                     <FormControl
                         sx={{ width: '100%'}}
                         variant="outlined"
@@ -42,7 +42,7 @@ function AddSchool() {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={6} lg={5} >
+                <Grid item xs={12} md={6} lg={4} >
                     <FormControl
                         sx={{width: '100%'}}
                         variant="outlined"
@@ -85,7 +85,8 @@ function AddSchool() {
                         sx={{width: '100%'}}
                     />
                 </Grid>
-                <Grid item xs={12} md={6} lg={4} >
+                <Grid container item spacing = {2} xs={12} md={6} lg={12}>
+                <Grid item xs={12} lg={4}>
                     <FormControl
                         sx={{width: '100%'}}
                         variant="outlined"
@@ -101,7 +102,7 @@ function AddSchool() {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={6} lg={4} >
+                <Grid item xs={12} lg={4} >
                     <FormControl sx={{width: '100%'}} component="fieldset" variant="standard">
                         <FormLabel component="legend">Habilitées par:</FormLabel>
                         <FormGroup>
@@ -114,7 +115,7 @@ function AddSchool() {
                         </FormGroup>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={6} lg={4} >
+                <Grid item xs={12} lg={4}>
                     <FormControl sx={{width: '100%'}} component="fieldset" variant="standard">
                         <FormLabel component="legend">Membre de:</FormLabel>
                         <FormGroup>
@@ -126,6 +127,7 @@ function AddSchool() {
                             />
                         </FormGroup>
                     </FormControl>
+                </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <FormControl
@@ -189,7 +191,8 @@ function AddSchool() {
                 <Grid
                     sx = {{
                         width: "100%",
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        pt: 3
                     }}
                 >
                     <Button sx={{ m: 2, py: 1.5, minWidth: '150px' }} variant="contained" color = 'error' >Annuler</Button>
