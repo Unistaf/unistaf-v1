@@ -21,6 +21,9 @@ import iconLogoTrans from '../../assets/img/icon-logo-trans.png';
 import iconGoogle from '../../assets/img/google.svg';
 import { Link } from 'react-router-dom';
 import students from '../../assets/img/students.png'
+import { AppDispatch } from 'src/redux/store';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'src/redux/services/loginThunk';
 
 interface State {
   email: string;
@@ -28,7 +31,16 @@ interface State {
   showPassword: boolean;
 }
 
+interface iDataLogin {
+  data: {
+    email: string,
+    password: string
+  }
+}
+
 const Connexion = () => {
+  const dispatch: AppDispatch = useDispatch()
+
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -50,10 +62,20 @@ const Connexion = () => {
   const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("I'm connected");
+
+    const arg: iDataLogin = {
+      data: {
+        email: values.email,
+        password: values.password,
+      }
+    }
+
+    dispatch(loginThunk(arg))
   };
+  
   const handleConnectGoogle = (e) => {
     e.preventDefault();
     console.log('Connect me witch google');

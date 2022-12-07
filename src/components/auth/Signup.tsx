@@ -2,32 +2,44 @@ import { AccountBox, ContactMail, ContactPhone, Flag, PermContactCalendar, Perso
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
 import { borderRadius } from "@mui/system";
 import axios from "axios";
-import React, { useState } from "react";
-import { API } from "src/api/api";
-import { SIGNUP_PATH } from "src/api/paths";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { registerThunk } from "src/redux/services/registerThunk";
+import { AppDispatch } from "src/redux/store";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
 import '../../styles.css'
 import InputRegister from "./InputRegister";
 
 interface State {
-  firstname: string;
-  lastname: string;
-  birthdate: Date;
-  birthplace: string;
-  sexe: string;
-  nationalite: string;
-  pays_de_residence: string;
-  address: string;
-  email: string;
-  phone: number;
-  level: string;
-  password: string;
-  confirmation: string;
-  showPassword: boolean;
+  firstname: string,
+  lastname: string,
+  email: string,
+  password: string,
+  confirmation: string,
+  showPassword: boolean
 }
 
+interface iData {
+  firstname: string,
+  lastname: string,
+  email: string,
+  password: string
+}
+
+interface iDataRegister {
+  data: {
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string
+  }
+}
+
+
 const Signup = () => {
-  const [values, setValues] = useState({
+  const dispatch: AppDispatch = useDispatch()
+
+  const [values, setValues] = useState<State>({
     firstname: '',
     lastname: '',
     email: '',
@@ -52,11 +64,20 @@ const Signup = () => {
     event.preventDefault();
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(values);
 
-    await axios.post(SIGNUP_PATH, values)
+    const arg: iDataRegister = {
+      data: {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        password: values.password,
+      }
+    }
+
+    dispatch(registerThunk(arg))
+
     // console.log('Hello je me suis inscrit');
   };
 
@@ -64,7 +85,8 @@ const Signup = () => {
     <Box sx={{ with: '100vw', bgcolor: '#002984' }}>
       <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid
-          item xs={12} sm={4}
+          item xs={12}
+          sm={4}
           sx={{
             height: '100vh',
             color: '#fff',
@@ -77,7 +99,8 @@ const Signup = () => {
         </Grid>
         <Grid
           className="signup"
-          item xs={12} sm={8}
+          item xs={12}
+          sm={8}
           sx={{
             py: 5,
             display: 'flex',
@@ -117,7 +140,7 @@ const Signup = () => {
             <Grid>
               <h1>Bienvenue !</h1>
               <p>
-                Inscrivez-vous pour accéder à des centaines de choix de filière
+                Inscrivez-vous pour accéder à des centaines de choix de filières
               </p>
             </Grid>
           </Grid>
