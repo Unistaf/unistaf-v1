@@ -9,6 +9,7 @@ import { AppDispatch } from "src/redux/store";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
 import '../../styles.css'
 import InputRegister from "./InputRegister";
+import { useForm } from "react-hook-form";
 
 interface State {
   firstname: string,
@@ -31,14 +32,29 @@ interface iDataRegister {
     firstname: string,
     lastname: string,
     email: string,
-    password: string
+    password: string,
+    password_confirmation: string
   }
 }
 
+interface iResponse {
+  [key: string]: any;
+}
 
 const Signup = () => {
-  const dispatch: AppDispatch = useDispatch()
+  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
 
+  const { formState: { errors }, setError } = useForm({
+    defaultValues: {
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      confirmation: '',
+    }
+  });
   const [values, setValues] = useState<State>({
     firstname: '',
     lastname: '',
@@ -47,9 +63,54 @@ const Signup = () => {
     confirmation: '',
     showPassword: false
   });
+  const [disabled, setDisabled] = useState(false)
+
+  const dispatch: AppDispatch = useDispatch()
+
 
   const handleChangeValues =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      // console.log(prop);
+      if (prop === 'email') {
+        if (!emailRegex.test(event.target.value)) {
+          // setError('confirmation', "password must match")
+          setError('email', { type: 'custom', message: 'Email non valide' });
+          console.log('password must match');
+        } else {
+          setError('email', { type: 'custom', message: '' });
+        }
+      }
+
+      if (prop === 'confirmation') {
+        if (values.password !== event.target.value) {
+          // setError('confirmation', "password must match")
+          setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
+          console.log('password must match');
+        } else {
+          setError('confirmation', { type: 'custom', message: '' });
+        }
+      }
+
+      if (prop === 'password') {
+        let result = passwordRegex.test(event.target.value)
+        if (result) {
+          setDisabled(false)
+          setError('password', { type: 'custom', message: '' });
+
+          if (values.confirmation !== event.target.value) {
+            // setError('confirmation', "password must match")
+            setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
+          } else {
+            setError('confirmation', { type: 'custom', message: '' });
+          }
+
+        }
+        else {
+          setDisabled(true)
+          setError('password', { type: 'custom', message: 'Au moins 8 caracteres, une lettre majuscule, minucsule, un nombre, un caractere special' });
+          
+        }
+      }
       setValues({ ...values, [prop]: event.target.value });
     };
 
@@ -73,10 +134,32 @@ const Signup = () => {
         lastname: values.lastname,
         email: values.email,
         password: values.password,
+        password_confirmation: values.confirmation
       }
     }
 
-    dispatch(registerThunk(arg))
+    // ! email: kajoxo@mailinator.com - lawef@mailinator.com
+    // ! pwd: Badji2002++
+    dispatch(registerThunk(arg)).then((res: iResponse) => {
+      console.log(res.payload);
+      if (res.type === 'user/register/rejected') {
+        if (res.payload.response.data) {
+          const data = JSON.parse(res.payload.response.data)
+          if (data.password) {
+            console.log(data.password[0]);
+            // if(data.password[0] === "The password must contain at least one uppercase and one lowercase letter."){
+            //   console.log();
+            // }
+          }
+
+        }
+        if (res.payload.response.data.email) {
+          console.log(res.payload.response.data);
+
+        }
+      }
+
+    })
 
     // console.log('Hello je me suis inscrit');
   };
@@ -187,6 +270,7 @@ const Signup = () => {
                   <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-email">address Email</InputLabel>
                     <OutlinedInput
+                      error={errors.email?.message ? true : false}
                       required
                       id="outlined-adornment-email"
                       value={values.email}
@@ -205,12 +289,16 @@ const Signup = () => {
                       }
                       label="address Email"
                     />
+                    <span className="error">{
+                      errors.email?.message
+                    }</span>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
                     <OutlinedInput
+                      error={errors.password?.message ? true : false}
                       id="outlined-adornment-password"
                       type={values.showPassword ? 'text' : 'password'}
                       value={values.password}
@@ -229,12 +317,16 @@ const Signup = () => {
                       }
                       label="Mot(s) de passe"
                     />
+                    <span className="error">{
+                      errors.password?.message
+                    }</span>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-confirmation">Confirmation</InputLabel>
                     <OutlinedInput
+                      error={errors.confirmation?.message ? true : false}
                       id="outlined-adornment-confirmation"
                       type={values.showPassword ? 'text' : 'password'}
                       value={values.confirmation}
@@ -253,6 +345,9 @@ const Signup = () => {
                       }
                       label="confirmation"
                     />
+                    <span className="error">{
+                      errors.confirmation?.message
+                    }</span>
                   </FormControl>
                 </Grid>
                 <FormGroup>
@@ -266,6 +361,7 @@ const Signup = () => {
                   sx={{ mt: 2, ml: 1, p: 1.5 }}
                   variant="contained"
                   onClick={handleSubmit}
+                  disabled={disabled}
                 >
                   Inscription
                 </Button>

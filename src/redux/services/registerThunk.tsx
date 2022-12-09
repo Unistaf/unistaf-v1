@@ -12,7 +12,7 @@ interface iData {
 }
 
 export const registerThunk = createAsyncThunk(
-  'user/login',
+  'user/register',
   async ({ data }:iData, { rejectWithValue }) => {
     try {
       console.log('data from register :', data);

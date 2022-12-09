@@ -1,4 +1,12 @@
 /* Sign up page */
+.error{
+    font-size: 0.8rem !important;
+    color: rgb(233, 60, 60);
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-left: 0.3rem !important;
+}
+
 @media only screen and (max-width: 600px) {
     .signup{
         padding: 50px 0 25px 25px !important;
