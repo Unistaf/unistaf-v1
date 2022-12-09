@@ -10,6 +10,8 @@ import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
 import '../../styles.css'
 import InputRegister from "./InputRegister";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { emailRegex, passwordRegex } from '../../utils/regex';
 
 interface State {
   firstname: string,
@@ -42,9 +44,7 @@ interface iResponse {
 }
 
 const Signup = () => {
-  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
+  const navigate = useNavigate()
 
   const { formState: { errors }, setError } = useForm({
     defaultValues: {
@@ -63,19 +63,37 @@ const Signup = () => {
     confirmation: '',
     showPassword: false
   });
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(true)
 
   const dispatch: AppDispatch = useDispatch()
+
+  useEffect(() => {
+    if (emailRegex.test(values.email) && (values.password === values.confirmation)) {
+      if (values.firstname.length <= 2) {
+        setError('firstname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
+        return
+      }
+      if (values.lastname.length <= 2) {
+        setError('lastname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
+        return
+      }
+      setDisabled(false)
+    }
+  }, [values.firstname, values.lastname, values.email, values.password, values.confirmation])
 
 
   const handleChangeValues =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       // console.log(prop);
+      if (prop === 'firstname') {
+        if (values.firstname.length >= 3) {
+
+        }
+      }
       if (prop === 'email') {
         if (!emailRegex.test(event.target.value)) {
           // setError('confirmation', "password must match")
           setError('email', { type: 'custom', message: 'Email non valide' });
-          console.log('password must match');
         } else {
           setError('email', { type: 'custom', message: '' });
         }
@@ -85,7 +103,6 @@ const Signup = () => {
         if (values.password !== event.target.value) {
           // setError('confirmation', "password must match")
           setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
-          console.log('password must match');
         } else {
           setError('confirmation', { type: 'custom', message: '' });
         }
@@ -94,7 +111,6 @@ const Signup = () => {
       if (prop === 'password') {
         let result = passwordRegex.test(event.target.value)
         if (result) {
-          setDisabled(false)
           setError('password', { type: 'custom', message: '' });
 
           if (values.confirmation !== event.target.value) {
@@ -106,9 +122,8 @@ const Signup = () => {
 
         }
         else {
-          setDisabled(true)
           setError('password', { type: 'custom', message: 'Au moins 8 caracteres, une lettre majuscule, minucsule, un nombre, un caractere special' });
-          
+
         }
       }
       setValues({ ...values, [prop]: event.target.value });
@@ -138,27 +153,37 @@ const Signup = () => {
       }
     }
 
+    if (!emailRegex.test(values.email)) {
+      setError('email', { type: 'custom', message: 'Email non valide' });
+    }
+    if((values.password !== values.confirmation)){
+      return setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
+    }
+    if (values.firstname.length <= 2) {
+      setError('firstname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
+      return
+    }
+    if (values.lastname.length <= 2) {
+      setError('lastname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
+      return
+    }
+
     // ! email: kajoxo@mailinator.com - lawef@mailinator.com
     // ! pwd: Badji2002++
     dispatch(registerThunk(arg)).then((res: iResponse) => {
-      console.log(res.payload);
       if (res.type === 'user/register/rejected') {
+        // console.log(res);
         if (res.payload.response.data) {
           const data = JSON.parse(res.payload.response.data)
-          if (data.password) {
-            console.log(data.password[0]);
-            // if(data.password[0] === "The password must contain at least one uppercase and one lowercase letter."){
-            //   console.log();
-            // }
+          if (data.email) {
+            setError('email', { type: 'custom', message: 'Email indisponible' });
+            console.log(data.email);
           }
-
+          return
         }
-        if (res.payload.response.data.email) {
-          console.log(res.payload.response.data);
-
-        }
+        return
       }
-
+      return navigate('/')
     })
 
     // console.log('Hello je me suis inscrit');
@@ -246,6 +271,7 @@ const Signup = () => {
                   <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-nom">Nom</InputLabel>
                     <OutlinedInput
+                      error={errors.lastname?.message ? true : false}
                       required
                       id="outlined-adornment-nom"
                       value={values.lastname}
@@ -264,6 +290,9 @@ const Signup = () => {
                       }
                       label="nom"
                     />
+                    <span className="error">{
+                      errors.lastname?.message
+                    }</span>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
