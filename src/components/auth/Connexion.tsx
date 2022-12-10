@@ -24,6 +24,7 @@ import students from '../../assets/img/students.png'
 import { AppDispatch } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'src/redux/services/loginThunk';
+import InputReuse from '../reusable/InputReuse';
 
 interface State {
   email: string;
@@ -75,7 +76,7 @@ const Connexion = () => {
 
     dispatch(loginThunk(arg))
   };
-  
+
   const handleConnectGoogle = (e) => {
     e.preventDefault();
     console.log('Connect me witch google');
@@ -96,7 +97,7 @@ const Connexion = () => {
             alignItems: 'center'
           }}
         >
-          <img style={{width: '90%'}} src={students} alt="Happy students" />
+          <img style={{ width: '90%' }} src={students} alt="Happy students" />
         </Grid>
         <Grid
           item
@@ -148,57 +149,40 @@ const Connexion = () => {
               }}
             >
               <FormControl sx={{ m: 1, p: 0 }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-email">
-                  Adresse Email
-                </InputLabel>
-                <OutlinedInput
-                  required
+                <InputReuse
+                  htmlFor="outlined-adornment-email"
+                  inputLabel="Adresse Email"
                   id="outlined-adornment-email"
                   value={values.email}
                   type="email"
-                  onChange={handleChange('email')}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        arial-label="email"
-                        onMouseDown={handleMouseDown}
-                        edge="end"
-                      >
-                        <AlternateEmail />
-                      </IconButton>
-                    </InputAdornment>
-                  }
+                  handleChangeValues={handleChange('email')}
+                  position="end"
+                  ariaLabel="email"
+                  icon={<AlternateEmail />}
                   label="Adresse email"
-                />
+                  onClick={null}
+                />   
               </FormControl>
               <FormControl sx={{ m: 1 }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Mot(s) de passe
-                </InputLabel>
-                <OutlinedInput
+                <InputReuse
+                  htmlFor="outlined-adornment-password"
+                  inputLabel="Mot(s) de passe"
                   id="outlined-adornment-password"
-                  type={values.showPassword ? 'text' : 'password'}
                   value={values.password}
-                  onChange={handleChange('password')}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDown}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
+                  type={values.showPassword ? 'text' : 'password'}
+                  handleChangeValues={handleChange('password')}
+                  position="end"
+                  ariaLabel="toggle password visibility"
+                  icon={values.showPassword ? (
+                    <VisibilityOff />
+                  ) : (
+                    <Visibility />
+                  )}
                   label="Mot(s) de passe"
+                  onClick={handleClickShowPassword}
                 />
-                <Link style={{textAlign: 'right', marginTop: '0.5rem', color: '#002984'}} to="/password">Mot(s) de passe oublié ?</Link>
+                
+                <Link style={{ textAlign: 'right', marginTop: '0.5rem', color: '#002984' }} to="/password">Mot(s) de passe oublié ? </Link>
                 <Button
                   sx={{ mt: 2, p: 1.5 }}
                   variant="contained"
@@ -226,7 +210,7 @@ const Connexion = () => {
           >
             <p>
               N'avez-vous pas de compte ?
-              <Link to="/signup">Inscrivez-vous ici!</Link>
+              <Link to="/signup"> Inscrivez-vous ici!</Link>
             </p>
           </Grid>
         </Grid>
