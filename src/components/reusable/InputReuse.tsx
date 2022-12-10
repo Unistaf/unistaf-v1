@@ -19,7 +19,8 @@ interface IProps {
   ariaLabel: string,
   position: "end" | "start",
   icon: ReactElement,
-  onClick: () => void | null
+  onClick: () => void | null,
+  error: boolean | null
 }
 
 const InputReuse = ({
@@ -33,7 +34,8 @@ const InputReuse = ({
   ariaLabel,
   position,
   icon,
-  onClick
+  onClick,
+  error
 }: IProps) => {
   return (
     <>

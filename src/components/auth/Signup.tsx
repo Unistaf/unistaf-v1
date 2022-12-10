@@ -12,6 +12,7 @@ import InputRegister from "./InputRegister";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { emailRegex, passwordRegex } from '../../utils/regex';
+import InputReuse from "../reusable/InputReuse";
 
 interface State {
   firstname: string,
@@ -156,7 +157,7 @@ const Signup = () => {
     if (!emailRegex.test(values.email)) {
       setError('email', { type: 'custom', message: 'Email non valide' });
     }
-    if((values.password !== values.confirmation)){
+    if ((values.password !== values.confirmation)) {
       return setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
     }
     if (values.firstname.length <= 2) {
@@ -190,216 +191,160 @@ const Signup = () => {
   };
 
   return (
-    <Box sx={{ with: '100vw', bgcolor: '#002984' }}>
-      <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid
-          item xs={12}
-          sm={4}
-          sx={{
-            height: '100vh',
-            color: '#fff',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
+    // <Box sx={{padding: 0}}>
+    <Box sx={{
+      width: '100vw',
+      height: '100vh',
+      // bgcolor: '#002984',
+      py: 5,
+      // display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      bgcolor: '#F2F5F9',
+      maxWidth: 700,
+      margin: '2rem auto',
+      padding: 2,
+      // border: '2px solid #002984',
+      // boxShadow: '1px 2px 5px rgba(0, 0, 0, 0.5)',
+      boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
+    }}>
+      <div style={{
+        width: '90px',
+        borderRadius: '5%',
+        border: '2px solid #002984',
+        textAlign: 'center',
+      }}>
+        <img
+          src={iconLogoTrans}
+          alt="Logo UNISTAF"
+          style={{
+            width: '100%',
+            height: 'auto',
+            margin: 'auto auto'
           }}
-        >
-          <h1>Un texte marketing ou design</h1>
-        </Grid>
-        <Grid
-          className="signup"
-          item xs={12}
-          sm={8}
-          sx={{
-            py: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            // alignItems: 'center',
-            borderRadius: '50px 0 0 50px',
-            bgcolor: '#F2F5F9'
-          }}
-        >
-          <Grid
-            sx={{
-              display: 'flex'
-            }}
-          >
-            <Grid
-              sx={{
-                width: '90px',
-                borderRadius: '5%',
-                border: '2px solid #002984',
-                mx: 1,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <img
-                src={iconLogoTrans}
-                alt="Logo UNISTAF"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  margin: 'auto auto'
-                }}
+        />
+      </div>
+      <h1>Bienvenue !</h1>
+      <p>
+        Inscrivez-vous pour accéder à des centaines de choix de filières
+      </p>
+      <form>
+        <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx={{ pr: 3, pt: 3 }}>
+          <Grid item sm={6} xs={12}>
+            <InputRegister
+              ariaLabel="firstname" id="outlined-adornment-firstname"
+              htmlFor="outlined-adornment-firstname" handleMouseDown={handleMouseDown}
+              value={values.firstname}
+              handleChangeValues={handleChangeValues('firstname')}
+              type="text"
+              inputLabel="Prénom"
+              label="firstname"
+              position="end"
+            />
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
+              <InputReuse
+                error={false}
+                htmlFor="outlined-adornment-nom"
+                inputLabel="Nom"
+                id="outlined-adornment-nom"
+                value={values.lastname}
+                type="text"
+                handleChangeValues={handleChangeValues('lastname')}
+                position="end"
+                ariaLabel="lastname"
+                icon={<AccountBox />}
+                label="nom"
+                onClick={null}
               />
-            </Grid>
-            <Grid>
-              <h1>Bienvenue !</h1>
-              <p>
-                Inscrivez-vous pour accéder à des centaines de choix de filières
-              </p>
-            </Grid>
+              <span className="error">{
+                errors.lastname?.message
+              }</span>
+            </FormControl>
           </Grid>
-          <Grid>
-            <form>
-              <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx={{ pr: 3, pt: 3 }}>
-                <Grid item sm={6} xs={12}>
-                  <InputRegister
-                    ariaLabel="firstname" id="outlined-adornment-firstname"
-                    htmlFor="outlined-adornment-firstname" handleMouseDown={handleMouseDown}
-                    value={values.firstname}
-                    handleChangeValues={handleChangeValues('firstname')}
-                    type="text"
-                    inputLabel="Prénom"
-                    label="firstname"
-                    position="end"
-                  />
-                </Grid>
-                <Grid item sm={6} xs={12}>
-                  <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-nom">Nom</InputLabel>
-                    <OutlinedInput
-                      error={errors.lastname?.message ? true : false}
-                      required
-                      id="outlined-adornment-nom"
-                      value={values.lastname}
-                      type='text'
-                      onChange={handleChangeValues('lastname')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label="lastname"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <AccountBox />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="nom"
-                    />
-                    <span className="error">{
-                      errors.lastname?.message
-                    }</span>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-email">address Email</InputLabel>
-                    <OutlinedInput
-                      error={errors.email?.message ? true : false}
-                      required
-                      id="outlined-adornment-email"
-                      value={values.email}
-                      type='email'
-                      onChange={handleChangeValues('email')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            arial-label="email"
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            <ContactMail />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="address Email"
-                    />
-                    <span className="error">{
-                      errors.email?.message
-                    }</span>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Mot(s) de passe</InputLabel>
-                    <OutlinedInput
-                      error={errors.password?.message ? true : false}
-                      id="outlined-adornment-password"
-                      type={values.showPassword ? 'text' : 'password'}
-                      value={values.password}
-                      onChange={handleChangeValues('password')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Mot(s) de passe"
-                    />
-                    <span className="error">{
-                      errors.password?.message
-                    }</span>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-confirmation">Confirmation</InputLabel>
-                    <OutlinedInput
-                      error={errors.confirmation?.message ? true : false}
-                      id="outlined-adornment-confirmation"
-                      type={values.showPassword ? 'text' : 'password'}
-                      value={values.confirmation}
-                      onChange={handleChangeValues('confirmation')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDown}
-                            edge="end"
-                          >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="confirmation"
-                    />
-                    <span className="error">{
-                      errors.confirmation?.message
-                    }</span>
-                  </FormControl>
-                </Grid>
-                <FormGroup>
-                  <FormControlLabel
-                    sx={{ height: "100%", my: "auto", ml: 1, mt: 2 }}
-                    control={<Checkbox />}
-                    label="J'accepte les conditions d'utilisation"
-                  />
-                </FormGroup>
-                <Button
-                  sx={{ mt: 2, ml: 1, p: 1.5 }}
-                  variant="contained"
-                  onClick={handleSubmit}
-                  disabled={disabled}
-                >
-                  Inscription
-                </Button>
-              </Grid>
-            </form>
+          <Grid item xs={12} sm={6}>
+            <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+              <InputReuse
+                error={errors.email?.message ? true : false}
+                htmlFor="outlined-adornment-email"
+                inputLabel="Addresse Email"
+                id="outlined-adornment-email"
+                value={values.email}
+                type="email"
+                handleChangeValues={handleChangeValues('email')}
+                position="end"
+                ariaLabel="email"
+                icon={<ContactMail />}
+                label="Addresse Email"
+                onClick={null}
+              />
+              <span className="error">{
+                errors.email?.message
+              }</span>
+            </FormControl>
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+            <InputReuse
+                error={errors.password?.message ? true : false}
+                htmlFor="outlined-adornment-password"
+                inputLabel="Mot(s) de passe"
+                id="outlined-adornment-password"
+                value={values.password}
+                type={values.showPassword ? 'text' : 'password'}
+                handleChangeValues={handleChangeValues('password')}
+                position="end"
+                ariaLabel="toggle password visibility"
+                icon={values.showPassword ? <VisibilityOff /> : <Visibility />}
+                label="Mot(s) de passe"
+                onClick={handleClickShowPassword}
+              />
+              <span className="error">{
+                errors.password?.message
+              }</span>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+            <InputReuse
+                error={errors.confirmation?.message ? true : false}
+                htmlFor="outlined-adornment-confirmation"
+                inputLabel="Confirmer"
+                id="outlined-adornment-confirmation"
+                value={values.confirmation}
+                type={values.showPassword ? 'text' : 'password'}
+                handleChangeValues={handleChangeValues('confirmation')}
+                position="end"
+                ariaLabel="toggle password visibility"
+                icon={values.showPassword ? <VisibilityOff /> : <Visibility />}
+                label="confirmation"
+                onClick={handleClickShowPassword}
+              />
+              <span className="error">{
+                errors.confirmation?.message
+              }</span>
+            </FormControl>
+          </Grid>
+          <FormGroup>
+            <FormControlLabel
+              sx={{ height: "100%", my: "auto", ml: 1, mt: 2 }}
+              control={<Checkbox />}
+              label="J'accepte les conditions d'utilisation"
+            />
+          </FormGroup>
+          <Button
+            sx={{ mt: 2, ml: 1, p: 1.5 }}
+            variant="contained"
+            onClick={handleSubmit}
+            disabled={disabled}
+          >
+            Inscription
+          </Button>
         </Grid>
-      </Grid>
+      </form>
     </Box>
+    // </Box>
   );
 };
 

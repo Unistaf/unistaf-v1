@@ -150,6 +150,7 @@ const Connexion = () => {
             >
               <FormControl sx={{ m: 1, p: 0 }} variant="outlined">
                 <InputReuse
+                  error={false}
                   htmlFor="outlined-adornment-email"
                   inputLabel="Adresse Email"
                   id="outlined-adornment-email"
@@ -161,10 +162,11 @@ const Connexion = () => {
                   icon={<AlternateEmail />}
                   label="Adresse email"
                   onClick={null}
-                />   
+                />
               </FormControl>
               <FormControl sx={{ m: 1 }} variant="outlined">
                 <InputReuse
+                  error={false}
                   htmlFor="outlined-adornment-password"
                   inputLabel="Mot(s) de passe"
                   id="outlined-adornment-password"
@@ -181,7 +183,7 @@ const Connexion = () => {
                   label="Mot(s) de passe"
                   onClick={handleClickShowPassword}
                 />
-                
+
                 <Link style={{ textAlign: 'right', marginTop: '0.5rem', color: '#002984' }} to="/password">Mot(s) de passe oublié ? </Link>
                 <Button
                   sx={{ mt: 2, p: 1.5 }}
