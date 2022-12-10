@@ -19,12 +19,14 @@ import {
 } from '@mui/icons-material';
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png';
 import iconGoogle from '../../assets/img/google.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import students from '../../assets/img/students.png'
 import { AppDispatch } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'src/redux/services/loginThunk';
 import InputReuse from '../reusable/InputReuse';
+import { useForm } from 'react-hook-form';
+import { setCurrentUser } from 'src/redux/slices/user.slice';
 
 interface State {
   email: string;
@@ -41,7 +43,14 @@ interface iDataLogin {
 
 const Connexion = () => {
   const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
 
+  const { formState: { errors }, setError } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    }
+  });
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -74,7 +83,21 @@ const Connexion = () => {
       }
     }
 
-    dispatch(loginThunk(arg))
+    dispatch(loginThunk(arg)).then(res => {
+      console.log(res);
+      if (res.type === 'user/login/fulfilled') {
+        if (res.payload.access_token && res.payload.user.slug) {
+          dispatch(setCurrentUser(res.payload))
+          return navigate('dashboard')
+        }
+      }
+      if (res.type === 'user/login/rejected') {
+        if (res.payload.response.statusText === "Unauthorized") {
+          return setError('email', { type: 'custom', message: 'Verifier si vous vont identifiants sont correctes' });
+        }
+        return setError('email', { type: 'custom', message: 'Verifier si vous vont identifiants sont corrects' });
+      }
+    })
   };
 
   const handleConnectGoogle = (e) => {
@@ -150,7 +173,7 @@ const Connexion = () => {
             >
               <FormControl sx={{ m: 1, p: 0 }} variant="outlined">
                 <InputReuse
-                  error={false}
+                  error={errors.email?.message ? true : false}
                   htmlFor="outlined-adornment-email"
                   inputLabel="Adresse Email"
                   id="outlined-adornment-email"
@@ -163,10 +186,13 @@ const Connexion = () => {
                   label="Adresse email"
                   onClick={null}
                 />
+                <span className="error">{
+                  errors.email?.message
+                }</span>
               </FormControl>
               <FormControl sx={{ m: 1 }} variant="outlined">
                 <InputReuse
-                  error={false}
+                  error={errors.email?.message ? true : false}
                   htmlFor="outlined-adornment-password"
                   inputLabel="Mot(s) de passe"
                   id="outlined-adornment-password"
@@ -183,25 +209,28 @@ const Connexion = () => {
                   label="Mot(s) de passe"
                   onClick={handleClickShowPassword}
                 />
+                <span className="error">{
+                  errors.email?.message
+                }</span>
 
-                <Link style={{ textAlign: 'right', marginTop: '0.5rem', color: '#002984' }} to="/password">Mot(s) de passe oublié ? </Link>
-                <Button
-                  sx={{ mt: 2, p: 1.5 }}
-                  variant="contained"
-                  onClick={handleSubmit}
-                >
-                  Connectez-vous
-                </Button>
-                <Button
-                  sx={{ mt: 1, p: 1.5 }}
-                  variant="outlined"
-                  onClick={handleConnectGoogle}
-                >
-                  {/* <Google /> */}
-                  <img src={iconGoogle} alt="Icon Google" width={'25px'} />
-                  <span>Connectez-vous avec Google</span>
-                </Button>
               </FormControl>
+              <Link style={{ textAlign: 'right', marginTop: '0.5rem', color: '#002984' }} to="/password">Mot(s) de passe oublié ? </Link>
+              <Button
+                sx={{ mt: 2, p: 1.5 }}
+                variant="contained"
+                onClick={handleSubmit}
+              >
+                Connectez-vous
+              </Button>
+              <Button
+                sx={{ mt: 1, p: 1.5 }}
+                variant="outlined"
+                onClick={handleConnectGoogle}
+              >
+                {/* <Google /> */}
+                <img src={iconGoogle} alt="Icon Google" width={'25px'} />
+                <span>Connectez-vous avec Google</span>
+              </Button>
             </Grid>
           </form>
           <Grid

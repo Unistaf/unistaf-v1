@@ -13,14 +13,9 @@ export const loginThunk = createAsyncThunk(
   'user/login',
   async ({ data }:iData, { rejectWithValue }) => {
     try {
-      console.log('data from login :', data);
-      
       const result = await axios.post(LOGIN_PATH, data)
-      console.log(result);
-      
+      return result.data      
     } catch (error) {
-      console.log(error);
-      
       return rejectWithValue(error)
     }
   })

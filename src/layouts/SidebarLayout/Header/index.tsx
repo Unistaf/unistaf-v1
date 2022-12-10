@@ -49,21 +49,28 @@ function Header() {
         boxShadow:
           theme.palette.mode === 'dark'
             ? `0 1px 0 ${alpha(
-                lighten(theme.colors.primary.main, 0.7),
-                0.15
-              )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
+              lighten(theme.colors.primary.main, 0.7),
+              0.15
+            )}, 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)`
             : `0px 2px 8px -3px ${alpha(
-                theme.colors.alpha.black[100],
-                0.2
-              )}, 0px 5px 22px -4px ${alpha(
-                theme.colors.alpha.black[100],
-                0.1
-              )}`
+              theme.colors.alpha.black[100],
+              0.2
+            )}, 0px 5px 22px -4px ${alpha(
+              theme.colors.alpha.black[100],
+              0.1
+            )}`,
       }}
     >
-      <Box display="flex" alignItems="center">
-        <HeaderButtons />
-        <HeaderUserbox />
+      <Box sx={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: { lg: 'end', xs: 'space-between' }
+      }}
+        // display="flex"
+        // alignItems="center"
+        // justifyContent="space-between"
+      >
         <Box
           component="span"
           sx={{
@@ -71,7 +78,7 @@ function Header() {
             display: { lg: 'none', xs: 'inline-block' }
           }}
         >
-          <Tooltip arrow title="Toggle Menu">
+          <Tooltip arrow title="Basculer le menu">
             <IconButton color="primary" onClick={toggleSidebar}>
               {!sidebarToggle ? (
                 <MenuTwoToneIcon fontSize="small" />
@@ -80,6 +87,16 @@ function Header() {
               )}
             </IconButton>
           </Tooltip>
+        </Box>
+        <Box
+          sx={{
+            ml: 2,
+          }}
+          display="flex"
+          alignItems="center"
+        >
+          <HeaderButtons />
+          <HeaderUserbox />
         </Box>
       </Box>
     </HeaderWrapper>
