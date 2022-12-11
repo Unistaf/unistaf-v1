@@ -27,6 +27,7 @@ import { loginThunk } from 'src/redux/services/loginThunk';
 import InputReuse from '../reusable/InputReuse';
 import { useForm } from 'react-hook-form';
 import { setCurrentUser } from 'src/redux/slices/user.slice';
+import { ADMIN_DASHBOARD_NAVIGATION, REGISTER_NAVIGATION } from 'src/navigation_paths';
 
 interface State {
   email: string;
@@ -88,7 +89,7 @@ const Connexion = () => {
       if (res.type === 'user/login/fulfilled') {
         if (res.payload.access_token && res.payload.user.slug) {
           dispatch(setCurrentUser(res.payload))
-          return navigate('dashboard')
+          return navigate(ADMIN_DASHBOARD_NAVIGATION)
         }
       }
       if (res.type === 'user/login/rejected') {
@@ -241,7 +242,7 @@ const Connexion = () => {
           >
             <p>
               N'avez-vous pas de compte ?
-              <Link to="/signup"> Inscrivez-vous ici!</Link>
+              <Link to={REGISTER_NAVIGATION}> Inscrivez-vous ici!</Link>
             </p>
           </Grid>
         </Grid>

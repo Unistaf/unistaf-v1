@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { emailRegex, passwordRegex } from '../../utils/regex';
 import InputReuse from "../reusable/InputReuse";
+import { LOGIN_NAVIGATION } from "src/navigation_paths";
 
 interface State {
   firstname: string,
@@ -184,7 +185,7 @@ const Signup = () => {
         }
         return
       }
-      return navigate('/')
+      return navigate(LOGIN_NAVIGATION)
     })
 
     // console.log('Hello je me suis inscrit');

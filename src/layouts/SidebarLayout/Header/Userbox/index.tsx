@@ -87,12 +87,13 @@ function HeaderUserbox() {
   };
 
   console.log(currentUser.currentUser.access_token);
-  const logout = async (): Promise<void> => {
 
+
+  const logout = async (): Promise<void> => {
     try {
       await axios.post(LOGOUT_PATH, {
         headers: {
-          'authorization': `bearer ${currentUser.currentUser.access_token}`
+          'Authorization': `Bearer ${currentUser.currentUser.access_token}`
         }
       })
       navigate('')
