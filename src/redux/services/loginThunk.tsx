@@ -13,8 +13,9 @@ export const loginThunk = createAsyncThunk(
   'user/login',
   async ({ data }:iData, { rejectWithValue }) => {
     try {
-      const result = await axios.post(LOGIN_PATH, data)
-      return result.data      
+      const result = await axios.post(LOGIN_PATH, data);
+      sessionStorage.setItem('token', result?.data?.access_token);
+      return result.data;
     } catch (error) {
       return rejectWithValue(error)
     }

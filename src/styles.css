@@ -26,6 +26,10 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 }
 
+.google-btn:hover{
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
 
 /* Sign up page */
 .error{

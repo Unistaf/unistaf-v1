@@ -70,10 +70,10 @@ function HeaderUserbox() {
     avatar: '/static/images/avatars/1.jpg',
     jobtitle: 'Platform'
   };
-  const currentUser: any = useSelector((state: iStore) => state.user)
+  const currentUser: any = useSelector((state: iStore) => state.user);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -88,6 +88,18 @@ function HeaderUserbox() {
 
   console.log(currentUser.currentUser.access_token);
 
+  // const logout = async (): Promise<void> => {
+  //   try {
+  //     await axios.post(LOGOUT_PATH, {
+  //       headers: {
+  //         'Authorization': `Bearer ${currentUser.currentUser.access_token}`
+  //       }
+  //     })
+  //     navigate('')
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   const logout = async (): Promise<void> => {
     try {
