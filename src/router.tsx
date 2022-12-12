@@ -9,6 +9,7 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './components/auth/Connexion';
 import Signup from './components/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
+import { ADMIN_DASHBOARD_NAVIGATION } from './navigation_paths';
 
 const Loader = (Component) => (props) =>
   (
@@ -41,7 +42,7 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: 'super-admin',
+    path: ADMIN_DASHBOARD_NAVIGATION,
     element: <SidebarLayout />,
     children: [
       {

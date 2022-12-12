@@ -110,7 +110,7 @@ function HeaderNotifications() {
                 color="text.secondary"
               >
                 {' '}
-                new messages in your inbox
+                Nouveau message
               </Typography>
             </Box>
           </ListItem>

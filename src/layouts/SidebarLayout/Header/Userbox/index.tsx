@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import unistafLogo from '../../../../assets/img/icon-logo-trans.png'
 
 import {
   Avatar,
@@ -22,6 +23,11 @@ import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutThunk } from 'src/redux/services/logoutThunk';
+import { LOGOUT_PATH } from 'src/routes/app_paths';
+import axios from 'axios';
+import { iStore } from 'src/redux/store';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -60,10 +66,14 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
   const user = {
-    name: 'Catherine Pike',
+    name: 'Unistaf',
     avatar: '/static/images/avatars/1.jpg',
-    jobtitle: 'Project Manager'
+    jobtitle: 'Platform'
   };
+  const currentUser: any = useSelector((state: iStore) => state.user);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -76,10 +86,40 @@ function HeaderUserbox() {
     setOpen(false);
   };
 
+  console.log(currentUser.currentUser.access_token);
+
+  // const logout = async (): Promise<void> => {
+  //   try {
+  //     await axios.post(LOGOUT_PATH, {
+  //       headers: {
+  //         'Authorization': `Bearer ${currentUser.currentUser.access_token}`
+  //       }
+  //     })
+  //     navigate('')
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  const logout = async (): Promise<void> => {
+    try {
+      await axios.get(LOGOUT_PATH, {
+        headers: {
+          'Authorization': `bearer ${currentUser.currentUser.access_token}`
+        }
+      })
+      console.log('apres gt');
+      
+      navigate('/')
+    } catch (error) {
+      console.log(error);      
+    }
+  }
+
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+        <Avatar variant="rounded" alt={user.name} src={unistafLogo} />
         <Hidden mdDown>
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
@@ -106,7 +146,7 @@ function HeaderUserbox() {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+          <Avatar variant="rounded" alt={user.name} src={unistafLogo} />
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
             <UserBoxDescription variant="body2">
@@ -118,26 +158,26 @@ function HeaderUserbox() {
         <List sx={{ p: 1 }} component="nav">
           <ListItem button to="/management/profile/details" component={NavLink}>
             <AccountBoxTwoToneIcon fontSize="small" />
-            <ListItemText primary="My Profile" />
+            <ListItemText primary="Mon profil" />
           </ListItem>
-          <ListItem button to="/dashboards/messenger" component={NavLink}>
+          {/* <ListItem button to="/dashboards/messenger" component={NavLink}>
             <InboxTwoToneIcon fontSize="small" />
             <ListItemText primary="Messenger" />
-          </ListItem>
+          </ListItem> */}
           <ListItem
             button
             to="/management/profile/settings"
             component={NavLink}
           >
             <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Account Settings" />
+            <ListItemText primary="Parametres" />
           </ListItem>
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button onClick={logout} color="error" fullWidth>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
-            Sign out
+            Déconnexion
           </Button>
         </Box>
       </Popover>
