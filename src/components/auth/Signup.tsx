@@ -1,4 +1,4 @@
-import { AccountBox, ContactMail, ContactPhone, Flag, PermContactCalendar, PersonPinCircle, School, Visibility, VisibilityOff, Wc, } from "@mui/icons-material";
+import { AccountBox, ContactMail, ContactPhone, Flag, Mail, PermContactCalendar, PersonPinCircle, Save, School, Visibility, VisibilityOff, Wc, } from "@mui/icons-material";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from "@mui/material"
 import { borderRadius } from "@mui/system";
 import axios from "axios";
@@ -14,6 +14,9 @@ import { useNavigate } from "react-router";
 import { emailRegex, passwordRegex } from '../../utils/regex';
 import InputReuse from "../reusable/InputReuse";
 import { LOGIN_NAVIGATION } from "src/navigation_paths";
+import { LoadingButton } from "@mui/lab";
+import { unistafColors } from '../../utils/colors';
+import UnistafButton from "../reusable/UnistafButton";
 
 interface State {
   firstname: string,
@@ -47,6 +50,7 @@ interface iResponse {
 
 const Signup = () => {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   const { formState: { errors }, setError } = useForm({
     defaultValues: {
@@ -70,15 +74,20 @@ const Signup = () => {
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
-    if (emailRegex.test(values.email) && (values.password === values.confirmation)) {
+    if (emailRegex.test(values.email) && passwordRegex.test(values.password) && passwordRegex.test(values.confirmation) && values.password === values.confirmation) {
+
       if (values.firstname.length <= 2) {
-        setError('firstname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
+        setDisabled(true)
+        setError('firstname', { type: 'custom', message: 'Mettez au moins 3 caracteres' });
         return
       }
-      if (values.lastname.length <= 2) {
+      if (values.lastname.length <= 1) {
+        setDisabled(true)
         setError('lastname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
         return
       }
+      setError('firstname', { type: 'custom', message: '' });
+      setError('lastname', { type: 'custom', message: '' });
       setDisabled(false)
     }
   }, [values.firstname, values.lastname, values.email, values.password, values.confirmation])
@@ -86,15 +95,29 @@ const Signup = () => {
 
   const handleChangeValues =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      // console.log(prop);
-      if (prop === 'firstname') {
-        if (values.firstname.length >= 3) {
 
+      if (prop === 'firstname') {
+        if (event.target.value.length <= 2) {
+          setDisabled(true)
+          setError('firstname', { type: 'custom', message: 'Mettez au moins 3 caracteres' });
+        }
+        else {
+          setError('firstname', { type: 'custom', message: '' });
+        }
+      }
+      if (prop === 'lastname') {
+        if (event.target.value.length <= 1) {
+          setDisabled(true)
+          setError('lastname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
+        }
+        else {
+          setError('lastname', { type: 'custom', message: '' });
         }
       }
       if (prop === 'email') {
         if (!emailRegex.test(event.target.value)) {
           // setError('confirmation', "password must match")
+          setDisabled(true)
           setError('email', { type: 'custom', message: 'Email non valide' });
         } else {
           setError('email', { type: 'custom', message: '' });
@@ -104,6 +127,7 @@ const Signup = () => {
       if (prop === 'confirmation') {
         if (values.password !== event.target.value) {
           // setError('confirmation', "password must match")
+          setDisabled(true)
           setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
         } else {
           setError('confirmation', { type: 'custom', message: '' });
@@ -117,6 +141,7 @@ const Signup = () => {
 
           if (values.confirmation !== event.target.value) {
             // setError('confirmation', "password must match")
+            setDisabled(true)
             setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
           } else {
             setError('confirmation', { type: 'custom', message: '' });
@@ -124,6 +149,7 @@ const Signup = () => {
 
         }
         else {
+          setDisabled(true)
           setError('password', { type: 'custom', message: 'Au moins 8 caracteres, une lettre majuscule, minucsule, un nombre, un caractere special' });
 
         }
@@ -144,7 +170,7 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    setLoading(true)
     const arg: iDataRegister = {
       data: {
         firstname: values.firstname,
@@ -157,15 +183,19 @@ const Signup = () => {
 
     if (!emailRegex.test(values.email)) {
       setError('email', { type: 'custom', message: 'Email non valide' });
+      return
     }
     if ((values.password !== values.confirmation)) {
+      setLoading(false)
       return setError('confirmation', { type: 'custom', message: 'Les deux mots de passe doivent correspondre' });
     }
     if (values.firstname.length <= 2) {
+      setLoading(false)
       setError('firstname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
       return
     }
     if (values.lastname.length <= 2) {
+      setLoading(false)
       setError('lastname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
       return
     }
@@ -173,13 +203,12 @@ const Signup = () => {
     // ! email: kajoxo@mailinator.com - lawef@mailinator.com
     // ! pwd: Badji2002++
     dispatch(registerThunk(arg)).then((res: iResponse) => {
+      setLoading(false)
       if (res.type === 'user/register/rejected') {
-        // console.log(res);
         if (res.payload.response.data) {
           const data = JSON.parse(res.payload.response.data)
           if (data.email) {
             setError('email', { type: 'custom', message: 'Email indisponible' });
-            console.log(data.email);
           }
           return
         }
@@ -187,26 +216,18 @@ const Signup = () => {
       }
       return navigate(LOGIN_NAVIGATION)
     })
-
-    // console.log('Hello je me suis inscrit');
   };
 
   return (
-    // <Box sx={{padding: 0}}>
     <Box sx={{
       width: '100vw',
-      height: '100vh',
-      // bgcolor: '#002984',
       py: 5,
-      // display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       bgcolor: '#F2F5F9',
       maxWidth: 700,
       margin: '2rem auto',
       padding: 2,
-      // border: '2px solid #002984',
-      // boxShadow: '1px 2px 5px rgba(0, 0, 0, 0.5)',
       boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
     }}>
       <div style={{
@@ -230,119 +251,140 @@ const Signup = () => {
         Inscrivez-vous pour accéder à des centaines de choix de filières
       </p>
       <form>
-        <Grid container columnSpacing={{ xs: 0.5, sm: 1, md: 2 }} rowSpacing={{ xs: 0.5, sm: 1, md: 2 }} sx={{ pr: 3, pt: 3 }}>
-          <Grid item sm={6} xs={12}>
-            <InputRegister
-              ariaLabel="firstname" id="outlined-adornment-firstname"
-              htmlFor="outlined-adornment-firstname" handleMouseDown={handleMouseDown}
-              value={values.firstname}
-              handleChangeValues={handleChangeValues('firstname')}
-              type="text"
+        <Grid item sm={6} xs={12}>
+          <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
+            <InputReuse
+              error={errors.firstname?.message ? true : false}
+              htmlFor="outlined-adornment-firstname"
               inputLabel="Prénom"
-              label="firstname"
+              id="outlined-adornment-firstname"
+              value={values.firstname}
+              type="text"
+              handleChangeValues={handleChangeValues('firstname')}
               position="end"
+              ariaLabel="firstname"
+              icon={<AccountBox />}
+              label="firstname"
+              onClick={null}
             />
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
-              <InputReuse
-                error={false}
-                htmlFor="outlined-adornment-nom"
-                inputLabel="Nom"
-                id="outlined-adornment-nom"
-                value={values.lastname}
-                type="text"
-                handleChangeValues={handleChangeValues('lastname')}
-                position="end"
-                ariaLabel="lastname"
-                icon={<AccountBox />}
-                label="nom"
-                onClick={null}
-              />
-              <span className="error">{
-                errors.lastname?.message
-              }</span>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
-              <InputReuse
-                error={errors.email?.message ? true : false}
-                htmlFor="outlined-adornment-email"
-                inputLabel="Addresse Email"
-                id="outlined-adornment-email"
-                value={values.email}
-                type="email"
-                handleChangeValues={handleChangeValues('email')}
-                position="end"
-                ariaLabel="email"
-                icon={<ContactMail />}
-                label="Addresse Email"
-                onClick={null}
-              />
-              <span className="error">{
-                errors.email?.message
-              }</span>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+            <span className="error">{
+              errors.firstname?.message
+            }</span>
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <FormControl sx={{ width: '100%', my: 1 }} variant="outlined">
             <InputReuse
-                error={errors.password?.message ? true : false}
-                htmlFor="outlined-adornment-password"
-                inputLabel="Mot(s) de passe"
-                id="outlined-adornment-password"
-                value={values.password}
-                type={values.showPassword ? 'text' : 'password'}
-                handleChangeValues={handleChangeValues('password')}
-                position="end"
-                ariaLabel="toggle password visibility"
-                icon={values.showPassword ? <VisibilityOff /> : <Visibility />}
-                label="Mot(s) de passe"
-                onClick={handleClickShowPassword}
-              />
-              <span className="error">{
-                errors.password?.message
-              }</span>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
-            <InputReuse
-                error={errors.confirmation?.message ? true : false}
-                htmlFor="outlined-adornment-confirmation"
-                inputLabel="Confirmer"
-                id="outlined-adornment-confirmation"
-                value={values.confirmation}
-                type={values.showPassword ? 'text' : 'password'}
-                handleChangeValues={handleChangeValues('confirmation')}
-                position="end"
-                ariaLabel="toggle password visibility"
-                icon={values.showPassword ? <VisibilityOff /> : <Visibility />}
-                label="confirmation"
-                onClick={handleClickShowPassword}
-              />
-              <span className="error">{
-                errors.confirmation?.message
-              }</span>
-            </FormControl>
-          </Grid>
-          <FormGroup>
-            <FormControlLabel
-              sx={{ height: "100%", my: "auto", ml: 1, mt: 2 }}
-              control={<Checkbox />}
-              label="J'accepte les conditions d'utilisation"
+              error={errors.lastname?.message ? true : false}
+              htmlFor="outlined-adornment-nom"
+              inputLabel="Nom"
+              id="outlined-adornment-nom"
+              value={values.lastname}
+              type="text"
+              handleChangeValues={handleChangeValues('lastname')}
+              position="end"
+              ariaLabel="lastname"
+              icon={<AccountBox />}
+              label="nom"
+              onClick={null}
             />
-          </FormGroup>
-          <Button
-            sx={{ mt: 2, ml: 1, p: 1.5 }}
-            variant="contained"
+            <span className="error">{
+              errors.lastname?.message
+            }</span>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+            <InputReuse
+              error={errors.email?.message ? true : false}
+              htmlFor="outlined-adornment-email"
+              inputLabel="Addresse Email"
+              id="outlined-adornment-email"
+              value={values.email}
+              type="email"
+              handleChangeValues={handleChangeValues('email')}
+              position="end"
+              ariaLabel="email"
+              icon={<Mail />}
+              label="Addresse Email"
+              onClick={null}
+            />
+            <span className="error">{
+              errors.email?.message
+            }</span>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+            <InputReuse
+              error={errors.password?.message ? true : false}
+              htmlFor="outlined-adornment-password"
+              inputLabel="Mot(s) de passe"
+              id="outlined-adornment-password"
+              value={values.password}
+              type={values.showPassword ? 'text' : 'password'}
+              handleChangeValues={handleChangeValues('password')}
+              position="end"
+              ariaLabel="toggle password visibility"
+              icon={values.showPassword ? <VisibilityOff /> : <Visibility />}
+              label="Mot(s) de passe"
+              onClick={handleClickShowPassword}
+            />
+            <span className="error">{
+              errors.password?.message
+            }</span>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl sx={{ my: 1, width: '100%' }} variant="outlined">
+            <InputReuse
+              error={errors.confirmation?.message ? true : false}
+              htmlFor="outlined-adornment-confirmation"
+              inputLabel="Confirmer"
+              id="outlined-adornment-confirmation"
+              value={values.confirmation}
+              type={values.showPassword ? 'text' : 'password'}
+              handleChangeValues={handleChangeValues('confirmation')}
+              position="end"
+              ariaLabel="toggle password visibility"
+              icon={values.showPassword ? <VisibilityOff /> : <Visibility />}
+              label="confirmation"
+              onClick={handleClickShowPassword}
+            />
+            <span className="error">{
+              errors.confirmation?.message
+            }</span>
+          </FormControl>
+        </Grid>
+        <FormGroup>
+          <FormControlLabel
+            sx={{ height: "100%", my: "auto", ml: 1, mt: 2 }}
+            control={<Checkbox />}
+            label="J'accepte les conditions d'utilisation"
+          />
+        </FormGroup>
+        <UnistafButton
+        color="#fff"
+          bgColor={unistafColors[1]}
+          disabled={disabled}
+          handleSubmit={handleSubmit}
+          loading={loading}
+          icon={<Save />}
+        >
+          Inscription
+        </UnistafButton>
+        {/* <LoadingButton
+          sx={{ mt: 2, ml: 1, px: 5, py: 1.5, backgroundColor: unisafColors[1] }}
+            size="small"
+            disabled={false}
             onClick={handleSubmit}
-            disabled={disabled}
+            loading={loading}
+            loadingPosition="end"
+            variant="contained"
           >
             Inscription
-          </Button>
-        </Grid>
+          </LoadingButton> */}
+
       </form>
     </Box>
     // </Box>

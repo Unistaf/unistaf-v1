@@ -1,3 +1,32 @@
+/* !base classes */
+.h2--title{
+    margin: 0 !important;
+}
+
+
+/* login */
+.login_container{
+    display: flex;
+    height: 100vh;
+}
+.left-form{
+    background-color: #0D0DA3;
+}
+.right-form{
+    flex-direction: column;
+    padding: 2rem 1rem !important;
+}
+.left-form, .right-form{
+    width: 50% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.google-btn{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+}
+
+
 /* Sign up page */
 .error{
     font-size: 0.8rem !important;
@@ -7,10 +36,51 @@
     margin-left: 0.3rem !important;
 }
 
+.formContainer{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.MuiFormControl-root{
+    margin: 0 !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.MuiLoadingButton-root {
+    margin-left: 0 !important;
+}
+
+@media screen and (max-width: 900px) {
+    .login_container{
+        display: block;
+    }
+    .formContainer{
+        width: 60%;
+    }
+
+    .left-form{
+        display: none !important;
+    }
+
+    .right-form{
+        display: block;
+        width: 100% !important;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .signup{
         padding: 50px 0 25px 25px !important;
         border-radius: 50px 50px 0 0 !important;
+    }
+
+    .login_container{
+        display: block;
+    }
+
+    .formContainer{
+        width: 100%;
     }
   }
 

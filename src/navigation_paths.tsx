@@ -3,7 +3,7 @@
  * -------------------------------------------
  */
 export const REGISTER_NAVIGATION = 'signup'
-export const LOGIN_NAVIGATION = ''
+export const LOGIN_NAVIGATION = '/'
 
 /** ------------------------------------------
  *! ADMIN NAVIGATION                          |

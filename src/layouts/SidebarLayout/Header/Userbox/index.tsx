@@ -91,12 +91,14 @@ function HeaderUserbox() {
 
   const logout = async (): Promise<void> => {
     try {
-      await axios.post(LOGOUT_PATH, {
+      await axios.get(LOGOUT_PATH, {
         headers: {
-          'Authorization': `Bearer ${currentUser.currentUser.access_token}`
+          'Authorization': `bearer ${currentUser.currentUser.access_token}`
         }
       })
-      navigate('')
+      console.log('apres gt');
+      
+      navigate('/')
     } catch (error) {
       console.log(error);      
     }

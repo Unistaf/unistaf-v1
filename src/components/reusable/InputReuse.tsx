@@ -41,6 +41,7 @@ const InputReuse = ({
     <>
       <InputLabel htmlFor={htmlFor}>{inputLabel}</InputLabel>
       <OutlinedInput
+        error={error}
         required
         id={id}
         value={value}
