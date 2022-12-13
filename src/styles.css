@@ -1,6 +1,15 @@
 /* !base classes */
 .h2--title{
     margin: 0 !important;
+    color: black;
+}
+
+p{
+    color: black !important;
+}
+
+.btn--font-size{
+    font-size: 1rem !important;
 }
 
 
@@ -47,8 +56,8 @@
 
 .MuiFormControl-root{
     margin: 0 !important;
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
 }
 
 .MuiLoadingButton-root {
@@ -85,6 +94,10 @@
 
     .formContainer{
         width: 100%;
+    }
+
+    .btn--font-size{
+        font-size: 0.85rem !important;
     }
   }
 

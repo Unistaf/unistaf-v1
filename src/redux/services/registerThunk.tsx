@@ -15,14 +15,9 @@ export const registerThunk = createAsyncThunk(
   'user/register',
   async ({ data }:iData, { rejectWithValue }) => {
     try {
-      // console.log('data from register :', data);
-
-      const result = await axios.post(REGISTER_PATH, data)
-      console.log(result);
+      await axios.post(REGISTER_PATH, data)
       
-    } catch (error) {
-      console.log(error);
-      
+    } catch (error) {      
       return rejectWithValue(error)
     }
   })

@@ -118,143 +118,6 @@ const Connexion = () => {
   };
 
   return (
-    // <Box sx={{ width: '100%', height: '100vh' }} className="login_container">
-    //   <Grid
-    //     className='left-form'
-    //     item
-    //     sx={{
-    //       bgcolor: '#002984',
-    //       color: '#fff',
-    //       display: 'flex',
-    //       justifyContent: 'center',
-    //       alignItems: 'center'
-    //     }}
-    //   >
-    //     <img style={{ width: '80%' }} src={students} alt="Happy students" />
-    //   </Grid>
-    //   <Grid
-    //     item
-    //     className='right-form'
-    //   >
-    //     <Grid
-    //       className="headerFormContainer"
-    //       sx={{
-    //         textAlign: 'center',
-    //         padding: 1.5
-    //       }}
-    //     >
-    //       <Grid
-    //         className="imgItem"
-    //         sx={{
-    //           width: '70px',
-    //           height: '70px',
-    //           mx: 'auto',
-    //           borderRadius: '50%',
-    //           border: '2px solid #002984'
-    //         }}
-    //       >
-    //         <img src={iconLogoTrans} width="60px" alt="Logo UNISTAF" />
-    //       </Grid>
-    //       <div className="headerFormText">
-    //         <h1>Connexion</h1>
-    //         <p style={{maxWidth: '350px', margin: 'auto'}}>
-    //           Connectez vous pour accéder à des centaines de choix de
-    //           filières
-    //         </p>
-    //       </div>
-    //     </Grid>
-    //     <form className="formContainer">
-    //       <Grid
-    //         sx={{
-    //           width: '100%',
-    //           display: 'flex',
-    //           flexDirection: 'column'
-    //         }}
-    //       >
-    //         <FormControl sx={{ m: 1, p: 0 }} variant="outlined">
-    //           <InputReuse
-    //             error={errors.email?.message ? true : false}
-    //             htmlFor="outlined-adornment-email"
-    //             inputLabel="Adresse Email"
-    //             id="outlined-adornment-email"
-    //             value={values.email}
-    //             type="email"
-    //             handleChangeValues={handleChange('email')}
-    //             position="end"
-    //             ariaLabel="email"
-    //             icon={<Mail />}
-    //             label="Adresse email"
-    //             onClick={null}
-    //           />
-    //           <span className="error">{
-    //             errors.email?.message
-    //           }</span>
-    //         </FormControl>
-    //         <FormControl sx={{ m: 1 }} variant="outlined">
-    //           <InputReuse
-    //             error={errors.email?.message ? true : false}
-    //             htmlFor="outlined-adornment-password"
-    //             inputLabel="Mot(s) de passe"
-    //             id="outlined-adornment-password"
-    //             value={values.password}
-    //             type={values.showPassword ? 'text' : 'password'}
-    //             handleChangeValues={handleChange('password')}
-    //             position="end"
-    //             ariaLabel="toggle password visibility"
-    //             icon={values.showPassword ? (
-    //               <VisibilityOff />
-    //             ) : (
-    //               <Visibility />
-    //             )}
-    //             label="Mot(s) de passe"
-    //             onClick={handleClickShowPassword}
-    //           />
-    //           <span className="error">{
-    //             errors.email?.message
-    //           }</span>
-
-    //         </FormControl>
-    //         <Link style={{ textAlign: 'right', marginTop: '0.5rem', color: unistafColors[1] }} to="/password">Mot(s) de passe oublié ? </Link>
-    //         <UnistafButton
-    //           bgColor={unistafColors[1]}
-    //           disabled={false}
-    //           handleSubmit={handleSubmit}
-    //           loading={false}
-    //         >
-    //           Connectez-vous
-    //         </UnistafButton>
-    //         {/* <Button
-    //             sx={{ mt: 2, p: 1.5 }}
-    //             variant="contained"
-    //             onClick={handleSubmit}
-    //           >
-    //             Connectez-vous
-    //           </Button> */}
-    //         <Button
-    //           sx={{ mt: 2, ml: 1, px: 5, py: 1.5 }}
-    //           variant="outlined"
-    //           onClick={handleConnectGoogle}
-    //         >
-    //           {/* <Google /> */}
-    //           <img src={iconGoogle} alt="Icon Google" width={'25px'} />
-    //           <span>Connectez-vous avec Google</span>
-    //         </Button>
-    //       </Grid>
-    //     </form>
-    //     <Grid
-    //       sx={{
-    //         position: 'absolute',
-    //         bottom: '0'
-    //       }}
-    //     >
-    //       <p>
-    //         N'avez-vous pas de compte ?
-    //         <Link to={REGISTER_NAVIGATION}> Inscrivez-vous ici!</Link>
-    //       </p>
-    //     </Grid>
-    //   </Grid>
-
-    // </Box>
     <Box className="login_container">
       <div className='left-form'>
         <img style={{ width: '80%' }} src={students} alt="Happy students" />
@@ -277,7 +140,7 @@ const Connexion = () => {
           </div>
           <div style={{ textAlign: 'center' }}>
             <h1 className='h2--title'>Connexion</h1>
-            <p style={{ maxWidth: '350px', margin: 'auto', padding: '0, 1rem' }}>
+            <p style={{ maxWidth: '350px', margin: '0.5rem auto', padding: '0, 1rem' }}>
               Connectez vous pour accéder à des centaines de choix de
               filières
             </p>
@@ -336,6 +199,7 @@ const Connexion = () => {
             </FormControl>
             <Link style={{ textAlign: 'right', marginTop: '0.5rem', color: unistafColors[1] }} to="/password">Mot(s) de passe oublié ? </Link>
             <UnistafButton
+              className='btn--font-size'
               color='#fff'
               bgColor={unistafColors[1]}
               disabled={false}
@@ -353,7 +217,7 @@ const Connexion = () => {
                 Connectez-vous
               </Button> */}
             <UnistafButton
-            className='google-btn'
+              className='google-btn btn--font-size'
               bgColor="#fff"
               color="#000"
               disabled={false}
@@ -367,7 +231,7 @@ const Connexion = () => {
         </form>
         <p style={{ textAlign: 'center', marginTop: '2rem' }}>
           N'avez-vous pas de compte ?
-          <Link to={REGISTER_NAVIGATION}> Inscrivez-vous ici!</Link>
+          <Link to={REGISTER_NAVIGATION}> Inscrivez-vous ici</Link>
         </p>
       </div>
     </Box>

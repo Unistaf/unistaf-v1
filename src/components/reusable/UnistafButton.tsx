@@ -16,7 +16,7 @@ interface IProps {
 const UnistafButton = ({bgColor, disabled, handleSubmit, loading, children, icon, color, className}: IProps) => {
   return (
     <LoadingButton
-      sx={{ mt: 2, ml: 1, px: 4, py: 1.5, backgroundColor: bgColor, color: color}}
+      sx={{ mt: 2, ml: 1, px: 4, py: 1.87, backgroundColor: bgColor, color: color}}
       size="small"
       disabled={disabled}
       onClick={handleSubmit}
