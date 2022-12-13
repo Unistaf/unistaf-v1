@@ -17,6 +17,7 @@ import { LOGIN_NAVIGATION } from "src/navigation_paths";
 import { LoadingButton } from "@mui/lab";
 import { unistafColors } from '../../utils/colors';
 import UnistafButton from "../reusable/UnistafButton";
+import { Link } from "react-router-dom";
 
 interface State {
   firstname: string,
@@ -150,7 +151,7 @@ const Signup = () => {
         }
         else {
           setDisabled(true)
-          setError('password', { type: 'custom', message: 'Au moins 8 caracteres, une lettre majuscule, minucsule, un nombre, un caractere special' });
+          setError('password', { type: 'custom', message: 'Au moins 8 caractères, une lettre majuscule, minuscule, un nombre, un caractère special' });
 
         }
       }
@@ -194,7 +195,7 @@ const Signup = () => {
       setError('firstname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
       return
     }
-    if (values.lastname.length <= 2) {
+    if (values.lastname.length <= 1) {
       setLoading(false)
       setError('lastname', { type: 'custom', message: 'Mettez au moins 2 caracteres' });
       return
@@ -205,12 +206,18 @@ const Signup = () => {
     dispatch(registerThunk(arg)).then((res: iResponse) => {
       setLoading(false)
       if (res.type === 'user/register/rejected') {
+        console.log('network error ', res.payload);
         if (res.payload.response.data) {
           const data = JSON.parse(res.payload.response.data)
           if (data.email) {
             setError('email', { type: 'custom', message: 'Email indisponible' });
           }
           return
+        }
+        if (!res.payload.response) {
+
+          // setError('email', { type: 'custom', message: 'Verifier si vous vont identifiants sont corrects' });
+          return setError('email', { type: 'custom', message: 'Erreur de connexion internet' });
         }
         return
       }
@@ -364,7 +371,8 @@ const Signup = () => {
           />
         </FormGroup>
         <UnistafButton
-        color="#fff"
+          className='btn--font-size'
+          color="#fff"
           bgColor={unistafColors[1]}
           disabled={disabled}
           handleSubmit={handleSubmit}
@@ -386,6 +394,10 @@ const Signup = () => {
           </LoadingButton> */}
 
       </form>
+      <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+          N'avez-vous pas de compte ?
+          <Link to={LOGIN_NAVIGATION}> Inscrivez-vous ici!</Link>
+        </p>
     </Box>
     // </Box>
   );
