@@ -395,8 +395,8 @@ const Signup = () => {
 
       </form>
       <p style={{ textAlign: 'center', marginTop: '2rem' }}>
-          N'avez-vous pas de compte ?
-          <Link to={LOGIN_NAVIGATION}> Inscrivez-vous ici!</Link>
+          Vous avez deja un compte ?
+          <Link to={LOGIN_NAVIGATION}> Connectez-vous ici</Link>
         </p>
     </Box>
     // </Box>

@@ -231,7 +231,7 @@ const Connexion = () => {
         </form>
         <p style={{ textAlign: 'center', marginTop: '2rem' }}>
           N'avez-vous pas de compte ?
-          <Link to={REGISTER_NAVIGATION}> Inscrivez-vous ici!</Link>
+          <Link to={REGISTER_NAVIGATION}> Inscrivez-vous ici</Link>
         </p>
       </div>
     </Box>
