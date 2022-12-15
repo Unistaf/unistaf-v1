@@ -7,7 +7,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
   const content = useRoutes(router);
@@ -15,10 +16,12 @@ function App() {
   return (
     <ThemeProvider>
       <Provider store={store}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <CssBaseline />
-          {content}
-        </LocalizationProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <CssBaseline />
+            {content}
+          </LocalizationProvider>
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   );

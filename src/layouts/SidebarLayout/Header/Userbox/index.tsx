@@ -86,7 +86,7 @@ function HeaderUserbox() {
     setOpen(false);
   };
 
-  console.log(currentUser.currentUser.access_token);
+  console.log(currentUser.currentUser);
 
   // const logout = async (): Promise<void> => {
   //   try {
@@ -108,8 +108,10 @@ function HeaderUserbox() {
           'Authorization': `bearer ${currentUser.currentUser.access_token}`
         }
       })
-      console.log('apres gt');
-      
+      // console.log('apres gt');
+      // storage.clear()
+      sessionStorage.clear()
+      localStorage.clear();
       navigate('/')
     } catch (error) {
       console.log(error);      
