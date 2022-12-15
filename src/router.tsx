@@ -9,7 +9,8 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './pages/auth/Connexion';
 import Signup from './pages/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
-import { ADMIN_DASHBOARD_NAVIGATION } from './navigation_paths';
+import { ADMIN_ADD_FACULTY_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION } from './navigation_paths';
+import AddFaculty from './pages/school/AddFaculty';
 
 const Loader = (Component) => (props) =>
 (
@@ -47,11 +48,11 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <h1>Hello - Super admin</h1>
+        element: <h1>Hello - Admin</h1>
       },
       {
-        path: 'add-school',
-        element: <AddSchool />
+        path: ADMIN_ADD_FACULTY_NAVIGATION,
+        element: <AddFaculty />
       },
     ]
   },

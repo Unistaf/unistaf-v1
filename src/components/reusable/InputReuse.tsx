@@ -38,9 +38,10 @@ const InputReuse = ({
   error
 }: IProps) => {
   return (
-    <>
+    <div>
       <InputLabel htmlFor={htmlFor}>{inputLabel}</InputLabel>
       <OutlinedInput
+        fullWidth={true}
         error={error}
         required
         id={id}
@@ -60,7 +61,7 @@ const InputReuse = ({
         }
         label={label}
       />
-    </>
+    </div>
   )
 }
 

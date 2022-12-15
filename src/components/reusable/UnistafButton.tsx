@@ -9,7 +9,7 @@ interface IProps {
   loading: boolean,
   children: Element | string,
   icon: ReactElement,
-  color: string,
+  color?: string,
   className?: string
 }
 

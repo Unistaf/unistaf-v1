@@ -4,14 +4,24 @@ import storage from 'redux-persist/lib/storage';
 // import storage from 'redux-persist-indexeddb-storage';
 import localforage from 'localforage';
 import storageSession from 'redux-persist/lib/storage/session'
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import thunk from 'redux-thunk';
 
-const persistConfig: {key: string, storage: any} = {
-  key: 'root',
+const persistConfig: { key: string, storage: any } = {
+  key: 't',
   storage: localforage,
 }
 
+// !user persit location using session storage
 const userPersistConfig = {
   key: 'u',
   storage: storageSession,
@@ -29,6 +39,12 @@ export const store = configureStore({
   reducer: persistedReducer,
   devTools: true,
   // middleware: [thunk]
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
 
 export const persistor = persistStore(store)
