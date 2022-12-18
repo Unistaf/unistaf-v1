@@ -7,9 +7,9 @@ interface IProps {
   disabled: boolean,
   handleSubmit: ((e: MouseEvent<HTMLButtonElement>) => Promise<void>) | ((e: React.MouseEvent<HTMLButtonElement>) => void)
   loading: boolean,
-  children: Element | string,
+  children: Element | string | ReactElement | null,
   icon: ReactElement,
-  color: string,
+  color?: string,
   className?: string
 }
 

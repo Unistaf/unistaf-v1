@@ -6,21 +6,22 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
-import Connexion from './components/auth/Connexion';
-import Signup from './components/auth/Signup';
+import Connexion from './pages/auth/Connexion';
+import Signup from './pages/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
-import { ADMIN_DASHBOARD_NAVIGATION } from './navigation_paths';
+import { ADMIN_ADD_FACULTY_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION } from './navigation_paths';
+import AddFaculty from './pages/school/AddFaculty';
 
 const Loader = (Component) => (props) =>
-  (
-    <Suspense fallback={<SuspenseLoader />}>
-      <Component {...props} />
-    </Suspense>
-  );
+(
+  <Suspense fallback={<SuspenseLoader />}>
+    <Component {...props} />
+  </Suspense>
+);
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
-    path: '',
+    path: LOGIN_NAVIGATION,
     element: <Connexion />
   },
   {
@@ -42,20 +43,6 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: ADMIN_DASHBOARD_NAVIGATION,
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <h1>Hello - Super admin</h1>
-      },
-      {
-        path: 'add-school',
-        element: <AddSchool />
-      },
-    ]
-  },
-  {
     path: 'ecole',
     element: <SidebarLayout />,
     children: [
@@ -67,4 +54,20 @@ const routes: RouteObject[] = [
   },
 ];
 
-export default routes;
+export const adminRoutes: RouteObject[] = [
+  {
+    path: ADMIN_DASHBOARD_NAVIGATION,
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: '',
+        element: <h1>Hello - Admin</h1>
+      },
+      {
+        path: ADMIN_ADD_FACULTY_NAVIGATION,
+        element: <AddFaculty />
+      },
+    ]
+  },
+]
+

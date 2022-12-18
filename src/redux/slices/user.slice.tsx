@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk } from "../services/loginThunk";
 import { registerThunk } from "../services/registerThunk";
+import localforage from 'localforage';
 
 interface iInitialState{
   currentUser: object,
@@ -18,6 +19,12 @@ const userSlice = createSlice({
   reducers: {
     setCurrentUser: (state, {payload}) => {
       state.currentUser = payload
+    },
+    clearCurrentUser: (state) => {
+      state.currentUser = null
+      sessionStorage.clear()
+      localStorage.clear();
+      localforage.clear()
     }
   },
   extraReducers: {
@@ -43,5 +50,5 @@ const userSlice = createSlice({
   }
 })
 
-export const {setCurrentUser} = userSlice.actions
+export const {setCurrentUser, clearCurrentUser} = userSlice.actions
 export default userSlice.reducer

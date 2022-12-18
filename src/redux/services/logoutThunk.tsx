@@ -7,12 +7,18 @@ interface iData {
 }
 
 export const logoutThunk = createAsyncThunk(
-  'user/login',
-  async (arg:string, { rejectWithValue }) => {
+  'user/logout',
+  async (arg:{token: string}, { rejectWithValue }) => {
     try {
-      const {data} = await axios.post(LOGOUT_PATH)
-      return data      
+      await axios.get(LOGOUT_PATH, {
+        headers: {
+          'Authorization': `bearer ${arg.token}`
+        }
+      })
+      sessionStorage.clear()
+      localStorage.clear();
     } catch (error) {
-      return rejectWithValue(error)
+      console.log(error);   
+      return rejectWithValue(error)   
     }
   })

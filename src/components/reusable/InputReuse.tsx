@@ -20,7 +20,8 @@ interface IProps {
   position: "end" | "start",
   icon: ReactElement,
   onClick: () => void | null,
-  error: boolean | null
+  error: boolean | null,
+  disabled?: boolean
 }
 
 const InputReuse = ({
@@ -35,12 +36,15 @@ const InputReuse = ({
   position,
   icon,
   onClick,
-  error
+  error,
+  disabled
 }: IProps) => {
   return (
-    <>
+    <div style={{width: '100%', margin: 0, padding: 0}}>
       <InputLabel htmlFor={htmlFor}>{inputLabel}</InputLabel>
       <OutlinedInput
+      disabled={disabled}
+        fullWidth={true}
         error={error}
         required
         id={id}
@@ -60,7 +64,7 @@ const InputReuse = ({
         }
         label={label}
       />
-    </>
+    </div>
   )
 }
 

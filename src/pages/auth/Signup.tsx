@@ -8,15 +8,15 @@ import { registerThunk } from "src/redux/services/registerThunk";
 import { AppDispatch } from "src/redux/store";
 import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
 import '../../styles.css'
-import InputRegister from "./InputRegister";
+import InputRegister from "../../components/reusable/InputRegister";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { emailRegex, passwordRegex } from '../../utils/regex';
-import InputReuse from "../reusable/InputReuse";
+import InputReuse from "../../components/reusable/InputReuse";
 import { LOGIN_NAVIGATION } from "src/navigation_paths";
 import { LoadingButton } from "@mui/lab";
 import { unistafColors } from '../../utils/colors';
-import UnistafButton from "../reusable/UnistafButton";
+import UnistafButton from "../../components/reusable/UnistafButton";
 import { Link } from "react-router-dom";
 
 interface State {
@@ -395,9 +395,9 @@ const Signup = () => {
 
       </form>
       <p style={{ textAlign: 'center', marginTop: '2rem' }}>
-          Vous avez deja un compte ?
-          <Link to={LOGIN_NAVIGATION}> Connectez-vous ici</Link>
-        </p>
+        Vous avez deja un compte ?
+        <Link to={LOGIN_NAVIGATION}> Connectez-vous ici</Link>
+      </p>
     </Box>
     // </Box>
   );

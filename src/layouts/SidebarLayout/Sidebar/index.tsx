@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 
 import SidebarMenu from './SidebarMenu';
+import { unistafColors } from 'src/utils/colors';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -45,20 +46,18 @@ function Sidebar() {
           position: 'fixed',
           left: 0,
           top: 0,
-          background:
-            theme.palette.mode === 'dark'
-              ? alpha(lighten(theme.header.background, 0.1), 0.5)
-              : darken(theme.colors.alpha.black[100], 0.5),
-          boxShadow:
-            theme.palette.mode === 'dark' ? theme.sidebar.boxShadow : 'none'
+          // !change sidebar bgColor
+          background: unistafColors[1],
+          color: 'white'
         }}
       >
         <Scrollbar>
+          {/* ****************** Desktop **************** */}
           <Box mt={3}>
             <Box
               mx={2}
               sx={{
-                width: 52
+                width: 52,
               }}
             >
               <h1>UNISTAF</h1>
@@ -80,6 +79,7 @@ function Sidebar() {
           }}
         />
       </SidebarWrapper>
+      {/* *************************** mobile ************** */}
       <Drawer
         sx={{
           boxShadow: `${theme.sidebar.boxShadow}`
@@ -92,14 +92,24 @@ function Sidebar() {
       >
         <SidebarWrapper
           sx={{
-            background:
-              theme.palette.mode === 'dark'
-                ? theme.colors.alpha.white[100]
-                : darken(theme.colors.alpha.black[100], 0.5)
+            // !change sidebar bgColor
+            background: unistafColors[1],
+            color: unistafColors[0]
           }}
         >
           <Scrollbar>
             <Box mt={3}>
+            </Box>
+            <Box mt={3}>
+              <Box
+                mx={2}
+                sx={{
+                  width: 52,
+                }}
+              >
+                <h1>UNISTAF</h1>
+                {/* <Logo /> */}
+              </Box>
             </Box>
             <Divider
               sx={{

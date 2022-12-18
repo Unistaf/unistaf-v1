@@ -31,6 +31,7 @@ import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwo
 import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
 import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
+import { ADMIN_LINKS_NAVIGATION } from 'src/navigation_paths';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -147,9 +148,9 @@ const SubMenuWrapper = styled(Box)(
                 background: ${theme.colors.alpha.trueWhite[100]};
                 opacity: 0;
                 transition: ${theme.transitions.create([
-                  'transform',
-                  'opacity'
-                ])};
+    'transform',
+    'opacity'
+  ])};
                 width: 6px;
                 height: 6px;
                 transform: scale(0);
@@ -182,36 +183,29 @@ function SidebarMenu() {
       <MenuWrapper>
         <List
           component="div"
-          // subheader={
-          //   <ListSubheader component="div" disableSticky>
-          //     Dashboards
-          //   </ListSubheader>
-          // }
+        subheader={
+           <ListSubheader component="div" disableSticky>
+             Mon ecole
+           </ListSubheader>
+         }
         >
           <SubMenuWrapper>
             <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboard"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Acceuil
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/ecole"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Mon ecole
-                </Button>
-              </ListItem>
+              {
+                ADMIN_LINKS_NAVIGATION.map((item) => (
+                  <ListItem key={item.label} component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to={item.link}
+                      startIcon={item.icon}
+                    >
+                      {item.label}
+                    </Button>
+                  </ListItem>
+                ))
+              }
             </List>
           </SubMenuWrapper>
         </List>
