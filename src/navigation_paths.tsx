@@ -15,6 +15,19 @@ export const LOGIN_NAVIGATION = '/'
 export const SUPER_ADMIN_DASHBOARD_NAVIGATION = '/dashboard'
 export const SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION = 'add-school'
 
+export const SUPER_ADMIN_LINKS_NAVIGATION = [
+  {
+    link: '',
+    label: 'Accueil',
+    icon: <HomeRoundedIcon />
+  },
+  // {
+  //   link: ADMIN_ADD_FACULTY_NAVIGATION,
+  //   label: 'Facultés',
+  //   icon: <SchoolRoundedIcon />
+  // }
+ ]
+
 /** ------------------------------------------
  *! ADMIN NAVIGATION                          |
  * -------------------------------------------

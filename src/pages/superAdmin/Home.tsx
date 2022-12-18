@@ -1,9 +1,11 @@
 import React from 'react'
+import CreateSchoolCardLink from 'src/components/CreateSchoolCardLink'
 
 const Home = () => {
   return (
     <section>
-      <h1>Welcome to unistaf interface</h1>
+      <h1>Liste des écoles</h1>
+      <CreateSchoolCardLink />
     </section>
   )
 }

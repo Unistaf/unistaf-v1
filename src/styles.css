@@ -1,3 +1,8 @@
+:root{
+    --primary-color: #ffffff;
+    --secondary-color: #0D0DA3;
+    --third-color: #000000
+}
 /* !base classes */
 .h2--title{
     /* margin: 0 !important; */
@@ -33,7 +38,7 @@ p{
     height: 100vh;
 }
 .left-form{
-    background-color: #0D0DA3;
+    background-color: var(--secondary-color);
 }
 .right-form{
     flex-direction: column;
@@ -87,6 +92,22 @@ p{
     display: flex;
     gap: 20px;
     /* justify-content: space-between; */
+}
+
+/****************** super admin ********************  */
+.add-school{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed var(--secondary-color);
+    /* border-style: ; */
+    max-width: 250px;
+    min-height: 300px;
+}
+
+.add-school p{
+    font-weight: 600;
 }
 
 @media screen and (max-width: 900px) {

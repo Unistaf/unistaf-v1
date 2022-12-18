@@ -8,14 +8,15 @@ import ThemeProvider from './theme/ThemeProvider';
 import { Provider, useSelector } from 'react-redux';
 import { store, persistor, iStore } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { adminRoutes, routes } from 'src/router';
+import { adminRoutes, routes, superAdminRoutes } from 'src/router';
+import { ICurrenUser } from './utils/interfaces';
 
 function App() {
-  const currentUser: any = useSelector((state: iStore) => state.user.currentUser);
+  const currentUser: ICurrenUser | any = useSelector((state: iStore) => state.user.currentUser);
   let content = null;
 
   if (currentUser?.user?.user_type === 'super_admin') {
-    content = useRoutes(routes)
+    content = useRoutes(superAdminRoutes)
   }
   else if (currentUser?.user?.user_type === 'admin') {
     content = useRoutes(adminRoutes)

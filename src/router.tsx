@@ -9,8 +9,9 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './pages/auth/Connexion';
 import Signup from './pages/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
-import { ADMIN_ADD_FACULTY_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION } from './navigation_paths';
+import { ADMIN_ADD_FACULTY_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION } from './navigation_paths';
 import AddFaculty from './pages/school/AddFaculty';
+import Home from './pages/superAdmin/Home';
 
 const Loader = (Component) => (props) =>
 (
@@ -53,6 +54,23 @@ export const routes: RouteObject[] = [
     ]
   },
 ];
+
+export const superAdminRoutes: RouteObject[] = [
+    {
+      path: SUPER_ADMIN_DASHBOARD_NAVIGATION,
+      element: <SidebarLayout />,
+      children: [
+        {
+          path: '',
+          element: <Home />
+        },
+        {
+          path: SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION,
+          element: <AddSchool />
+        },
+      ]
+    },
+]
 
 export const adminRoutes: RouteObject[] = [
   {
