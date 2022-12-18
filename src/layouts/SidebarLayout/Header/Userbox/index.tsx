@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-
 import { NavLink, useNavigate } from 'react-router-dom';
 import unistafLogo from '../../../../assets/img/icon-logo-trans.png'
 
@@ -28,6 +27,8 @@ import { logoutThunk } from 'src/redux/services/logoutThunk';
 import { LOGOUT_PATH } from 'src/routes/app_paths';
 import axios from 'axios';
 import { iStore } from 'src/redux/store';
+import { LOGIN_NAVIGATION } from 'src/navigation_paths';
+import { clearCurrentUser } from 'src/redux/slices/user.slice';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -86,21 +87,6 @@ function HeaderUserbox() {
     setOpen(false);
   };
 
-  console.log(currentUser.currentUser);
-
-  // const logout = async (): Promise<void> => {
-  //   try {
-  //     await axios.post(LOGOUT_PATH, {
-  //       headers: {
-  //         'Authorization': `Bearer ${currentUser.currentUser.access_token}`
-  //       }
-  //     })
-  //     navigate('')
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   const logout = async (): Promise<void> => {
     try {
       await axios.get(LOGOUT_PATH, {
@@ -108,11 +94,8 @@ function HeaderUserbox() {
           'Authorization': `bearer ${currentUser.currentUser.access_token}`
         }
       })
-      // console.log('apres gt');
-      // storage.clear()
-      sessionStorage.clear()
-      localStorage.clear();
-      navigate('/')
+      dispatch(clearCurrentUser())
+      navigate(LOGIN_NAVIGATION)
     } catch (error) {
       console.log(error);      
     }

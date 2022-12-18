@@ -9,6 +9,13 @@ export const REGISTER_NAVIGATION = 'signup'
 export const LOGIN_NAVIGATION = '/'
 
 /** ------------------------------------------
+ *! SUPER-ADMIN NAVIGATION                          |
+ * -------------------------------------------
+ */
+export const SUPER_ADMIN_DASHBOARD_NAVIGATION = '/dashboard'
+export const SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION = 'add-school'
+
+/** ------------------------------------------
  *! ADMIN NAVIGATION                          |
  * -------------------------------------------
  */

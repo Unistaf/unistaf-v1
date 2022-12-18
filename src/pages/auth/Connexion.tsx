@@ -28,7 +28,7 @@ import { loginThunk } from 'src/redux/services/loginThunk';
 import InputReuse from '../../components/reusable/InputReuse';
 import { useForm } from 'react-hook-form';
 import { setCurrentUser } from 'src/redux/slices/user.slice';
-import { ADMIN_DASHBOARD_NAVIGATION, REGISTER_NAVIGATION } from 'src/navigation_paths';
+import { ADMIN_DASHBOARD_NAVIGATION, REGISTER_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, USER_DASHBOARD_NAVIGATION } from 'src/navigation_paths';
 import { Mail } from '@mui/icons-material';
 import UnistafButton from '../../components/reusable/UnistafButton';
 import { unistafColors } from 'src/utils/colors';
@@ -92,7 +92,16 @@ const Connexion = () => {
       if (res.type === 'user/login/fulfilled') {
         if (res.payload.access_token && res.payload.user.slug) {
           dispatch(setCurrentUser(res.payload))
-          return navigate(ADMIN_DASHBOARD_NAVIGATION)
+          if (res.payload.user.user_type === 'super_admin') {
+            return navigate(SUPER_ADMIN_DASHBOARD_NAVIGATION)
+          }
+          else if (res.payload.user.user_type === 'admin') {
+            return navigate(ADMIN_DASHBOARD_NAVIGATION)
+          }
+          else if(res.payload.user.user_type === 'student'){
+            return navigate(USER_DASHBOARD_NAVIGATION)
+          }
+          console.log(res.payload.user.user_type)
         }
       }
       if (res.type === 'user/login/rejected') {

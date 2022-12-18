@@ -1,28 +1,38 @@
 import { Route, Routes, useRoutes } from 'react-router-dom';
-import router from 'src/router';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
-import { Provider } from 'react-redux';
-import { store, persistor } from './redux/store';
+import { Provider, useSelector } from 'react-redux';
+import { store, persistor, iStore } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { adminRoutes, routes } from 'src/router';
 
 function App() {
-  const content = useRoutes(router);
+  const currentUser: any = useSelector((state: iStore) => state.user.currentUser);
+  let content = null;
+
+  if (currentUser?.user?.user_type === 'super_admin') {
+    content = useRoutes(routes)
+  }
+  else if (currentUser?.user?.user_type === 'admin') {
+    content = useRoutes(adminRoutes)
+  }
+  else if (currentUser?.user?.user_type === 'student') {
+    // content = useRoutes()
+  }
+  else {
+    content = useRoutes(routes)
+  }
 
   return (
     <ThemeProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <CssBaseline />
-            {content}
-          </LocalizationProvider>
-        </PersistGate>
-      </Provider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <CssBaseline />
+        {content}
+      </LocalizationProvider>
     </ThemeProvider>
   );
 }

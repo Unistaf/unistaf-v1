@@ -50,7 +50,9 @@ export const store = configureStore({
 export const persistor = persistStore(store)
 
 export interface iStore {
-  user: object,
+  user: {
+    currentUser: object
+  },
 }
 
 export type AppDispatch = typeof store.dispatch;
