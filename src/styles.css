@@ -78,6 +78,17 @@ p{
     margin-left: 0 !important;
 }
 
+/* *************** select branch ****************** */
+.add-branches{
+    margin-top: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.select-branche{
+    display: flex;
+    gap: 20px;
+    /* justify-content: space-between; */
+}
+
 @media screen and (max-width: 900px) {
     .login_container{
         display: block;
@@ -93,6 +104,12 @@ p{
     .right-form{
         display: block;
         width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .flex-column{
+        flex-direction: column;
     }
 }
 

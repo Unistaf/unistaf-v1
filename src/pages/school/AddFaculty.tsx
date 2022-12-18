@@ -15,9 +15,9 @@ const AddFaculty = () => {
           disabled={false}
           handleSubmit={null}
           loading={false}
-          icon={<AddCircleOutlineRoundedIcon />}
+          icon={null}
         >
-          Ajouter
+          <AddCircleOutlineRoundedIcon />
         </UnistafButton>
       </div>
       <AddFacultyForm />
