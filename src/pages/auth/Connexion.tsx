@@ -101,7 +101,7 @@ const Connexion = () => {
           else if(res.payload.user.user_type === 'student'){
             return navigate(USER_DASHBOARD_NAVIGATION)
           }
-          console.log(res.payload.user.user_type)
+          // console.log(res.payload.user.user_type)
         }
       }
       if (res.type === 'user/login/rejected') {
@@ -112,9 +112,7 @@ const Connexion = () => {
           // setError('email', { type: 'custom', message: 'Verifier si vous vont identifiants sont corrects' });
           return setError('email', { type: 'custom', message: 'Erreur de connexion internet' });
         }
-        console.log(res.payload);
         if (res.payload.response.statusText === "Unauthorized") {
-          console.log('suer error');
           return setError('email', { type: 'custom', message: 'Vos identifiants sont incorrectes' });
         }
       }

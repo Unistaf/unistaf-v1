@@ -56,23 +56,31 @@ export const routes: RouteObject[] = [
 ];
 
 export const superAdminRoutes: RouteObject[] = [
-    {
-      path: SUPER_ADMIN_DASHBOARD_NAVIGATION,
-      element: <SidebarLayout />,
-      children: [
-        {
-          path: '',
-          element: <Home />
-        },
-        {
-          path: SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION,
-          element: <AddSchool />
-        },
-      ]
-    },
+  {
+    path: LOGIN_NAVIGATION,
+    element: <Connexion />
+  },
+  {
+    path: SUPER_ADMIN_DASHBOARD_NAVIGATION,
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: '',
+        element: <Home />
+      },
+      {
+        path: SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION,
+        element: <AddSchool />
+      },
+    ]
+  },
 ]
 
 export const adminRoutes: RouteObject[] = [
+  {
+    path: LOGIN_NAVIGATION,
+    element: <Connexion />
+  },
   {
     path: ADMIN_DASHBOARD_NAVIGATION,
     element: <SidebarLayout />,

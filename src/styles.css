@@ -19,8 +19,32 @@
 .align-items-center{
     align-items: center !important;
 }
+.justify-content-center{
+    justify-content: center;
+}
+.flex-column{
+    flex-direction: column;
+}
+.bordered{
+    border: 1px solid white;
+}
+.border-dashed{
+    border: 1px dashed rgb(232, 225, 225);
+}
+.mx-auto{
+    margin: auto;
+}
+.p-2{
+    padding: 1rem;
+}
 .gap-2{
     gap: 20px;
+}
+.text-uppercase{
+    text-transform: uppercase;
+}
+.text-center{
+    text-align: center;
 }
 
 p{
@@ -104,6 +128,9 @@ p{
     /* border-style: ; */
     max-width: 250px;
     min-height: 300px;
+}
+.add-school-placehlder::placeholder{
+    color: white;
 }
 
 .add-school p{
