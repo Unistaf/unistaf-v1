@@ -15,6 +15,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import thunk from 'redux-thunk';
+import schools from "./slices/schools.slice";
 
 const persistConfig: { key: string, storage: any } = {
   key: 't',
@@ -29,7 +30,8 @@ const userPersistConfig = {
 
 const rootReducer = combineReducers({
   // user: userReducer
-  user: persistReducer(userPersistConfig, userReducer)
+  user: persistReducer(userPersistConfig, userReducer),
+  schools
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -53,6 +55,9 @@ export interface iStore {
   user: {
     currentUser: object
   },
+  schools:{
+    listSchools: []
+  }
 }
 
 export type AppDispatch = typeof store.dispatch;
