@@ -1,7 +1,8 @@
 :root{
     --primary-color: #ffffff;
     --secondary-color: #0D0DA3;
-    --third-color: #000000
+    --third-color: #000000;
+    --dark-light: #393C49;
 }
 /* !base classes */
 .h2--title{
@@ -21,6 +22,9 @@
 }
 .justify-content-center{
     justify-content: center;
+}
+.justify-content-between{
+    justify-content: space-between;
 }
 .flex-column{
     flex-direction: column;
@@ -119,22 +123,60 @@ p{
 }
 
 /****************** super admin ********************  */
+.MuiPaper-root{
+    background-color: #393C49 !important;
+}
+.super-admin-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
 .add-school{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    border: 2px dashed var(--secondary-color);
+    border: 2px dashed var(--dark-light);
     /* border-style: ; */
-    max-width: 250px;
+    width: 100%;
     min-height: 300px;
+}
+.add-school-placehlder{
+    outline: 1px solid white !important;
+    border: none !important;
 }
 .add-school-placehlder::placeholder{
     color: white;
 }
-
 .add-school p{
     font-weight: 600;
+}
+.card{
+    width: 100%;
+    height: 400px;
+    background-color: var(--dark-light);
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.card_body{
+    padding: 0.5rem 1rem;
+}
+.card_body p{
+    font-size: 0.7rem;
+}
+.card_footer{
+    background-color: #7d7f89;
+    height: 100px;
+}
+.card_footer span{
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+.notation-items img{
+    width: 10px;
+    height: 10px;
+    margin-right: 0.15rem;
 }
 
 @media screen and (max-width: 900px) {
@@ -153,11 +195,18 @@ p{
         display: block;
         width: 100% !important;
     }
+
+    .super-admin-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media screen and (max-width: 700px) {
     .flex-column{
         flex-direction: column;
+    }
+    .super-admin-grid{
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -177,6 +226,10 @@ p{
 
     .btn--font-size{
         font-size: 0.85rem !important;
+    }
+
+    .super-admin-grid{
+        grid-template-columns: 1fr;
     }
   }
 

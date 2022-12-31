@@ -189,11 +189,11 @@ function SidebarMenu() {
       <MenuWrapper>
         <List
           component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Mon ecole
-            </ListSubheader>
-          }
+          // subheader={
+          //   <ListSubheader component="div" disableSticky>
+          //     Mon ecole
+          //   </ListSubheader>
+          // }
         >
           <SubMenuWrapper>
             <List component="div">

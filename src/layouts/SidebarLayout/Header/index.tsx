@@ -17,29 +17,35 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
 import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
+import { ICurrenUser } from 'src/utils/interfaces';
+import { useSelector } from 'react-redux';
+import { iStore } from 'src/redux/store';
+import { unistafColors } from 'src/utils/colors';
 
-const HeaderWrapper = styled(Box)(
-  ({ theme }) => `
-        height: ${theme.header.height};
-        color: ${theme.header.textColor};
-        padding: ${theme.spacing(0, 2)};
-        right: 0;
-        z-index: 6;
-        background-color: ${alpha(theme.header.background, 0.95)};
-        backdrop-filter: blur(3px);
-        position: fixed;
-        justify-content: space-between;
-        width: 100%;
-        @media (min-width: ${theme.breakpoints.values.lg}px) {
-            left: ${theme.sidebar.width};
-            width: auto;
-        }
-`
-);
 
 function Header() {
+  const currentUser: ICurrenUser | any = useSelector((state: iStore) => state?.user?.currentUser);
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const theme = useTheme();
+
+  const HeaderWrapper = styled(Box)(
+    ({ theme }) => `
+          height: ${theme.header.height};
+          color: ${currentUser?.user?.user_type === 'super_admin'  ? 'white' : theme.header.textColor};
+          padding: ${theme.spacing(0, 2)};
+          right: 0;
+          z-index: 6;
+          background-color: ${ currentUser?.user?.user_type === 'super_admin' ? alpha(theme.header.background, 0.95) : alpha(theme.header.background, 0.95)};
+          backdrop-filter: blur(3px);
+          position: fixed;
+          justify-content: space-between;
+          width: 100%;
+          @media (min-width: ${theme.breakpoints.values.lg}px) {
+              left: ${theme.sidebar.width};
+              width: auto;
+          }
+  `
+  );
 
   return (
     <HeaderWrapper

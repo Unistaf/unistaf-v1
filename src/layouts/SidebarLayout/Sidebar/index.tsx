@@ -17,6 +17,9 @@ import {
 
 import SidebarMenu from './SidebarMenu';
 import { unistafColors } from 'src/utils/colors';
+import { ICurrenUser } from 'src/utils/interfaces';
+import { useSelector } from 'react-redux';
+import { iStore } from 'src/redux/store';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -31,6 +34,7 @@ const SidebarWrapper = styled(Box)(
 );
 
 function Sidebar() {
+  const currentUser: ICurrenUser | any = useSelector((state: iStore) => state?.user?.currentUser);
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const closeSidebar = () => toggleSidebar();
   const theme = useTheme();
@@ -47,7 +51,8 @@ function Sidebar() {
           left: 0,
           top: 0,
           // !change sidebar bgColor
-          background: unistafColors[1],
+          // background: unistafColors[1],
+          background: currentUser?.user?.user_type === 'super_admin' ? unistafColors[2] : unistafColors[1], 
           color: 'white'
         }}
       >
@@ -93,7 +98,8 @@ function Sidebar() {
         <SidebarWrapper
           sx={{
             // !change sidebar bgColor
-            background: unistafColors[1],
+            // background: unistafColors[1],
+            background: currentUser?.user?.user_type === 'super_admin' ? unistafColors[2] : unistafColors[1], 
             color: unistafColors[0]
           }}
         >

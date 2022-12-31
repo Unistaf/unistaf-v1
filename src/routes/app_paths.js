@@ -13,6 +13,13 @@ export const REFRESH_PATH = API + AUTH_PREFIX + '/refresh'
 
 /**
  *+-----------------------------------------------------------+
+ *      SUPER ADMIN PATHS                                          |
+ *+-----------------------------------------------------------+
+ */
+ export const CREATE_SCHOOL_API_PATH = API + '/schools'
+ export const GET_SCHOOLS_API_PATH = API + '/schools'
+/**
+ *+-----------------------------------------------------------+
  *      ADMINS PATHS                                          |
  *+-----------------------------------------------------------+
  */
