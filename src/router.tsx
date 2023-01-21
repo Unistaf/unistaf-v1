@@ -13,6 +13,7 @@ import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATIO
 import AddFaculty from './pages/school/AddFaculty';
 import Home from './pages/superAdmin/Home';
 import MonEcole from './pages/school/components/MonEcole';
+import Falculties from './pages/school/Falculties';
 
 const Loader = (Component) => (props) =>
 (
@@ -92,7 +93,7 @@ export const adminRoutes: RouteObject[] = [
       },
       {
         path: ADMIN_FACULTIES_NAVIGATION,
-        element: <h1>Je suis les faculte</h1>,
+        element: <Falculties />,
       },
       {
         path: ADMIN_SCHOOL_NAVIGATION,
