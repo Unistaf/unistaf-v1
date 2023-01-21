@@ -179,6 +179,44 @@ p{
     margin-right: 0.15rem;
 }
 
+.admin-input{
+    width: 100%;
+    background-color: var(--dark-light);
+    padding: 1rem 0.5rem;
+    margin-top: 1rem;
+    color: white;
+    border: 1px solid white;
+}
+
+/* ********************* ECOLE ************************ */
+.mon-ecole{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+}
+.school-presentation{
+    border-radius: 15px;
+}
+.school-presentation h1{
+    font-size: 2.5rem;
+}
+.school-presentation p{
+    font-size: 1.5rem;
+    font-weight: 200;
+}
+.mon-ecole .right{
+    background-color: white;
+    box-shadow: -1px 5px 10px rgba(14, 15, 14, 0.1);
+    padding: 1rem;
+    width: 100%;
+    min-width: 200px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.desc-bold{
+    font-weight: 600;
+}
+
 @media screen and (max-width: 900px) {
     .login_container{
         display: block;
@@ -230,6 +268,12 @@ p{
 
     .super-admin-grid{
         grid-template-columns: 1fr;
+    }
+    .mon-ecole{
+        grid-template-columns: 1fr;
+    }
+    .mon-ecole .right{
+        width: 100%;
     }
   }
 

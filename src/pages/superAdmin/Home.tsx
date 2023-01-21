@@ -24,6 +24,7 @@ const Home = () => {
   return (
     <section>
       <h1>Liste des écoles</h1>
+      <SwipeableTemporaryDrawer anchor="Ajouter" content={<AddSchool />} />
       <div className='gap-2 super-admin-grid'>
         <CreateSchoolCardLink setOpenDrawer={() => setOpenDrawer((prev: boolean) => (!prev))} />
         {
@@ -32,8 +33,6 @@ const Home = () => {
           ))
         }
       </div>
-
-      <SwipeableTemporaryDrawer anchor="right" content={<AddSchool />} />
     </section>
   )
 }

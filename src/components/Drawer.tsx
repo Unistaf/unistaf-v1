@@ -38,7 +38,7 @@ export default function SwipeableTemporaryDrawer({anchor, content}) {
 
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -50,7 +50,7 @@ export default function SwipeableTemporaryDrawer({anchor, content}) {
   return (
     <div>
       <React.Fragment key={anchor}>
-        <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+        <button style={{padding: '0.5rem', border: 'none', backgroundColor: ''}} onClick={toggleDrawer(anchor, true)}>{anchor}</button>
         <SwipeableDrawer
           anchor={anchor}
           open={state[anchor]}

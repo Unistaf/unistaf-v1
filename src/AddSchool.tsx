@@ -8,25 +8,32 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { CREATE_SCHOOL_API_PATH } from './routes/app_paths';
 import { useSelector } from 'react-redux';
-import { ICurrenUser } from './utils/interfaces';
+import { ICurrenUser, iFile, initialFile } from './utils/interfaces';
 import { iStore } from './redux/store';
-import successMessage from './utils/successMessage';
-import SuccessMessage from './utils/successMessage';
-
+// import successMessage from './utils/successMessage';
+// import SuccessMessage from './utils/successMessage';
+import { errorMessage } from './utils/errorMessage';
 
 const AddSchool = () => {
   const currentUser: ICurrenUser | any = useSelector((state: iStore) => state.user.currentUser);
   const [loading, setLoading] = useState(false)
-  const { register, formState: { errors }, setError, handleSubmit } = useForm({
+  const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
       name: '',
       email: '',
       description: '',
-      logo: [],
+      // logo: [],
       banner: []
     }
   });
+  const [logo, setLogo] = useState<iFile | File | any>(initialFile)
+  const [banner, setBanner] = useState<File | iFile | any>(initialFile)
   const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState('')
+  const [error, setErrors] = useState({
+    logo: '',
+    banner: ''
+  })
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -36,26 +43,69 @@ const AddSchool = () => {
     setOpen(false);
   };
 
-  const submit = async (data: { name: string, email: string, description: string, logo: (string | Blob)[], banner: (string | Blob)[] }) => {
+  const submit = async (data: { name: string, email: string, description: string, banner: (string | Blob)[] }) => {
+    // console.log(banner);
+    // return
+    if (!logo.name) {
+      return setErrors((error) => ({
+        ...error,
+        logo: "Veuillez selectionner un logo"
+      }))
+    }
+    if (!banner.name) {
+      return setErrors((error) => ({
+        ...error,
+        banner: "Veuillez selectionner une bannière"
+      }))
+    }
+
     setLoading(true)
     let formData = new FormData()
     formData.append('name', data.name)
     formData.append('email', data.email)
     formData.append('description', data.description)
-    formData.append('logo', data.logo[0])
-    formData.append('banner', data.banner[0])
+    formData.append('logo', logo)
+    formData.append('banner', banner)
 
     try {
-      const result = await axios.post(CREATE_SCHOOL_API_PATH, formData, {
+      await axios.post(CREATE_SCHOOL_API_PATH, formData, {
         headers: {
           "Authorization": `bearer ${currentUser.access_token}`
         }
       })
 
+      window.location.reload()
       setOpen(true)
+      setMessage("Création d'école réussie")
 
     } catch (error) {
       console.log(error);
+      setLoading(false)
+      if (error.response.data.message === 'Unauthenticated.') {
+        setOpen(true)
+        // TODO: utiliser les alertes de mui
+        setMessage("Votre session a expiré. Veuillez vous reconnectez!")
+      }
+      if (error.response.data.errors.name) {
+        setOpen(true)
+        errorMessage("Il y a déjà une école avec ce nom")
+        // setMessage("Il y a déjà une école avec ce nom")
+        return
+      }
+      if (error.response.data.errors.logo) {
+        // setError("logo", { type: 'custom', message: "" })
+        setOpen(true)
+        errorMessage("Erreur de chargement du logo")
+        // setMessage("Erreur de chargement du logo")
+        return
+      }
+      if (error.response.data.errors.banner) {
+        // setError("logo", { type: 'custom', message: "" })
+        setOpen(true)
+        errorMessage("Erreur de chargement de la bannière")
+        // setMessage("Erreur de chargement de la bannière")
+        return
+      }
     }
     setLoading(false)
     console.log(data);
@@ -67,95 +117,122 @@ const AddSchool = () => {
       <form style={{ height: '100%' }} onSubmit={handleSubmit(submit)}>
         <label htmlFor='logo'>
           <div style={{ maxWidth: '150px', cursor: 'pointer' }} className='border-dashed p-2 flex flex-column justify-content-center align-items-center mx-auto'>
-            <AddRoundedIcon />
-            <span>Ajouter un logo</span>
-            <span>(500x500px)</span>
+            {
+              !logo.name ? <>
+                <AddRoundedIcon />
+                <span>Ajouter un logo</span><span>(500x500px)</span>
+              </> : <p>{logo.name}</p>
+            }
           </div>
-          <input {...register('logo')} id="logo" type="file" hidden accept='image/*' />
+          <input
+            name='logo'
+            onChange={(e) => {
+              setErrors({
+                logo: '',
+                banner: ''
+              })
+              setLogo(e.target.files[0])
+            }}
+            // {...register('logo')}
+            // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            //   setLogo(e.target.files[0])
+            // }}
+            id="logo"
+            type="file"
+            hidden
+            accept='image/*'
+          />
+          {
+            error.logo && <p style={{ fontSize: '0.8rem', color: 'red', textAlign: 'center' }}>{error.logo}</p>
+          }
+          {/* {
+            errors.logo && <p>{errors.logo.message}</p>
+          } */}
         </label>
         <div style={{ width: '100%', margin: 0, padding: 0 }}>
           <InputLabel htmlFor="outlined-adornment-name">Nom de l'école</InputLabel>
-          <OutlinedInput
+          <input
+            className='admin-input'
             {...register('name')}
-            sx={{
-              backgroundColor: '#55535E',
-              color: 'white'
-            }}
-            className="add-school-placehlder"
-            disabled={false}
-            fullWidth={true}
-            error={null}
-            required
-            id="outlined-adornment-name"
-            // value={null}
             type="text"
-            // onChange={null}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  arial-label="name"
-                  onClick={null}
-                  edge="end"
-                >
-                  {null}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Nom de l'ecole"
+            placeholder='Nom école'
           />
         </div>
         <div style={{ width: '100%', margin: '0', padding: 0 }}>
-          <InputLabel htmlFor="outlined-adornment-name">Nom de l'ecole</InputLabel>
-          <OutlinedInput
+          <input
+            className='admin-input'
             {...register('email')}
-            sx={{
-              backgroundColor: '#55535E',
-              color: 'white'
-            }}
-            className="add-school-placehlder"
-            disabled={false}
-            fullWidth={true}
-            error={null}
-            required
-            id="outlined-adornment-name"
-            // value={null}
             type="text"
-            // onChange={null}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  arial-label="name"
-                  onClick={null}
-                  edge="end"
-                >
-                  {null}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Nom de l'ecole"
+            placeholder='Email'
           />
         </div>
 
-        <TextareaAutosize
+        <textarea
           {...register('description')}
-          className="add-school-placehlder p-2"
-          aria-label="empty textarea"
+          required
           placeholder="A propos de  l'école"
-          style={{ width: '100%', height: '200px', backgroundColor: "#55535E", marginTop: '1rem', color: 'white' }}
-        />
+          style={{
+            width: '100%',
+            height: '200px',
+            backgroundColor: "#55535E",
+            marginTop: '1rem',
+            color: 'white',
+            padding: '0.5rem'
+          }}
+        >
+
+        </textarea>
         <label htmlFor="banner">
           <div style={{ width: '100%', marginTop: '1rem', cursor: 'pointer' }} className='border-dashed p-2 flex flex-column justify-content-center align-items-center mx-auto'>
-            <AddRoundedIcon />
-            <span>Ajouter une bannière</span>
-            <span>(500x500px)</span>
+            {
+              !banner?.name ? <>
+                <AddRoundedIcon />
+                <span>Ajouter une bannière</span>
+                <span>(500x500px)</span>
+              </> : <p>{banner?.name}</p>
+            }
           </div>
-          <input {...register('banner')} id="banner" type="file" hidden accept='image/*' />
+          <input
+            name='banner'
+            onChange={(e) => {
+              setErrors({
+                logo: '',
+                banner: ''
+              })
+              setBanner(e.target.files[0])
+            }}
+            // {...register('banner')}
+            // onChange={(e) => {
+            //   setBanner(e.target.files[0])
+            // }}
+            id="banner"
+            type="file"
+            hidden accept='image/*'
+          />
+          {
+            error.banner && <p style={{ fontSize: '0.8rem', color: 'red', textAlign:'center' }}>{error.banner}</p>
+          }
         </label>
-        <button disabled={loading} className='text-uppercase' style={{ backgroundColor: '#359323', color: 'white', padding: '1rem 2rem', border: 'none', marginTop: '1rem', borderRadius: '10px' }} type='submit'>{!loading ? "Ajouter" : "AJOUT EN COURS..."}</button>
+        <button
+          disabled={loading}
+          className='text-uppercase'
+          style={{
+            backgroundColor: '#359323',
+            color: 'white',
+            padding: '1rem 2rem',
+            border: 'none',
+            marginTop: '1rem',
+            borderRadius: '10px',
+            cursor: 'pointer'
+          }}
+          type='submit'
+        >
+          {!loading ? "Ajouter" : "AJOUT EN COURS..."}
+        </button>
       </form>
-      {
-        open && <SuccessMessage open={open} message="Creation d'ecole reussie" handleClose={handleClose} />
-      }
+      {/* {
+        open && <SuccessMessage open={open} message={message} handleClose={handleClose} />
+      } */}
     </div>
   )
 }

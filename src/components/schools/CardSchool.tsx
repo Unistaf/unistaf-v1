@@ -5,12 +5,12 @@ import star from '../../assets/img/star.png'
 import { API, IMAGE_API } from 'src/routes/api';
 
 const CardSchool = ({name, schoolLogo}) => {
-  console.log(IMAGE_API + schoolLogo)
+  console.log(IMAGE_API + 'storag/' + schoolLogo)
   
   return (
     <div className='card'>
       <div style={{height: '150px'}} className="school_image">
-        <img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={schoolLogo ? `${IMAGE_API + schoolLogo} `: logo} alt="School image" />
+        <img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={schoolLogo ? `${IMAGE_API + 'storage/' + schoolLogo} `: logo} alt="School image" />
       </div>
       <div className="card_body">
         <h2 className='school_name'>{name}</h2>
