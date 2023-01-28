@@ -8,6 +8,7 @@ import UnistafButton from './reusable/UnistafButton';
 import { unistafColors } from 'src/utils/colors';
 import AddBranche from './AddBranche';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import { stringRegexFunc } from '../helpers/stringRegex';
 
 interface State {
   name: string;
@@ -16,98 +17,82 @@ interface State {
 }
 
 const AddFacultyForm = () => {
-  const { register, handleSubmit, formState: { errors }, setError } = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-      school_id: null
-    }
-  });
-
-  const [values, setValues] = useState({
+  const [name, setName] = useState('')
+  const [domaine, setDomaine] = useState('')
+  const [description, setDescription] = useState('')
+  const [error, setError] = useState({
     name: '',
+    domaine: '',
     description: '',
-    school_id: null,
-  });
-
-  const [currentBranch, setCurrentBranch] = useState({
-    id: '',
-    name: '',
-    image: '',
-    saved: false,
+    school_id: ''
   })
 
-  const [branches, setBranches] = useState([{
-    id: '',
-    name: '',
-    image: '',
-    saved: false,
-  }])
-  const [brachesItems, setBrachesItems] = useState([])
+  const handleSubmit = () => {
+    console.log('submit');
+    if (!name) {
+      setError(error => ({
+        ...error,
+        description: '',
+        name: 'Veuillez renseigner le nom'
+      }))
+      return
+    }
+    if (!description) {
+      setError(error => ({
+        ...error,
+        name: '',
+        description: 'Veuillez renseigner la description'
+      }))
+      return
+    }
 
-  useEffect(() => {
-    branches.reverse()
-    // console.log('branches: ', );
-  }, [branches.length])
-
-  const handleChange =
-    (prop: keyof State) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: e.target.value });
-    };
+  }
 
   return (
-    <div>
+    <div className='p-2'>
+      <h2>Ajouter une faculté</h2>
       <form action="">
-        <div className='flex flex-column gap-2'>
-          <InputReuse
-            error={errors.name?.message ? true : false}
-            htmlFor="outlined-adornment-name"
-            inputLabel="Nom de la faculté"
-            id="outlined-adornment-name"
-            value={values.name}
-            type="text"
-            handleChangeValues={handleChange('name')}
-            position="end"
-            ariaLabel="name"
-            icon={<SchoolRoundedIcon />}
-            label="Nom de la faculté"
-            onClick={null}
-
+        <div className='flex flex-column mt-1'>
+          <input
+            value={name}
+            onChange={(e) => {
+              if (stringRegexFunc(e.target.value) || e.target.value === '') {
+                setError(error => ({
+                  ...error,
+                  name: '',
+                  description: ''
+                }))
+                setName(e.target.value)
+              }
+            }}
+            type="text" placeholder='Nom de la faculté'
           />
-          <InputReuse
-            error={errors.description?.message ? true : false}
-            htmlFor="outlined-adornment-description"
-            inputLabel="Description"
-            id="outlined-adornment-description"
-            value={values.description}
-            type="text"
-            handleChangeValues={handleChange('description')}
-            position="end"
-            ariaLabel="description"
-            icon={<DescriptionRoundedIcon />}
-            label="Description"
-            onClick={null}
-
-          />
-        </div>
-        <div className="add-branches">
-          {/* ******** ajout branches ********* */}
           {
-            branches.reverse().map((item, i) => (<AddBranche {...item} key={i} setBranches={setBranches} branches={branches}  />))
+            error.name && <p className='error-text'>{error.name}</p>
           }
         </div>
-        <div className="more-branches">
-          <UnistafButton
-            className='google-btn btn--font-size'
-            bgColor="#000"
-            color="#fff"
-            disabled={false}
-            handleSubmit={null}
-            loading={false}
-            icon={null}
-          >
-            <AddCircleOutlineRoundedIcon />
-          </UnistafButton>
+        <div className="more-branches mt-2">
+          <select onChange={(e) => {
+            setDomaine(e.target.value)
+          }}
+            name=""
+            id="">
+            <option value="">Domaine d'étude</option>
+          </select>
+        </div>
+        <div className="more-branches mt-2">
+          <textarea
+            value={description}
+            onChange={(e) => {
+              if (stringRegexFunc(e.target.value) || e.target.value === '') {
+                setDescription(e.target.value)
+              }
+            }}
+            placeholder='desciption'
+            name="description" id=""
+            cols={30}
+            rows={10}>
+          </textarea>
         </div>
         <UnistafButton
           className='google-btn btn--font-size'
@@ -118,7 +103,7 @@ const AddFacultyForm = () => {
           loading={false}
           icon={<Save />}
         >
-          Soumettre
+          Ajouter
         </UnistafButton>
       </form>
     </div>

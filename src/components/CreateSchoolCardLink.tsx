@@ -5,10 +5,8 @@ import { SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION } from 'src/navigation_paths';
 
 const CreateSchoolCardLink = ({setOpenDrawer}: {setOpenDrawer: () => void}) => {
   return (
-    <div className='add-school'>
-      {/* <Link to={SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION}> */}
-        <AddRoundedIcon onClick={setOpenDrawer} />
-      {/* </Link> */}
+    <div onClick={setOpenDrawer} className='add-school'>
+        <AddRoundedIcon/>
       <p>Ajouter une nouvelle ecole</p>
     </div>
   )

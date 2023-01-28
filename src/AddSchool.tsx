@@ -112,7 +112,7 @@ const AddSchool = () => {
   }
 
   return (
-    <div style={{ width: '500px', padding: '1.5rem', backgroundColor: `${unistafColors[2]}`, color: 'white', height: '' }}>
+    <div style={{padding: '1.5rem', backgroundColor: `${unistafColors[2]}`, color: 'white', height: '' }}>
       <h2 className='text-uppercase text-center'>Ajouter une école</h2>
       <form style={{ height: '100%' }} onSubmit={handleSubmit(submit)}>
         <label htmlFor='logo'>

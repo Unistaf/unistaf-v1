@@ -16,6 +16,7 @@ import {
 } from 'redux-persist';
 import thunk from 'redux-thunk';
 import schools from "./slices/schools.slice";
+import { unistafapi } from "./services/unistafapi";
 
 const persistConfig: { key: string, storage: any } = {
   key: 't',
@@ -31,7 +32,8 @@ const userPersistConfig = {
 const rootReducer = combineReducers({
   // user: userReducer
   user: persistReducer(userPersistConfig, userReducer),
-  schools
+  schools,
+  [unistafapi.reducerPath]: unistafapi.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -42,11 +44,7 @@ export const store = configureStore({
   devTools: true,
   // middleware: [thunk]
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+    getDefaultMiddleware().concat(unistafapi.middleware),
 })
 
 export const persistor = persistStore(store)
@@ -55,7 +53,7 @@ export interface iStore {
   user: {
     currentUser: object
   },
-  schools:{
+  schools: {
     listSchools: []
   }
 }

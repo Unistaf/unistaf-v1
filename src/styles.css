@@ -5,12 +5,20 @@
     --dark-light: #393C49;
 }
 /* !base classes */
+input, select, textarea{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    outline: none;
+}
+select{
+    cursor: pointer;
+}
 .h2--title{
     /* margin: 0 !important; */
     /* color: black; */
     font-size: 1.5rem;
 }
-
 .flex{
     display: flex;
 }
@@ -41,6 +49,18 @@
 .p-2{
     padding: 1rem;
 }
+.mt-1{
+    margin-top: 0.5rem;
+}
+.mt-2{
+    margin-top: 1rem;
+}
+.mb-1{
+    margin-top: 0.5rem;
+}
+.mb-2{
+    margin-top: 1rem;
+}
 .gap-2{
     gap: 20px;
 }
@@ -49,6 +69,14 @@
 }
 .text-center{
     text-align: center;
+}
+.custom-drawer{
+    width: 500px !important;
+    overflow-y: auto;
+}
+.error-text{
+    color: rgb(235, 26, 26);
+    font-size: 1rem;
 }
 
 p{
@@ -138,6 +166,7 @@ p{
     border: 2px dashed var(--dark-light);
     /* border-style: ; */
     width: 100%;
+    cursor: pointer;
     min-height: 300px;
 }
 .add-school-placehlder{
@@ -244,6 +273,10 @@ p{
     .super-admin-grid{
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .custom-drawer{
+        width: 400px !important;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -281,6 +314,9 @@ p{
     }
     .mon-ecole .right{
         width: 100%;
+    }
+    .custom-drawer{
+        width: 100% !important;
     }
   }
 
