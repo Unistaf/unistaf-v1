@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import InputReuse from './reusable/InputReuse'
-import { Mail, Save } from '@mui/icons-material';
-import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
-import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import { Save } from '@mui/icons-material';
 import UnistafButton from './reusable/UnistafButton';
 import { unistafColors } from 'src/utils/colors';
-import AddBranche from './AddBranche';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { stringRegexFunc } from '../helpers/stringRegex';
+import { useAddFacultiesMutation } from 'src/redux/services/extendedFacultyApi';
+import { useCurrentUserId } from 'src/hooks/useCurrentUserId';
+import { useToken } from '../hooks/useToken';
+import axios from 'axios';
+import { API } from 'src/routes/api';
 
 interface State {
   name: string;
@@ -16,7 +17,10 @@ interface State {
   school_id: number | string;
 }
 
-const AddFacultyForm = () => {
+const AddFacultyForm = ({setIsOpenDrawer}) => {
+  const { userId } = useCurrentUserId()
+  const { token } = useToken()
+  const [addFaculty] = useAddFacultiesMutation()
   const [name, setName] = useState('')
   const [domaine, setDomaine] = useState('')
   const [description, setDescription] = useState('')
@@ -27,8 +31,10 @@ const AddFacultyForm = () => {
     school_id: ''
   })
 
+  // console.log({ userId });
+
+
   const handleSubmit = () => {
-    console.log('submit');
     if (!name) {
       setError(error => ({
         ...error,
@@ -45,6 +51,32 @@ const AddFacultyForm = () => {
       }))
       return
     }
+
+    const data = { name, description, school_id: userId }
+
+    // axios.post(API + '/faculties', data, {
+    //   headers: {
+    //     "Authorization": `bearer ${token}`
+    //   },
+    // })
+    //   .then(res => {
+    //     console.log({ res });
+
+    //   })
+    //   .catch(err => {
+    //     console.log({ err });
+
+    //   })
+    addFaculty({data, token})
+    // .unwrap()
+    .then(res => {
+      console.log({res});
+      setIsOpenDrawer(false)
+    })
+    .catch(error => {
+      console.log({error});
+
+    })
 
   }
 
@@ -71,7 +103,7 @@ const AddFacultyForm = () => {
             error.name && <p className='error-text'>{error.name}</p>
           }
         </div>
-        <div className="more-branches mt-2">
+        {/* <div className="more-branches mt-2">
           <select onChange={(e) => {
             setDomaine(e.target.value)
           }}
@@ -79,7 +111,7 @@ const AddFacultyForm = () => {
             id="">
             <option value="">Domaine d'étude</option>
           </select>
-        </div>
+        </div> */}
         <div className="more-branches mt-2">
           <textarea
             value={description}
@@ -99,7 +131,7 @@ const AddFacultyForm = () => {
           bgColor={unistafColors[1]}
           color={unistafColors[0]}
           disabled={false}
-          handleSubmit={null}
+          handleSubmit={handleSubmit}
           loading={false}
           icon={<Save />}
         >

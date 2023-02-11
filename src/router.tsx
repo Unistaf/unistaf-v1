@@ -9,11 +9,12 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './pages/auth/Connexion';
 import Signup from './pages/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
-import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, ADMIN_SCHOOL_NAVIGATION } from './navigation_paths';
+import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, ADMIN_SCHOOL_NAVIGATION, ADMIN_DIPLOMES_NAVIGATION } from './navigation_paths';
 import AddFaculty from './pages/school/AddFaculty';
 import Home from './pages/superAdmin/Home';
 import MonEcole from './pages/school/components/MonEcole';
 import Falculties from './pages/school/Falculties';
+import DiplomePage from './pages/diplomes/DiplomePage';
 
 const Loader = (Component) => (props) =>
 (
@@ -92,25 +93,19 @@ export const adminRoutes: RouteObject[] = [
         element: <h1>Hello - Admin</h1>,
       },
       {
+        path: ADMIN_SCHOOL_NAVIGATION,
+        element: <MonEcole />,
+      },
+      {
         path: ADMIN_FACULTIES_NAVIGATION,
         element: <Falculties />,
       },
       {
-        path: ADMIN_SCHOOL_NAVIGATION,
-        element: <MonEcole />,
+        path: ADMIN_DIPLOMES_NAVIGATION,
+        element: <DiplomePage />,
       },
     ]
   },
-  // {
-  //   path: ADMIN_DASHBOARD_NAVIGATION,
-  //   element: <SidebarLayout />,
-  //   children: [
-  //     {
-  //       path: '',
-  //       element: <h1>Hello - Admin</h1>
-  //     },
-  //   ]
-  // },
   {
     path: ADMIN_FACULTIES_NAVIGATION,
     element: <SidebarLayout />,

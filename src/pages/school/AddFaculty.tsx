@@ -20,7 +20,7 @@ const AddFaculty = () => {
           <AddCircleOutlineRoundedIcon />
         </UnistafButton>
       </div>
-      <AddFacultyForm />
+      {/* <AddFacultyForm /> */}
     </section>
   )
 }
