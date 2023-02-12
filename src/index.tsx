@@ -1,8 +1,7 @@
 import ReactDOM from 'react-dom';
-import { HelmetProvider } from 'react-helmet-async';
+// import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 
-import 'nprogress/nprogress.css';
 import App from 'src/App';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
 import * as serviceWorker from 'src/serviceWorker';
@@ -11,7 +10,7 @@ import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
-  <HelmetProvider>
+  // <HelmetProvider>
     <SidebarProvider>
       <BrowserRouter>
         <Provider store={store}>
@@ -20,8 +19,8 @@ ReactDOM.render(
           </PersistGate>
         </Provider>
       </BrowserRouter>
-    </SidebarProvider>
-  </HelmetProvider>,
+    </SidebarProvider>,
+  // </HelmetProvider>,
   document.getElementById('root')
 );
 

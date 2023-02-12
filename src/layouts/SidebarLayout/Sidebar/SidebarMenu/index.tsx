@@ -32,6 +32,10 @@ import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwo
 import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
 import { ADMIN_LINKS_NAVIGATION } from 'src/navigation_paths';
+import { useSelector } from 'react-redux';
+import { iStore } from 'src/redux/store';
+import { ICurrenUser } from 'src/utils/interfaces';
+import { SUPER_ADMIN_LINKS_NAVIGATION } from '../../../../navigation_paths';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -177,22 +181,24 @@ const SubMenuWrapper = styled(Box)(
 
 function SidebarMenu() {
   const { closeSidebar } = useContext(SidebarContext);
+  const currentUser: ICurrenUser | any = useSelector((state: iStore) => state?.user?.currentUser);
+
 
   return (
     <>
       <MenuWrapper>
         <List
           component="div"
-        subheader={
-           <ListSubheader component="div" disableSticky>
-             Mon ecole
-           </ListSubheader>
-         }
+          // subheader={
+          //   <ListSubheader component="div" disableSticky>
+          //     Mon ecole
+          //   </ListSubheader>
+          // }
         >
           <SubMenuWrapper>
             <List component="div">
-              {
-                ADMIN_LINKS_NAVIGATION.map((item) => (
+              {currentUser?.user?.user_type === 'super_admin' ?
+                SUPER_ADMIN_LINKS_NAVIGATION.map((item) => (
                   <ListItem key={item.label} component="div">
                     <Button
                       disableRipple
@@ -204,7 +210,23 @@ function SidebarMenu() {
                       {item.label}
                     </Button>
                   </ListItem>
-                ))
+                )) : 
+                currentUser?.user?.user_type === 'admin' ? (
+                  ADMIN_LINKS_NAVIGATION.map((item) => (
+                    <ListItem key={item.label} component="div">
+                      <Button
+                        disableRipple
+                        component={RouterLink}
+                        onClick={closeSidebar}
+                        to={item.link}
+                        startIcon={item.icon}
+                      >
+                        {item.label}
+                      </Button>
+                    </ListItem>
+                  )
+                  ))
+                  : null
               }
             </List>
           </SubMenuWrapper>

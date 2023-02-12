@@ -5,17 +5,18 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';
-import { Provider, useSelector } from 'react-redux';
-import { store, persistor, iStore } from './redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { adminRoutes, routes } from 'src/router';
+import { useSelector } from 'react-redux';
+import { iStore } from './redux/store';
+import { adminRoutes, routes, superAdminRoutes } from 'src/router';
+import { ICurrenUser } from './utils/interfaces';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
-  const currentUser: any = useSelector((state: iStore) => state.user.currentUser);
+  const currentUser: ICurrenUser | any = useSelector((state: iStore) => state.user.currentUser);
   let content = null;
 
   if (currentUser?.user?.user_type === 'super_admin') {
-    content = useRoutes(routes)
+    content = useRoutes(superAdminRoutes)
   }
   else if (currentUser?.user?.user_type === 'admin') {
     content = useRoutes(adminRoutes)
@@ -32,6 +33,11 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <CssBaseline />
         {content}
+        <Toaster
+          containerStyle={{ bottom: "10%" }}
+          position="bottom-left"
+          reverseOrder={false}
+        />
       </LocalizationProvider>
     </ThemeProvider>
   );

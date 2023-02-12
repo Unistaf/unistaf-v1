@@ -97,7 +97,9 @@ function HeaderUserbox() {
       dispatch(clearCurrentUser())
       navigate(LOGIN_NAVIGATION)
     } catch (error) {
-      console.log(error);      
+      dispatch(clearCurrentUser())
+      navigate(LOGIN_NAVIGATION)
+      console.log(error);
     }
   }
 

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import InputReuse from './reusable/InputReuse'
-import { Mail, Save } from '@mui/icons-material';
-import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
-import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import { Save } from '@mui/icons-material';
 import UnistafButton from './reusable/UnistafButton';
 import { unistafColors } from 'src/utils/colors';
-import AddBranche from './AddBranche';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import { stringRegexFunc } from '../helpers/stringRegex';
+import { useAddFacultiesMutation } from 'src/redux/services/extendedFacultyApi';
+import { useCurrentUserId } from 'src/hooks/useCurrentUserId';
+import { useToken } from '../hooks/useToken';
+import axios from 'axios';
+import { API } from 'src/routes/api';
 
 interface State {
   name: string;
@@ -15,110 +17,125 @@ interface State {
   school_id: number | string;
 }
 
-const AddFacultyForm = () => {
-  const { register, handleSubmit, formState: { errors }, setError } = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-      school_id: null
-    }
-  });
-
-  const [values, setValues] = useState({
+const AddFacultyForm = ({setIsOpenDrawer}) => {
+  const { userId } = useCurrentUserId()
+  const { token } = useToken()
+  const [addFaculty] = useAddFacultiesMutation()
+  const [name, setName] = useState('')
+  const [domaine, setDomaine] = useState('')
+  const [description, setDescription] = useState('')
+  const [error, setError] = useState({
     name: '',
+    domaine: '',
     description: '',
-    school_id: null,
-  });
-
-  const [currentBranch, setCurrentBranch] = useState({
-    id: '',
-    name: '',
-    image: '',
-    saved: false,
+    school_id: ''
   })
 
-  const [branches, setBranches] = useState([{
-    id: '',
-    name: '',
-    image: '',
-    saved: false,
-  }])
-  const [brachesItems, setBrachesItems] = useState([])
+  // console.log({ userId });
 
-  useEffect(() => {
-    branches.reverse()
-    // console.log('branches: ', );
-  }, [branches.length])
 
-  const handleChange =
-    (prop: keyof State) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: e.target.value });
-    };
+  const handleSubmit = () => {
+    if (!name) {
+      setError(error => ({
+        ...error,
+        description: '',
+        name: 'Veuillez renseigner le nom'
+      }))
+      return
+    }
+    if (!description) {
+      setError(error => ({
+        ...error,
+        name: '',
+        description: 'Veuillez renseigner la description'
+      }))
+      return
+    }
+
+    const data = { name, description, school_id: userId }
+
+    // axios.post(API + '/faculties', data, {
+    //   headers: {
+    //     "Authorization": `bearer ${token}`
+    //   },
+    // })
+    //   .then(res => {
+    //     console.log({ res });
+
+    //   })
+    //   .catch(err => {
+    //     console.log({ err });
+
+    //   })
+    addFaculty({data, token})
+    // .unwrap()
+    .then(res => {
+      console.log({res});
+      setIsOpenDrawer(false)
+    })
+    .catch(error => {
+      console.log({error});
+
+    })
+
+  }
 
   return (
-    <div>
+    <div className='p-2'>
+      <h2>Ajouter une faculté</h2>
       <form action="">
-        <div className='flex flex-column gap-2'>
-          <InputReuse
-            error={errors.name?.message ? true : false}
-            htmlFor="outlined-adornment-name"
-            inputLabel="Nom de la faculté"
-            id="outlined-adornment-name"
-            value={values.name}
-            type="text"
-            handleChangeValues={handleChange('name')}
-            position="end"
-            ariaLabel="name"
-            icon={<SchoolRoundedIcon />}
-            label="Nom de la faculté"
-            onClick={null}
-
+        <div className='flex flex-column mt-1'>
+          <input
+            value={name}
+            onChange={(e) => {
+              if (stringRegexFunc(e.target.value) || e.target.value === '') {
+                setError(error => ({
+                  ...error,
+                  name: '',
+                  description: ''
+                }))
+                setName(e.target.value)
+              }
+            }}
+            type="text" placeholder='Nom de la faculté'
           />
-          <InputReuse
-            error={errors.description?.message ? true : false}
-            htmlFor="outlined-adornment-description"
-            inputLabel="Description"
-            id="outlined-adornment-description"
-            value={values.description}
-            type="text"
-            handleChangeValues={handleChange('description')}
-            position="end"
-            ariaLabel="description"
-            icon={<DescriptionRoundedIcon />}
-            label="Description"
-            onClick={null}
-
-          />
-        </div>
-        <div className="add-branches">
-          {/* ******** ajout branches ********* */}
           {
-            branches.reverse().map((item, i) => (<AddBranche {...item} key={i} setBranches={setBranches} branches={branches}  />))
+            error.name && <p className='error-text'>{error.name}</p>
           }
         </div>
-        <div className="more-branches">
-          <UnistafButton
-            className='google-btn btn--font-size'
-            bgColor="#000"
-            color="#fff"
-            disabled={false}
-            handleSubmit={null}
-            loading={false}
-            icon={null}
-          >
-            <AddCircleOutlineRoundedIcon />
-          </UnistafButton>
+        {/* <div className="more-branches mt-2">
+          <select onChange={(e) => {
+            setDomaine(e.target.value)
+          }}
+            name=""
+            id="">
+            <option value="">Domaine d'étude</option>
+          </select>
+        </div> */}
+        <div className="more-branches mt-2">
+          <textarea
+            value={description}
+            onChange={(e) => {
+              if (stringRegexFunc(e.target.value) || e.target.value === '') {
+                setDescription(e.target.value)
+              }
+            }}
+            placeholder='desciption'
+            name="description" id=""
+            cols={30}
+            rows={10}>
+          </textarea>
         </div>
         <UnistafButton
           className='google-btn btn--font-size'
           bgColor={unistafColors[1]}
           color={unistafColors[0]}
           disabled={false}
-          handleSubmit={null}
+          handleSubmit={handleSubmit}
           loading={false}
           icon={<Save />}
         >
-          Soumettre
+          Ajouter
         </UnistafButton>
       </form>
     </div>
