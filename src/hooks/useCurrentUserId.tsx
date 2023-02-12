@@ -5,7 +5,7 @@ import { iStore } from '../redux/store';
 export const useCurrentUserId = () => {
     const currentUser: ICurrenUser | any = useSelector((state: iStore) => state?.user?.currentUser);
     // console.log({currentUser: currentUser.user});
-    
-    const userId = currentUser.user.id
+
+    const userId: number = currentUser.user.id
     return { userId }
 }

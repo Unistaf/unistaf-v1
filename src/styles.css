@@ -22,6 +22,9 @@ select{
 .flex{
     display: flex;
 }
+.wrap{
+    flex-wrap: wrap;
+}
 .space-between{
     justify-content: space-between;
 }

@@ -1,13 +1,15 @@
 import { unistafapi } from "./unistafapi";
-// import { useGetFacultiesQuery } from 'src/redux/services/unistafapi';
-
 
 const extendedFacultyApi = unistafapi.injectEndpoints({
     endpoints: (builder) => ({
         getFaculties: builder.query({
-            query: ({ token }: { token: string }) => ({
-                url: `/faculties`,
-                "Authorization": `bearer ${token}`
+            query: ({ token, schoolId }: { token: string, schoolId: number }) => ({
+                url: `/facultiesbyschool/${schoolId}`,
+                headers: {
+                    "accept": "application/json",
+                    'content-type': 'application/json',
+                    "authorization": `bearer ${token}`,
+                }
             }),
             providesTags: ['Faculties']
         }),
@@ -17,7 +19,6 @@ const extendedFacultyApi = unistafapi.injectEndpoints({
                 method: 'POST',
                 body: data,
                 headers: {
-                    // "Authorization": `bearer ${token}`,
                     'Content-type': 'application/json; charset=UTF-8',
                     "authorization": `bearer ${token}`
                 }
