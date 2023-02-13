@@ -19,8 +19,14 @@ select{
     /* color: black; */
     font-size: 1.5rem;
 }
+.text-center{
+    text-align: center;
+}
 .w-100{
     width: 100%;
+}
+.m-0{
+    margin: 0;
 }
 .flex{
     display: flex;
@@ -68,10 +74,13 @@ select{
     margin-top: 1rem;
 }
 .btn{
-    background-color: transparent;
     border: 1px solid rgb(69, 69, 229);
-    padding: 0.5rem 2rem;
+    padding: 0.75rem 2rem;
     border-radius: 50px;
+}
+.btn-secondary{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 .gap-2{
     gap: 20px;
@@ -266,6 +275,19 @@ p{
     color: var(--secondary-color);
 }
 
+/* ************************ diplomes ************************** */
+.diplome-card{
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(10, 14, 16, 0.15); 
+    border-radius: 15px;
+}
+.diplome-card--img{
+    width: 100%;
+    object-fit: cover;
+    max-width: 180px;
+}
+
 @media screen and (max-width: 900px) {
     .login_container{
         display: block;
@@ -299,6 +321,22 @@ p{
     .super-admin-grid{
         grid-template-columns: repeat(2, 1fr);
     }
+    .diplome-card{
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-100{
+        width: 100% !important;
+    }
+    .diplome-img--container{
+        width: 100%;
+    }
+    .diplome-actions{
+        width: 100%;
+    }
+    .text-700-center{
+        text-align: center;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -330,6 +368,15 @@ p{
     }
     .custom-drawer{
         width: 100% !important;
+    }
+    .diplome-card{
+        align-items: flex-start;
+    }
+    h3{
+        font-size: 14px !important;
+    }
+    p{
+        font-size: 13px !important;
     }
   }
 
