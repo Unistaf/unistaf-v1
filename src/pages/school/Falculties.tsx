@@ -29,7 +29,7 @@ const Falculties = () => {
             </div>
             <div className='flex wrap gap-2' style={{ marginTop: '1rem' }}>
                 {
-                    data.data.map((faculty:{name:string, description: string}, index:number) => {
+                    data?.data?.map((faculty:{name:string, description: string}, index:number) => {
                         return <FacultyCard title={faculty.name} description={faculty.description} key={index} />
                     })
                 }

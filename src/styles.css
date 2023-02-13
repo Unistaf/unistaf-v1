@@ -19,6 +19,9 @@ select{
     /* color: black; */
     font-size: 1.5rem;
 }
+.w-100{
+    width: 100%;
+}
 .flex{
     display: flex;
 }
@@ -64,6 +67,12 @@ select{
 .mb-2{
     margin-top: 1rem;
 }
+.btn{
+    background-color: transparent;
+    border: 1px solid rgb(69, 69, 229);
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+}
 .gap-2{
     gap: 20px;
 }
@@ -81,6 +90,7 @@ select{
     color: rgb(235, 26, 26);
     font-size: 1rem;
 }
+
 
 p{
     /* color: black !important; */
