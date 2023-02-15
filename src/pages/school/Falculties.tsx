@@ -3,7 +3,7 @@ import UnistafButton from 'src/components/reusable/UnistafButton'
 import FacultyCard from './components/FacultyCard'
 import { unistafColors } from '../../utils/colors';
 import AppDrawer from 'src/components/AppDrawer';
-import AddFacultyForm from '../../components/AddFacultyForm';
+import AddFacultyForm from './AddFacultyForm';
 import { useToken } from '../../hooks/useToken'
 import { useGetFacultiesQuery } from 'src/redux/services/extendedFacultyApi';
 import { useCurrentUserId } from 'src/hooks/useCurrentUserId';
@@ -13,7 +13,10 @@ const Falculties = () => {
     const userId: { userId: number } = useCurrentUserId()
     const schoolId = userId.userId
     const { token } = useToken()
-    const { data = [], isError, isLoading, isFetching, error } = useGetFacultiesQuery({ token: token, schoolId })
+    const { data = [], isError, isLoading, isFetching, error } = useGetFacultiesQuery({ token: token, schoolId:1 })
+
+    console.log({data});
+    
 
     return (
         <section>
@@ -29,7 +32,7 @@ const Falculties = () => {
             </div>
             <div className='flex wrap gap-2' style={{ marginTop: '1rem' }}>
                 {
-                    data?.data?.map((faculty:{name:string, description: string}, index:number) => {
+                    data?.data?.map((faculty: { name: string, description: string }, index: number) => {
                         return <FacultyCard title={faculty.name} description={faculty.description} key={index} />
                     })
                 }

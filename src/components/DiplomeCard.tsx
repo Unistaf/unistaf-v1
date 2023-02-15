@@ -1,5 +1,6 @@
-import { LocationCityOutlined } from '@mui/icons-material'
+import { CalendarMonth, CalendarMonthOutlined, LocationCityOutlined, Timelapse } from '@mui/icons-material'
 import React from 'react'
+import { unistafColors } from 'src/utils/colors'
 import bakeli from '../assets/img/bakeli.png'
 
 const DiplomeCard = () => {
@@ -34,8 +35,8 @@ const DiplomeCard = () => {
                 </p>
             </div>
             <div className="date m-0">
-                <p className='m-0'>Jan 2023</p>
-                <p className='m'>A votre rythme</p>
+                <p className='m-0 flex align-items-center gap-0'><CalendarMonth style={{ color: unistafColors[1] }} />Jan 2023</p>
+                <p className='flex align-items-center gap-0'> <Timelapse style={{ color: unistafColors[1] }} /> A votre rythme</p>
             </div>
             <div className="diplome-actions">
                 <button className='btn btn-secondary btn-100'>Modifier</button>

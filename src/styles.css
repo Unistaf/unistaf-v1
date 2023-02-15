@@ -82,6 +82,12 @@ select{
     background-color: var(--secondary-color);
     color: var(--primary-color);
 }
+.gap-0{
+    gap: 5px;
+}
+.gap-1{
+    gap: 10px;
+}
 .gap-2{
     gap: 20px;
 }
@@ -323,7 +329,7 @@ p{
     }
     .diplome-card{
         flex-direction: column;
-        align-items: center;
+        /* align-items: center; */
     }
     .btn-100{
         width: 100% !important;
