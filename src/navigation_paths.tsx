@@ -3,12 +3,20 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { SchoolRounded, SchoolSharp } from '@mui/icons-material';
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
+
+/** ------------------------------------------
+ *! STATIC HOMEPAGE                          |
+ * -------------------------------------------
+ */
+export const STATIC_HOME_PAGE = '/'
+
+
 /** ------------------------------------------
  *! AUTHENTICATION NAVIGATION                  |
  * -------------------------------------------
  */
 export const REGISTER_NAVIGATION = 'signup'
-export const LOGIN_NAVIGATION = '/'
+export const LOGIN_NAVIGATION = '/login'
 
 /** ------------------------------------------
  *! SUPER-ADMIN NAVIGATION                          |
