@@ -5,7 +5,7 @@ const FacultyCard = ({ title, description }) => {
     return (
         <div style={{
             minWidth: '300px',
-            // maxWidth: '370px',
+            maxWidth: '370px',
             backgroundColor: 'white',
             boxShadow: '-1px 4px 5px rgba(0, 0, 0, 0.1)',
             borderRadius: '10px',

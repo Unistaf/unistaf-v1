@@ -1,21 +1,26 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import DiplomeCard from 'src/components/DiplomeCard'
 import UnistafButton from 'src/components/reusable/UnistafButton'
+import { ADMIN_ADD_DIPLOMES_URL } from 'src/navigation_paths'
 import { unistafColors } from 'src/utils/colors'
 
 const DiplomePage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   return (
     <div>
-      <div className="flex justify-content-between">
+      <div className="flex justify-content-between align-items-center">
         <h2>Mes Diplomes</h2>
-        <UnistafButton
+        <Link className='btn link btn-secondary' to={ADMIN_ADD_DIPLOMES_URL}>
+          Ajouter
+        </Link>
+        {/* <UnistafButton
           bgColor={unistafColors[1]}
           disabled={false} loading={false}
           handleSubmit={() => setIsOpenDrawer(true)}
           icon={null}
           color="#FFFFFF" className="" ><span>Ajouter</span>
-        </UnistafButton>
+        </UnistafButton> */}
       </div>
       <div className="flex">
         <DiplomeCard />

@@ -5,6 +5,7 @@
     --dark-light: #393C49;
 }
 /* !base classes */
+a{text-decoration: none;}
 input, select, textarea{
     width: 100%;
     padding: 1rem;
@@ -73,10 +74,16 @@ select{
 .mb-2{
     margin-top: 1rem;
 }
+.link{
+    margin: 0;
+    display: block;
+}
 .btn{
     border: 1px solid rgb(69, 69, 229);
     padding: 0.75rem 2rem;
     border-radius: 50px;
+    display: inline-block;
+    font-weight: 500;
 }
 .btn-secondary{
     background-color: var(--secondary-color);
@@ -104,11 +111,6 @@ select{
 .error-text{
     color: rgb(235, 26, 26);
     font-size: 1rem;
-}
-
-
-p{
-    /* color: black !important; */
 }
 
 .btn--font-size{
