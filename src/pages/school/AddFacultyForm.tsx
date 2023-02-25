@@ -33,9 +33,6 @@ const AddFacultyForm = ({ setIsOpenDrawer }) => {
     school_id: ''
   })
 
-  // console.log(domaines?.data);
-
-
   const handleSubmit = () => {
     if (!name) {
       setError(error => ({
@@ -54,9 +51,9 @@ const AddFacultyForm = ({ setIsOpenDrawer }) => {
       return
     }
 
-    const data = { name, description, school_id: userId  , domain_id: domaine_id }
+    const data = { name, description, school_id: userId, domain_id: domaine_id }
     // console.log({data});
-    
+
 
     // axios.post(API + '/faculties', data, {
     //   headers: {
@@ -74,7 +71,7 @@ const AddFacultyForm = ({ setIsOpenDrawer }) => {
     addFaculty({ data, token })
       // .unwrap()
       .then(res => {
-        console.log({ res });
+        // console.log({ res });
         setIsOpenDrawer(false)
       })
       .catch(error => {

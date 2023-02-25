@@ -7,16 +7,14 @@ import AddFacultyForm from './AddFacultyForm';
 import { useToken } from '../../hooks/useToken'
 import { useGetFacultiesQuery } from 'src/redux/services/extendedFacultyApi';
 import { useCurrentUserId } from 'src/hooks/useCurrentUserId';
+import EmptyList from 'src/components/EmptyList';
 
 const Falculties = () => {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false)
     const userId: { userId: number } = useCurrentUserId()
     const schoolId = userId.userId
     const { token } = useToken()
-    const { data = [], isError, isLoading, isFetching, error } = useGetFacultiesQuery({ token: token, schoolId:1 })
-
-    console.log({data});
-    
+    const { data = [], isError, isLoading, isFetching, error } = useGetFacultiesQuery({ token: token, schoolId: schoolId })
 
     return (
         <section>
@@ -32,9 +30,12 @@ const Falculties = () => {
             </div>
             <div className='flex wrap gap-2' style={{ marginTop: '1rem' }}>
                 {
-                    data?.data?.map((faculty: { name: string, description: string }, index: number) => {
-                        return <FacultyCard title={faculty.name} description={faculty.description} key={index} />
-                    })
+                    data?.data.length ?
+                        data?.data?.map((faculty: { name: string, description: string }, index: number) => {
+                            return <FacultyCard title={faculty.name} description={faculty.description} key={index} />
+                        })
+                        :
+                        <EmptyList text="facultés" />
                 }
             </div>
             <AppDrawer isOpen={isOpenDrawer} toggleDrawer={setIsOpenDrawer} direction="right">
