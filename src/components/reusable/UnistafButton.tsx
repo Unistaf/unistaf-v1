@@ -10,7 +10,7 @@ interface IProps {
   children: Element | string | ReactElement | null,
   icon: ReactElement,
   color?: string,
-  className?: string
+  className?: string,
 }
 
 const UnistafButton = ({bgColor, disabled, handleSubmit, loading, children, icon, color, className}: IProps) => {

@@ -1,390 +1,444 @@
-:root{
-    --primary-color: #ffffff;
-    --secondary-color: #0D0DA3;
-    --third-color: #000000;
-    --dark-light: #393C49;
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #0d0da3;
+  --third-color: #000000;
+  --dark-light: #393c49;
 }
 /* !base classes */
-a{text-decoration: none;}
-input, select, textarea{
-    width: 100%;
-    padding: 1rem;
-    border-radius: 10px;
-    outline: none;
+a {
+  text-decoration: none;
 }
-select{
-    cursor: pointer;
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  outline: none;
 }
-.h2--title{
-    /* margin: 0 !important; */
-    /* color: black; */
-    font-size: 1.5rem;
+select {
+  cursor: pointer;
 }
-.text-center{
-    text-align: center;
+.h2--title {
+  /* margin: 0 !important; */
+  /* color: black; */
+  font-size: 1.5rem;
 }
-.w-100{
-    width: 100%;
+.text-center {
+  text-align: center;
 }
-.m-0{
-    margin: 0;
+.w-100 {
+  width: 100%;
 }
-.flex{
-    display: flex;
+.m-0 {
+  margin: 0;
 }
-.wrap{
-    flex-wrap: wrap;
+.flex {
+  display: flex;
 }
-.space-between{
-    justify-content: space-between;
+.wrap {
+  flex-wrap: wrap;
 }
-.align-items-center{
-    align-items: center !important;
+.space-between {
+  justify-content: space-between;
 }
-.justify-content-center{
-    justify-content: center;
+.align-items-center {
+  align-items: center !important;
 }
-.justify-content-between{
-    justify-content: space-between;
+.justify-content-center {
+  justify-content: center;
 }
-.flex-column{
-    flex-direction: column;
+.justify-content-between {
+  justify-content: space-between;
 }
-.bordered{
-    border: 1px solid white;
+.flex-column {
+  flex-direction: column;
 }
-.border-dashed{
-    border: 1px dashed rgb(232, 225, 225);
+.bordered {
+  border: 1px solid white;
 }
-.mx-auto{
-    margin: auto;
+.border-dashed {
+  border: 1px dashed rgb(232, 225, 225);
 }
-.p-2{
-    padding: 1rem;
+.mx-auto {
+  margin: auto;
 }
-.mt-1{
-    margin-top: 0.5rem;
+.p-2 {
+  padding: 1rem;
 }
-.mt-2{
-    margin-top: 1rem;
+.mt-1 {
+  margin-top: 0.5rem;
 }
-.mb-1{
-    margin-top: 0.5rem;
+.mt-2 {
+  margin-top: 1rem;
 }
-.mb-2{
-    margin-top: 1rem;
+.mb-1 {
+  margin-top: 0.5rem;
 }
-.link{
-    margin: 0;
-    display: block;
+.mb-2 {
+  margin-top: 1rem;
 }
-.btn{
-    border: 1px solid rgb(69, 69, 229);
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    display: inline-block;
-    font-weight: 500;
+.link {
+  margin: 0;
+  display: block;
 }
-.btn-secondary{
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+.btn {
+  border: 1px solid rgb(69, 69, 229);
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  display: inline-block;
+  font-weight: 500;
 }
-.gap-0{
-    gap: 5px;
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
-.gap-1{
-    gap: 10px;
+.gap-0 {
+  gap: 5px;
 }
-.gap-2{
-    gap: 20px;
+.gap-1 {
+  gap: 10px;
 }
-.text-uppercase{
-    text-transform: uppercase;
+.gap-2 {
+  gap: 20px;
 }
-.text-center{
-    text-align: center;
+.text-uppercase {
+  text-transform: uppercase;
 }
-.custom-drawer{
-    width: 500px !important;
-    overflow-y: auto;
+.text-center {
+  text-align: center;
 }
-.error-text{
-    color: rgb(235, 26, 26);
-    font-size: 1rem;
+.custom-drawer {
+  width: 500px !important;
+  overflow-y: auto;
+}
+.error-text {
+  color: rgb(235, 26, 26);
+  font-size: 1rem;
 }
 
-.btn--font-size{
-    font-size: 1rem !important;
+.btn--font-size {
+  font-size: 1rem !important;
 }
-
 
 /* login */
-.login_container{
-    display: flex;
-    height: 100vh;
+.login_container {
+  display: flex;
+  height: 100vh;
 }
-.left-form{
-    background-color: var(--secondary-color);
+.left-form {
+  background-color: var(--secondary-color);
 }
-.right-form{
-    flex-direction: column;
-    padding: 2rem 1rem !important;
+.right-form {
+  flex-direction: column;
+  padding: 2rem 1rem !important;
 }
-.left-form, .right-form{
-    width: 50% !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.left-form,
+.right-form {
+  width: 50% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.google-btn{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
-}
-
-.google-btn:hover{
-    background-color: rgba(0, 0, 0, 0.04) !important;
+.google-btn {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 }
 
+.google-btn:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
 
 /* Sign up page */
-.error{
-    font-size: 0.8rem !important;
-    color: rgb(233, 60, 60);
-    padding: 0 !important;
-    margin: 0 !important;
-    margin-left: 0.3rem !important;
+.error {
+  font-size: 0.8rem !important;
+  color: rgb(233, 60, 60);
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-left: 0.3rem !important;
 }
 
-.formContainer{
-    width: 70%;
-    margin: 0 auto;
+.formContainer {
+  width: 70%;
+  margin: 0 auto;
 }
 
-.MuiFormControl-root{
-    margin: 0 !important;
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
+.MuiFormControl-root {
+  margin: 0 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .MuiLoadingButton-root {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 /* *************** select branch ****************** */
-.add-branches{
-    margin-top: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+.add-branches {
+  margin-top: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-.select-branche{
-    display: flex;
-    gap: 20px;
-    /* justify-content: space-between; */
+.select-branche {
+  display: flex;
+  gap: 20px;
+  /* justify-content: space-between; */
 }
 
 /****************** super admin ********************  */
-.MuiPaper-root{
-    background-color: #393C49 !important;
+.MuiPaper-root {
+  background-color: #393c49 !important;
 }
-.super-admin-grid{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.super-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
-.add-school{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    border: 2px dashed var(--dark-light);
-    /* border-style: ; */
-    width: 100%;
-    cursor: pointer;
-    min-height: 300px;
+.add-school {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 2px dashed var(--dark-light);
+  /* border-style: ; */
+  width: 100%;
+  cursor: pointer;
+  min-height: 300px;
 }
-.add-school-placehlder{
-    outline: 1px solid white !important;
-    border: none !important;
+.add-school-placehlder {
+  outline: 1px solid white !important;
+  border: none !important;
 }
-.add-school-placehlder::placeholder{
-    color: white;
+.add-school-placehlder::placeholder {
+  color: white;
 }
-.add-school p{
-    font-weight: 600;
+.add-school p {
+  font-weight: 600;
 }
-.card{
-    width: 100%;
-    height: 400px;
-    background-color: var(--dark-light);
-    color: var(--primary-color);
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+.card {
+  width: 100%;
+  height: 400px;
+  background-color: var(--dark-light);
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
-.card_body{
-    padding: 0.5rem 1rem;
+.card_body {
+  padding: 0.5rem 1rem;
 }
-.card_body p{
-    font-size: 0.7rem;
+.card_body p {
+  font-size: 0.7rem;
 }
-.card_footer{
-    background-color: #7d7f89;
-    height: 100px;
+.card_footer {
+  background-color: #7d7f89;
+  height: 100px;
 }
-.card_footer span{
-    font-weight: 600;
-    margin-left: 0.5rem;
+.card_footer span {
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
-.notation-items img{
-    width: 10px;
-    height: 10px;
-    margin-right: 0.15rem;
+.notation-items img {
+  width: 10px;
+  height: 10px;
+  margin-right: 0.15rem;
 }
 
-.admin-input{
-    width: 100%;
-    background-color: var(--dark-light);
-    padding: 1rem 0.5rem;
-    margin-top: 1rem;
-    color: white;
-    border: 1px solid white;
+.admin-input {
+  width: 100%;
+  background-color: var(--dark-light);
+  padding: 1rem 0.5rem;
+  margin-top: 1rem;
+  color: white;
+  border: 1px solid white;
 }
 
 /* ********************* ECOLE ************************ */
-.mon-ecole{
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 1rem;
+.mon-ecole {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
 }
-.school-presentation{
-    border-radius: 15px;
+.school-presentation {
+  border-radius: 15px;
 }
-.school-presentation h1{
-    font-size: 2.5rem;
+.school-presentation h1 {
+  font-size: 2.5rem;
 }
-.school-presentation p{
-    font-size: 1.5rem;
-    font-weight: 200;
+.school-presentation p {
+  font-size: 1.5rem;
+  font-weight: 200;
 }
-.mon-ecole .right{
-    background-color: white;
-    box-shadow: -1px 5px 10px rgba(14, 15, 14, 0.1);
-    padding: 1rem;
-    width: 100%;
-    min-width: 200px;
-    border-radius: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+.mon-ecole .right {
+  background-color: white;
+  box-shadow: -1px 5px 10px rgba(14, 15, 14, 0.1);
+  padding: 1rem;
+  width: 100%;
+  min-width: 200px;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
-.desc-bold{
-    font-weight: 600;
+.desc-bold {
+  font-weight: 600;
 }
 /* ***************************** faculty ********************** */
-.head h2, .head p{
-    margin: 0 !important;
+.head h2,
+.head p {
+  margin: 0 !important;
 }
-.head h2{
-    color: var(--secondary-color);
+.head h2 {
+  color: var(--secondary-color);
 }
 
 /* ************************ diplomes ************************** */
-.diplome-card{
-    justify-content: space-between;
-    background-color: white;
-    box-shadow: 0px 0px 5px rgba(10, 14, 16, 0.15); 
-    border-radius: 15px;
+.diplome-card {
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(10, 14, 16, 0.15);
+  border-radius: 15px;
 }
-.diplome-card--img{
-    width: 100%;
-    object-fit: cover;
-    max-width: 180px;
+.diplome-card--img {
+  width: 100%;
+  object-fit: cover;
+  max-width: 180px;
+}
+
+/* *********************** Statics pages ************************ */
+/* *********************** Front page ************************ */
+.subtitle {
+  position: relative;
+  width: max-content;
+  color: var(--secondary-color);
+  margin: 50px 0 !important;
+}
+.subtitle::after {
+  content: '';
+  width: 30%;
+  height: 4px;
+  background-color: var(--secondary-color);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.domaine-box{
+  border:1px solid var(--secondary-color);
+  border-radius:10px;
+  min-height: 100px;
+  padding: 0 20px;
+  gap: 20px;
+}
+
+.pagination-btn {
+  width: 100%;
+  color: var(--primary-color);
+}
+.pagination-btn div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  min-width: 35 !important;
+  height: 35px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 100%;
+  padding: 0 !important;
+  cursor: pointer;
+}
+.pagination-btn .contained {
+  background-color: var(--secondary-color);
+}
+.pagination-btn .outlined {
+  background-color: var(--primary-color);
+  color: #0d0da3;
 }
 
 @media screen and (max-width: 900px) {
-    .login_container{
-        display: block;
-    }
-    .formContainer{
-        width: 60%;
-    }
+  .login_container {
+    display: block;
+  }
+  .formContainer {
+    width: 60%;
+  }
 
-    .left-form{
-        display: none !important;
-    }
+  .left-form {
+    display: none !important;
+  }
 
-    .right-form{
-        display: block;
-        width: 100% !important;
-    }
+  .right-form {
+    display: block;
+    width: 100% !important;
+  }
 
-    .super-admin-grid{
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .super-admin-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    .custom-drawer{
-        width: 400px !important;
-    }
+  .custom-drawer {
+    width: 400px !important;
+  }
 }
 
 @media screen and (max-width: 700px) {
-    .flex-column{
-        flex-direction: column;
-    }
-    .super-admin-grid{
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .diplome-card{
-        flex-direction: column;
-        /* align-items: center; */
-    }
-    .btn-100{
-        width: 100% !important;
-    }
-    .diplome-img--container{
-        width: 100%;
-    }
-    .diplome-actions{
-        width: 100%;
-    }
-    .text-700-center{
-        text-align: center;
-    }
+  .flex-column {
+    flex-direction: column;
+  }
+  .super-admin-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .diplome-card {
+    flex-direction: column;
+    /* align-items: center; */
+  }
+  .btn-100 {
+    width: 100% !important;
+  }
+  .diplome-img--container {
+    width: 100%;
+  }
+  .diplome-actions {
+    width: 100%;
+  }
+  .text-700-center {
+    text-align: center;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    .signup{
-        padding: 50px 0 25px 25px !important;
-        border-radius: 50px 50px 0 0 !important;
-    }
-
-    .login_container{
-        display: block;
-    }
-
-    .formContainer{
-        width: 100%;
-    }
-
-    .btn--font-size{
-        font-size: 0.85rem !important;
-    }
-
-    .super-admin-grid{
-        grid-template-columns: 1fr;
-    }
-    .mon-ecole{
-        grid-template-columns: 1fr;
-    }
-    .mon-ecole .right{
-        width: 100%;
-    }
-    .custom-drawer{
-        width: 100% !important;
-    }
-    .diplome-card{
-        align-items: flex-start;
-    }
-    h3{
-        font-size: 14px !important;
-    }
-    p{
-        font-size: 13px !important;
-    }
+  .signup {
+    padding: 50px 0 25px 25px !important;
+    border-radius: 50px 50px 0 0 !important;
   }
 
+  .login_container {
+    display: block;
+  }
+
+  .formContainer {
+    width: 100%;
+  }
+
+  .btn--font-size {
+    font-size: 0.85rem !important;
+  }
+
+  .super-admin-grid {
+    grid-template-columns: 1fr;
+  }
+  .mon-ecole {
+    grid-template-columns: 1fr;
+  }
+  .mon-ecole .right {
+    width: 100%;
+  }
+  .custom-drawer {
+    width: 100% !important;
+  }
+  .diplome-card {
+    align-items: flex-start;
+  }
+  h3 {
+    font-size: 14px !important;
+  }
+  p {
+    font-size: 13px !important;
+  }
+}
