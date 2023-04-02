@@ -14,7 +14,7 @@ import { useRef, useState } from 'react';
 import NotificationsActiveTwoToneIcon from '@mui/icons-material/NotificationsActiveTwoTone';
 import { styled } from '@mui/material/styles';
 
-import { formatDistance, subDays } from 'date-fns';
+// import { formatDistance, subDays } from 'date-fns';
 
 const NotificationsBadge = styled(Badge)(
   ({ theme }) => `
@@ -99,9 +99,9 @@ function HeaderNotifications() {
                   Messaging Platform
                 </Typography>
                 <Typography variant="caption" sx={{ textTransform: 'none' }}>
-                  {formatDistance(subDays(new Date(), 3), new Date(), {
+                  {/* {formatDistance(subDays(new Date(), 3), new Date(), {
                     addSuffix: true
-                  })}
+                  })} */}
                 </Typography>
               </Box>
               <Typography

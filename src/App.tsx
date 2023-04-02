@@ -18,7 +18,7 @@ function App() {
   if (currentUser?.user?.user_type === 'super_admin') {
     content = useRoutes(superAdminRoutes)
   }
-  else if (currentUser?.user?.user_type === 'admin') {
+  else if (currentUser?.user?.user_type === 'school') {
     content = useRoutes(adminRoutes)
   }
   else if (currentUser?.user?.user_type === 'student') {

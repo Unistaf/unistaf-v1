@@ -1,8 +1,9 @@
-:root {
-  --primary-color: #ffffff;
-  --secondary-color: #0d0da3;
-  --third-color: #000000;
-  --dark-light: #393c49;
+:root{
+    --primary-color: #ffffff;
+    --secondary-color: #0D0DA3;
+    --third-color: #000000;
+    --dark-light: #393C49;
+    --border-secondary: #DDDDDD
 }
 /* !base classes */
 a {
@@ -349,6 +350,57 @@ select {
 .pagination-btn .outlined {
   background-color: var(--primary-color);
   color: #0d0da3;
+}
+.form-row{
+    flex-wrap: wrap;
+}
+.form-row *{
+    flex: 1;
+}
+[aria-invalid="true"] {
+    border: 2px solid red;
+  }
+
+/* ******************************** WYSIWYG************************* */
+.wrapper-class {
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+  .editor-class {
+    background-color:lightgray;
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+  .toolbar-class {
+    border: 1px solid #ccc;
+  }
+
+
+
+.form-row input, select, textarea{
+    background-color: #ffffff !important;
+    border: 2px solid var(--border-secondary);
+    min-width: 200px;
+}
+.form-row textarea{
+    resize: none;
+}
+.checkbox-container label{
+    margin-left: -50px;
+}
+#anaqsup{
+    width: 50px !important;
+}
+/* #anaqsup::after{
+    content: "ANAQ SUP";
+    display: block;
+    width: 200px;
+} */
+fieldset input {
+    width: initial;
+}
+fieldset label{
+    margin-left: -90px;
 }
 
 @media screen and (max-width: 900px) {
