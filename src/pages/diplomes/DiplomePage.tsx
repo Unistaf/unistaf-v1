@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import DiplomeCard from 'src/components/DiplomeCard'
+import ResourceDataMap from 'src/components/ResourceDataMap'
 import UnistafButton from 'src/components/reusable/UnistafButton'
+import { useToken } from 'src/hooks/useToken'
 import { ADMIN_ADD_DIPLOMES_URL } from 'src/navigation_paths'
+import { useGetBranchesQuery } from 'src/redux/services/extendedBrancheApi'
 import { unistafColors } from 'src/utils/colors'
 
 const DiplomePage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
+  const { token } = useToken()
+  const { data: branches } = useGetBranchesQuery({ token })
+  console.log({ branches });
+
   return (
     <div>
       <div className="flex justify-content-between align-items-center">
@@ -22,8 +29,12 @@ const DiplomePage = () => {
           color="#FFFFFF" className="" ><span>Ajouter</span>
         </UnistafButton> */}
       </div>
-      <div className="flex">
-        <DiplomeCard />
+      <div className="fle">
+        <ResourceDataMap
+          resourceData={branches?.data}
+          resourceItem={DiplomeCard}
+          resourceName="branche"
+        />
       </div>
     </div>
   )
