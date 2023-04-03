@@ -13,7 +13,7 @@ import { useAddBranchesMutation } from 'src/redux/services/extendedBrancheApi';
 import { useNavigate } from 'react-router';
 import { ADMIN_DIPLOMES_NAVIGATION } from 'src/navigation_paths';
 
-import { EditorState } from 'draft-js';
+import { EditorState, Modifier } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
@@ -34,14 +34,23 @@ const AjouterDiplome = () => {
     const [addBranche] = useAddBranchesMutation()
     const { data: faculties = {}, isError, isLoading, isFetching, error } = useGetFacultiesQuery({ token: token, schoolId: schoolId })
     // console.log({ faculties });
-    // const [editorState, setEditorState] = useState<any>(htmlToDraft('Your html contents'))
-    const [convertedContent, setConvertedContent] = useState<any>(null)
+    // const [editorState, setOutletsState] = useState<any>(htmlToDraft('Your html contents'))
+    const [convertedOutlets, setConvertedOutlets] = useState<any>(null)
+    const [convertedAdvantages, setConvertedAdvantages] = useState<any>(null)
+    const [convertedPrerequisite, setConvertedPrerequisite] = useState<any>(null)
 
-    const [editorState, setEditorState] = useState(
-        () => EditorState.createEmpty(),
-    );
+    const [outletsState, setOutletsState] = useState(() => EditorState.createEmpty());
+    const [advantagesState, setAdvantagesState] = useState(() => EditorState.createEmpty())
+    const [prerequisiteState, setPrerequisiteState] = useState(() => EditorState.createEmpty())
+    // const [outletsState, setOutletsState] = useState(
+    //     () => EditorState.createEmpty(),
+    // );
 
-    const addDiplome = (data: {}) => {
+    const addDiplome = (data: { outlets: string, advantages: string, prerequisite: string }) => {
+        // !outlets, advantages,prerequisite
+        data.outlets = convertedOutlets
+        data.advantages = convertedAdvantages
+        data.prerequisite = convertedPrerequisite
         console.log({ data });
         addBranche({ data, token }).then((res) => {
             console.log({ res });
@@ -53,9 +62,17 @@ const AjouterDiplome = () => {
 
     useEffect(() => {
         // !permet de convertir le contenu du wysiwyg en HTML
-        let html = convertToHTML(editorState.getCurrentContent());
-        // console.log({ html });
-        setConvertedContent(html);
+        // !outlets
+        let outletes: string = convertToHTML(outletsState.getCurrentContent());
+        setConvertedOutlets(outletes);
+
+        // !advantages
+        let advantages: string = convertToHTML(advantagesState.getCurrentContent())
+        setConvertedAdvantages(advantages)
+
+        // !prerequisiteState
+        let prerequisite: string = convertToHTML(prerequisiteState.getCurrentContent())
+        setConvertedPrerequisite(prerequisite)
 
         // ! convertir le html en contenu du wysiwyg
         // const editorStates = EditorState.createWithContent(convertFromHTML(html));
@@ -65,7 +82,9 @@ const AjouterDiplome = () => {
         // console.log({ editorStates });
 
 
-    }, [editorState]);
+        // Modifier.insertText(outletsState.getCurrentContent(), outletsState.getSelection(), 'contesnt')
+
+    }, [outletsState]);
 
     return (
         <div>
@@ -74,7 +93,7 @@ const AjouterDiplome = () => {
                 <span>Ajouter un diplome</span>
             </header>
             <div>
-                <form onSubmit={handleSubmit(addDiplome)} action="" className='gap-1 flex flex-column'>
+                <form onSubmit={handleSubmit(addDiplome)} action="" className='gap-1 flex flex-column mb-3'>
                     <div className="form-row flex gap-1">
                         <Input
                             register={{ ...register('name') }}
@@ -97,49 +116,6 @@ const AjouterDiplome = () => {
                             placeholder="Diplomes obtenus(BTS,LICENCE,MASTER...)"
                         /> */}
                     </div>
-                    <div className="form-row flex align-items-center gap-1">
-                        {/* <select name="" id="">
-                            <option value="">Dilome requis</option>
-                        </select> */}
-                        {/* <select
-                            {...register("dureeFormation")}
-                            name="" id=""
-                        >
-                            <option value="">Duree formation</option>
-                            <option value="1">1 an</option>
-                            <option value="2">2 an</option>
-                            <option value="3">3 an</option>
-                        </select> */}
-                        {/* <div>
-                            Accrediter par:
-                            <div className="flex">
-                                <div className="flex checkbox-container align-items-center">
-                                    <input id='anaqsup' type="checkbox" />
-                                    <label htmlFor="anaqsup" className='flex'>ANAQ SUP</label>
-                                </div>
-                                <div className='flex align-items-center'>
-                                    <input id='cames' type="checkbox" />
-                                    <label htmlFor="cames" className='flex'>CAMES</label>
-                                </div>
-                                <div className='flex align-items-center'>
-                                    <input type="checkbox" id="scales" name="scales" />
-                                    <label htmlFor="scales">Scales</label>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <fieldset>
-                            <legend>Choose your interests</legend>
-                            <div>
-                                <input type="checkbox" id="coding" name="interest" value="coding" />
-                                <label htmlFor="coding">Coding</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="music" name="interest" value="music" />
-                                <label htmlFor="music">Music</label>
-                            </div>
-                        </fieldset> */}
-
-                    </div>
                     <div className="form-row flex gap-1">
                         <Input
                             register={{ ...register('description') }}
@@ -147,75 +123,66 @@ const AjouterDiplome = () => {
                             placeholder="Description"
                             error={errors.name}
                         />
-                        <Input
+                        {/* <Input
                             register={{ ...register('prerequisite') }}
                             type="text"
                             placeholder="Prerequis"
                             error={errors.name}
-                        />
-                        <Input
+                        /> */}
+                        {/* <Input
                             register={{ ...register('outlets') }}
                             type="text"
                             placeholder="Debouches"
                             error={errors.name}
-                        />
-                        <Input
+                        /> */}
+                        {/* <Input
                             register={{ ...register('advantages') }}
                             type="text"
                             placeholder="Avantages"
                             error={errors.name}
-                        />
-                        {/* <textarea
-                            {...register('description')}
-                            name="prerequises"
-                            id="prerequises"
-                            cols={30}
-                            rows={10}
-                            placeholder="Prerequis"
-                        ></textarea> */}
-                        {/* <textarea
-                            {...register('prerequisite')}
-                            name="prerequises"
-                            id="prerequises"
-                            cols={30}
-                            rows={10}
-                            placeholder="Prerequis"
-                        ></textarea> */}
-                        {/* <textarea
-                            {...register('outlets')}
-                            name="debouches"
-                            id="debouches"
-                            cols={30}
-                            rows={10}
-                            placeholder="Debouches"
-                        /> */}
-                        {/* <textarea
-                            {...register('advantages')}
-                            name="avantages"
-                            id="avantages"
-                            cols={30}
-                            rows={10}
-                            placeholder="Avantages"
                         /> */}
                     </div>
-                    <div>
+                    <div className='mt-2'>
+                        Prérequis
                         <Editor
                             // defaultEditorState={editorState}
-                            editorState={editorState}
-                            onEditorStateChange={setEditorState}
+                            editorState={prerequisiteState}
+                            onEditorStateChange={setPrerequisiteState}
+                            wrapperClassName="wrapper-class"
+                            editorClassName="editor-class"
+                            toolbarClassName="toolbar-class"
+                        />
+                    </div>
+                    <div className='mt-2'>
+                        Avantages
+                        <Editor
+                            // defaultEditorState={editorState}
+                            editorState={advantagesState}
+                            onEditorStateChange={setAdvantagesState}
+                            wrapperClassName="wrapper-class"
+                            editorClassName="editor-class"
+                            toolbarClassName="toolbar-class"
+                        />
+                    </div>
+                    <div className='mt-2'>
+                        Débouchés
+                        <Editor
+                            // defaultEditorState={editorState}
+                            editorState={outletsState}
+                            onEditorStateChange={setOutletsState}
                             wrapperClassName="wrapper-class"
                             editorClassName="editor-class"
                             toolbarClassName="toolbar-class"
                         />
                     </div>
 
-                    <div
+                    {/* <div
                         className="preview"
-                        dangerouslySetInnerHTML={createMarkup(convertedContent)}
+                        dangerouslySetInnerHTML={createMarkup(convertedOutlets)}
                     >
 
-                    </div>
-                    <button className='btn btn-secondary' type='submit'>Ajouter</button>
+                    </div> */}
+                    <button className='btn btn-secondary mb-5' type='submit'>Ajouter</button>
                     {/* <button>Submit</button> */}
                 </form>
             </div>

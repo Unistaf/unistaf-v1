@@ -3,7 +3,10 @@ import React from 'react'
 import { unistafColors } from 'src/utils/colors'
 import bakeli from '../assets/img/bakeli.png'
 
-const DiplomeCard = () => {
+const DiplomeCard = ({ branche }: { branche: { name: string } }) => {
+    const { name } = branche
+    // console.log({ branche });
+
     return (
         <div className='diplome-card w-100 flex gap-2 p-2 mt-2'>
             <div className='diplome-img--container text-700-center'>
@@ -11,7 +14,7 @@ const DiplomeCard = () => {
             </div>
             <div>
                 <h3 className='flex justify-content-between align-items-center gap-2 m-0'>
-                    <span>BTS Marketing Digital et communication</span>
+                    <span>{name}</span>
                     <span style={{
                         display: 'inline-block',
                         padding: '0rem 0.5rem',
@@ -22,7 +25,7 @@ const DiplomeCard = () => {
                     }}
                     >Bac</span>
                 </h3>
-                <p className='m-0'>ANAQ-SUP</p>
+                {/* <p className='m-0'>ANAQ-SUP</p> */}
                 <p className='lieu flex gap-2 align-items-center'>
                     <span className='flex align-items-center' ><LocationCityOutlined /> Thies</span>
                     <span style={{

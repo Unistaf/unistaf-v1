@@ -17,6 +17,7 @@ import Falculties from './pages/school/Falculties';
 import DiplomePage from './pages/diplomes/DiplomePage';
 import AjouterDiplome from './pages/diplomes/AjouterDiplome';
 import StaticHomePage from './pages/staticHomePage/StaticHomePage';
+import NotFoundPage from './components/NotFoundPage';
 
 const Loader = (Component) => (props) =>
 (
@@ -31,6 +32,10 @@ export const routes: RouteObject[] = [
     element: <StaticHomePage />
   },
   {
+    path: '*',
+    element: <NotFoundPage />
+  },
+  {
     path: LOGIN_NAVIGATION,
     element: <Connexion />
   },
@@ -38,30 +43,30 @@ export const routes: RouteObject[] = [
     path: '/signup',
     element: <Signup />
   },
-  {
-    path: 'dashboard',
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <h1>Hello - Acceuil</h1>
-      },
-      {
-        path: 'mady',
-        element: <h1>Hello - Mady</h1>
-      },
-    ]
-  },
-  {
-    path: 'ecole',
-    element: <SidebarLayout />,
-    children: [
-      {
-        path: '',
-        element: <h1>Ecole</h1>
-      },
-    ]
-  },
+  // {
+  //   path: 'dashboard',
+  //   element: <SidebarLayout />,
+  //   children: [
+  //     {
+  //       path: '',
+  //       element: <h1>Hello - Acceuil</h1>
+  //     },
+  //     {
+  //       path: 'mady',
+  //       element: <h1>Hello - Mady</h1>
+  //     },
+  //   ]
+  // },
+  // {
+  //   path: 'ecole',
+  //   element: <SidebarLayout />,
+  //   children: [
+  //     {
+  //       path: '',
+  //       element: <h1>Ecole</h1>
+  //     },
+  //   ]
+  // },
 ];
 
 export const superAdminRoutes: RouteObject[] = [
@@ -89,6 +94,14 @@ export const adminRoutes: RouteObject[] = [
   {
     path: LOGIN_NAVIGATION,
     element: <Connexion />
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />
+  },
+  {
+    path: '',
+    element: <Navigate to={ADMIN_DASHBOARD_NAVIGATION} />
   },
   {
     path: '',
