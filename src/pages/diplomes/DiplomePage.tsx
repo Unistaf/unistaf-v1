@@ -12,7 +12,7 @@ const DiplomePage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const { token } = useToken()
   const { data: branches } = useGetBranchesQuery({ token })
-  console.log({ branches });
+  // console.log({ branches });
 
   return (
     <div>

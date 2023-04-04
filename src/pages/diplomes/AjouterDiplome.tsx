@@ -13,7 +13,7 @@ import { useAddBranchesMutation } from 'src/redux/services/extendedBrancheApi';
 import { useNavigate } from 'react-router';
 import { ADMIN_DIPLOMES_NAVIGATION } from 'src/navigation_paths';
 
-import { EditorState, Modifier } from 'draft-js';
+import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 

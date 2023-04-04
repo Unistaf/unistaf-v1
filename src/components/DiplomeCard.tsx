@@ -1,11 +1,22 @@
 import { CalendarMonth, CalendarMonthOutlined, LocationCityOutlined, Timelapse } from '@mui/icons-material'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { setCurrentDiplome } from 'src/redux/slices/diplome.slice'
 import { unistafColors } from 'src/utils/colors'
 import bakeli from '../assets/img/bakeli.png'
+// import { ADMIN_DIPLOME_DETAILS_NAVIGATION } from 'src/navigation_paths'
 
-const DiplomeCard = ({ branche }: { branche: { name: string } }) => {
-    const { name } = branche
+const DiplomeCard = ({ branche }: { branche: { name: string, id: number } }) => {
+    const { id, name } = branche
     // console.log({ branche });
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const seeDetails = () => {
+        dispatch(setCurrentDiplome(branche))
+        navigate(`${id}/details`)
+    }
 
     return (
         <div className='diplome-card w-100 flex gap-2 p-2 mt-2'>
@@ -42,7 +53,7 @@ const DiplomeCard = ({ branche }: { branche: { name: string } }) => {
                 <p className='flex align-items-center gap-0'> <Timelapse style={{ color: unistafColors[1] }} /> A votre rythme</p>
             </div>
             <div className="diplome-actions">
-                <button className='btn btn-secondary btn-100'>Modifier</button>
+                <button onClick={seeDetails} className='btn btn-secondary btn-100'>Details</button>
             </div>
         </div>
     )
