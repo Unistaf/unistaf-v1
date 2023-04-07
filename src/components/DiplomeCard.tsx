@@ -53,7 +53,7 @@ const DiplomeCard = ({ branche }: { branche: { name: string, id: number } }) => 
                 <p className='flex align-items-center gap-0'> <Timelapse style={{ color: unistafColors[1] }} /> A votre rythme</p>
             </div>
             <div className="diplome-actions">
-                <button onClick={seeDetails} className='btn btn-secondary btn-100'>Details</button>
+                <button onClick={seeDetails} className='p-1 btn-edit btn-100'>Details</button>
             </div>
         </div>
     )

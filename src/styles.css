@@ -67,6 +67,9 @@ select {
 .mx-auto {
   margin: auto;
 }
+.p-1{
+  padding: 0.5rem;
+}
 .p-2 {
   padding: 1rem;
 }
@@ -132,9 +135,22 @@ select {
   color: rgb(235, 26, 26);
   font-size: 1rem;
 }
-
+/* ********************** btns ********************** */
 .btn--font-size {
   font-size: 1rem !important;
+}
+.btn-edit{
+  border: 1px solid gray;
+  transition: all 200ms;
+  border-radius: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+.btn-edit:hover{
+  background-color: #0D0DA3;
+  color: white;
+  border: 1px solid #fff;
 }
 
 /* login */

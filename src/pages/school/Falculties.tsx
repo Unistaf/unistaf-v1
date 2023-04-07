@@ -25,7 +25,7 @@ const Falculties = () => {
                     disabled={false} loading={false}
                     handleSubmit={() => setIsOpenDrawer(true)}
                     icon={null}
-                    color="#FFFFFF" className="" ><span>Ajouter</span>
+                    color="#FFFFFF" className="btn-edit" ><span>Ajouter</span>
                 </UnistafButton>
             </div>
             <div className='flex wrap gap-2' style={{ marginTop: '1rem' }}>

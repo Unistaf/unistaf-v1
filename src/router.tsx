@@ -9,7 +9,7 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './pages/auth/Connexion';
 import Signup from './pages/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
-import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, ADMIN_SCHOOL_NAVIGATION, ADMIN_DIPLOMES_NAVIGATION, ADMIN_ADD_DIPLOMES_NAVIGATION, STATIC_HOME_PAGE, ADMIN_DIPLOME_DETAILS_NAVIGATION } from './navigation_paths';
+import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, ADMIN_SCHOOL_NAVIGATION, ADMIN_DIPLOMES_NAVIGATION, ADMIN_ADD_DIPLOMES_NAVIGATION, STATIC_HOME_PAGE, ADMIN_DIPLOME_DETAILS_NAVIGATION, ADMIN_DIPLOME_EDIT_NAVIGATION } from './navigation_paths';
 import AddFaculty from './pages/school/AddFaculty';
 import Home from './pages/superAdmin/Home';
 import MonEcole from './pages/school/components/MonEcole';
@@ -19,6 +19,7 @@ import AjouterDiplome from './pages/diplomes/AjouterDiplome';
 import StaticHomePage from './pages/staticHomePage/StaticHomePage';
 import NotFoundPage from './components/NotFoundPage';
 import DetailsDiplomePage from './pages/diplomes/DetailsDiplomePage';
+import ModifierDiplome from './pages/diplomes/ModifierDiplome';
 
 const Loader = (Component) => (props) =>
 (
@@ -131,6 +132,10 @@ export const adminRoutes: RouteObject[] = [
       {
         path: ADMIN_DIPLOME_DETAILS_NAVIGATION + '/:id/' + 'details',
         element: <DetailsDiplomePage />
+      },
+      {
+        path: ADMIN_DIPLOME_EDIT_NAVIGATION + "/:id/" + "edit",
+        element: <ModifierDiplome />
       }
     ]
   },

@@ -18,7 +18,7 @@ const DiplomePage = () => {
     <div>
       <div className="flex justify-content-between align-items-center">
         <h2>Mes Diplomes</h2>
-        <Link className='btn link btn-secondary' to={ADMIN_ADD_DIPLOMES_URL}>
+        <Link className='p-1 btn-edit' to={ADMIN_ADD_DIPLOMES_URL}>
           Ajouter
         </Link>
         {/* <UnistafButton

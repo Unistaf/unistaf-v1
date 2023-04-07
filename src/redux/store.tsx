@@ -57,6 +57,13 @@ export interface iStore {
   },
   schools: {
     listSchools: []
+  },
+  diplomes: {
+    currentDiplome: {
+      outlets: string,
+      advantages: string,
+      prerequisite: string
+    }
   }
 }
 

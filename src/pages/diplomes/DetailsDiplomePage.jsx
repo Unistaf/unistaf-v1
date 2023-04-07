@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { EditorState } from 'draft-js';
 import { createMarkup } from 'src/utils/createMarkup';
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { ADMIN_DIPLOME_EDIT_NAVIGATION } from 'src/navigation_paths';
 
 const DetailsDiplomePage = () => {
     const {id} = useParams()
@@ -11,6 +13,9 @@ const DetailsDiplomePage = () => {
     // console.log({currentDiplome});
   return (
     <div className='bg-white p-3 my-2'>
+
+        <Link className='btn-edit p-1' to={`${ADMIN_DIPLOME_EDIT_NAVIGATION}/${currentDiplome.id}/edit`}>Modifier</Link>
+
         <h1>{currentDiplome.name}</h1>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={12} sm={6}>

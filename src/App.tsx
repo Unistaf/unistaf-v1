@@ -10,6 +10,7 @@ import { iStore } from './redux/store';
 import { adminRoutes, routes, superAdminRoutes } from 'src/router';
 import { ICurrenUser } from './utils/interfaces';
 import { Toaster } from 'react-hot-toast';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 function App() {
   const currentUser: ICurrenUser | any = useSelector((state: iStore) => state.user.currentUser);
