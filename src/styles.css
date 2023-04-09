@@ -73,6 +73,12 @@ select, button {
 .p-2 {
   padding: 1rem;
 }
+.px-2{
+  padding: 1rem;
+}
+.pe-2{
+  padding: 1rem;
+}
 .p-3{
   padding: 2rem;
 }

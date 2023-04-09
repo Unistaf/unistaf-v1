@@ -92,7 +92,7 @@ export const superAdminRoutes: RouteObject[] = [
   },
 ]
 
-export const adminRoutes: RouteObject[] = [
+export const adminRoutes = [
   {
     path: LOGIN_NAVIGATION,
     element: <Connexion />
@@ -103,7 +103,8 @@ export const adminRoutes: RouteObject[] = [
   // },
   {
     path: '',
-    element: <Navigate to={ADMIN_DASHBOARD_NAVIGATION} />
+    element: <Navigate to={ADMIN_DASHBOARD_NAVIGATION} />,
+    breadcrumb: "Acceuil"
   },
   {
     path: '',
@@ -112,30 +113,37 @@ export const adminRoutes: RouteObject[] = [
       {
         path: ADMIN_DASHBOARD_NAVIGATION,
         element: <h1>Hello - Admin</h1>,
+        breadcrumb: "Acceuil"
       },
       {
         path: ADMIN_SCHOOL_NAVIGATION,
         element: <MonEcole />,
+        breadcrumb: "Mon école"
       },
       {
         path: ADMIN_FACULTIES_NAVIGATION,
         element: <Falculties />,
+        breadcrumb: "Facultés"
       },
       {
         path: ADMIN_DIPLOMES_NAVIGATION,
-        element: <DiplomePage />
+        element: <DiplomePage />,
+        breadcrumb: "Diplomes"
       },
       {
         path: ADMIN_ADD_DIPLOMES_NAVIGATION,
-        element: <AjouterDiplome />
+        element: <AjouterDiplome />,
+        breadcrumb: "Ajouter"
       },
       {
         path: ADMIN_DIPLOME_DETAILS_NAVIGATION + '/:id/' + 'details',
-        element: <DetailsDiplomePage />
+        element: <DetailsDiplomePage />,
+        breadcrumb: "Détails"
       },
       {
         path: ADMIN_DIPLOME_EDIT_NAVIGATION + "/:id/" + "edit",
-        element: <ModifierDiplome />
+        element: <ModifierDiplome />,
+        breadcrumb: "Modifier"
       }
     ]
   },

@@ -8160,7 +8160,7 @@ react-refresh@^0.11.0, "react-refresh@>=0.10.0 <1.0.0":
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.11.0.tgz"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
 
-react-router-dom@6.3.0:
+react-router-dom@>=6.0.0, react-router-dom@6.3.0:
   version "6.3.0"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.3.0.tgz"
   integrity sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==
@@ -9546,6 +9546,11 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-react-router-breadcrumbs@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/use-react-router-breadcrumbs/-/use-react-router-breadcrumbs-4.0.1.tgz"
+  integrity sha512-Zbcy0KvWt1JePFcUHJAnTr7Z+AeO9WxmPs6A5Q/xqOVoi8edPKzpqHF87WB2opXwie/QjCxrEyTB7kFg7fgXvQ==
 
 use-sync-external-store@^1.0.0:
   version "1.2.0"

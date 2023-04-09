@@ -6,13 +6,17 @@ import UnistafButton from 'src/components/reusable/UnistafButton'
 import { useToken } from 'src/hooks/useToken'
 import { ADMIN_ADD_DIPLOMES_URL } from 'src/navigation_paths'
 import { useGetBranchesQuery } from 'src/redux/services/extendedBrancheApi'
+import { adminRoutes } from 'src/router'
 import { unistafColors } from 'src/utils/colors'
+import useBreadcrumbs from "use-react-router-breadcrumbs";
 
 const DiplomePage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const { token } = useToken()
   const { data: branches } = useGetBranchesQuery({ token })
-  // console.log({ branches });
+
+  // const breadcrumbs = useBreadcrumbs(adminRoutes);
+  // console.log({ breadcrumbs });
 
 
   // branches?.data.forEach(branche => {

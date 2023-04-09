@@ -82,7 +82,7 @@ const ModifierDiplome = () => {
             if (res.status >= 400) {
                 return
             }
-            dispatch(setCurrentDiplome({ ...res.data, faculty_id: res.data.faculty.id }))
+            dispatch(setCurrentDiplome({ ...res.data, faculty_id: res.data?.faculty.id }))
             navigate(-1)
         })
     }
