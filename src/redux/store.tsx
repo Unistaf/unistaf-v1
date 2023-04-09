@@ -60,6 +60,9 @@ export interface iStore {
   },
   diplomes: {
     currentDiplome: {
+      name: string,
+      description: string,
+      faculty_id: number,
       outlets: string,
       advantages: string,
       prerequisite: string

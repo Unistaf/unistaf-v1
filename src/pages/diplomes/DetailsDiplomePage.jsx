@@ -1,22 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux';
 import { EditorState } from 'draft-js';
 import { createMarkup } from 'src/utils/createMarkup';
 import { Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ADMIN_DIPLOME_EDIT_NAVIGATION } from 'src/navigation_paths';
+import { EditAttributesTwoTone } from '@mui/icons-material';
+import {MdEdit} from 'react-icons/md'
+import {AiOutlineDelete} from 'react-icons/ai'
+import { useDeleteBrancheMutation } from 'src/redux/services/extendedBrancheApi';
+import ConfirmAction from 'src/components/ConfirmAction';
+import { useToken } from 'src/hooks/useToken';
 
 const DetailsDiplomePage = () => {
     const {id} = useParams()
+    const navigate = useNavigate()
     const {currentDiplome} = useSelector(state => state.diplomes)
-    // console.log({currentDiplome});
-  return (
-    <div className='bg-white p-3 my-2'>
+    const [deleteBranche] = useDeleteBrancheMutation()
+    const { token } = useToken()
 
-        <Link className='btn-edit p-1' to={`${ADMIN_DIPLOME_EDIT_NAVIGATION}/${currentDiplome.id}/edit`}>Modifier</Link>
+    const [openDeleteConfirmation, setOpenDeleteModalConfirmation] = useState(false)
+    // console.log({currentDiplome});
+
+    const deleteBrancheFunc = () => {
+        deleteBranche({id:currentDiplome.id, token}).then(res => {
+            // console.log({res});
+            navigate(-1)
+            
+        })
+    }
+
+  return (
+    <div className='bg-white h-100 p-3 my-2'>
+
+        <ConfirmAction
+            open={openDeleteConfirmation} 
+            handleClose={() => setOpenDeleteModalConfirmation(false)}
+         >
+            <div className='flex gap-2 justify-content-center mt-3'>
+                <button 
+                    onClick={() => setOpenDeleteModalConfirmation(false)}
+                    className='btn-delete p-1 text-white'
+                >Non</button>
+                <button
+                    onClick={deleteBrancheFunc}
+                    className='btn-edit p-1'
+                 >Oui</button>
+            </div>
+        </ConfirmAction>
+
+        <div className='flex gap-2'>
+            <Link 
+                className='btn-edit p-1 fle text-center ' 
+                to={`${ADMIN_DIPLOME_EDIT_NAVIGATION}/${currentDiplome.id}/edit`}
+            >
+                <MdEdit size={20}/> 
+            </Link>
+            <button 
+                onClick={() => setOpenDeleteModalConfirmation(true)}
+                className='p-1 btn-delete text-white'
+            >
+                <AiOutlineDelete size={20} />
+            </button>
+        </div>
 
         <h1>{currentDiplome.name}</h1>
+        <p>{currentDiplome.description}</p>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={12} sm={6}>
                 <h2>Avantages</h2>

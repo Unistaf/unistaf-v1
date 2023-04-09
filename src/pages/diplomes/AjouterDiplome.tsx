@@ -50,7 +50,7 @@ const AjouterDiplome = () => {
         data.outlets = convertedOutlets
         data.advantages = convertedAdvantages
         data.prerequisite = convertedPrerequisite
-        console.log({ data });
+        // console.log({ data });
         addBranche({ data, token }).then((res) => {
             console.log({ res });
             navigate(ADMIN_DIPLOMES_NAVIGATION)

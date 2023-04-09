@@ -14,6 +14,12 @@ const DiplomePage = () => {
   const { data: branches } = useGetBranchesQuery({ token })
   // console.log({ branches });
 
+
+  // branches?.data.forEach(branche => {
+  //   console.log(branche);
+
+  // })
+
   return (
     <div>
       <div className="flex justify-content-between align-items-center">

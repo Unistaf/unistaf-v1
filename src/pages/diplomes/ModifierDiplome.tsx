@@ -5,24 +5,29 @@ import ResourceDataMap from 'src/components/ResourceDataMap';
 import Input from '../../components/Input';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useAddBranchesMutation } from 'src/redux/services/extendedBrancheApi';
+import { useAddBranchesMutation, useEditBrancheMutation } from 'src/redux/services/extendedBrancheApi';
 import { useGetFacultiesQuery } from 'src/redux/services/extendedFacultyApi';
 import { useCurrentUserId } from 'src/hooks/useCurrentUserId';
 import { useToken } from 'src/hooks/useToken';
 import OptionListItem from 'src/components/OptionListItem';
 import { useState, useEffect } from 'react';
 import { convertToHTML, convertFromHTML } from 'draft-convert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { iStore } from '../../redux/store';
 import { getWysiwygDefaultValue } from 'src/utils/wysiwygDefaultValue';
+import { setCurrentDiplome } from 'src/redux/slices/diplome.slice';
 
 
 
 const ModifierDiplome = () => {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     // !current diplome
     const { currentDiplome } = useSelector((state: iStore) => state.diplomes)
+    // console.log({ currentDiplome });
+
+    const [editBranche] = useEditBrancheMutation()
+
     const defaultValue = {
         entityMap: {},
         blocks: [
@@ -43,7 +48,13 @@ const ModifierDiplome = () => {
 
     const userId: { userId: number } = useCurrentUserId()
     const schoolId = userId.userId
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+        defaultValues: {
+            name: currentDiplome.name,
+            description: currentDiplome.description,
+            faculty_id: currentDiplome.faculty_id
+        }
+    });
     const [addBranche] = useAddBranchesMutation()
     const { token } = useToken()
     const { data: faculties = {}, isError, isLoading, isFetching, error } = useGetFacultiesQuery({ token: token, schoolId: schoolId })
@@ -52,25 +63,40 @@ const ModifierDiplome = () => {
     const [convertedAdvantages, setConvertedAdvantages] = useState<any>(null)
     const [convertedPrerequisite, setConvertedPrerequisite] = useState<any>(null)
 
-    const [outletsState, setOutletsState] = useState(() => EditorState.createWithContent(convertFromHTML("<p>uueggd</p>")));
-    const [advantagesState, setAdvantagesState] = useState(getWysiwygDefaultValue(currentDiplome.advantages))
-    const [prerequisiteState, setPrerequisiteState] = useState(getWysiwygDefaultValue(currentDiplome.prerequisite))
+    const [outletsState, setOutletsState] = useState(() => EditorState.createWithContent(convertFromHTML(currentDiplome.outlets)));
+    const [advantagesState, setAdvantagesState] = useState(() => EditorState.createWithContent(convertFromHTML(currentDiplome.advantages)))
+    const [prerequisiteState, setPrerequisiteState] = useState(EditorState.createWithContent(convertFromHTML(currentDiplome.prerequisite)))
 
-    console.log({ currentDiplome: EditorState.createWithContent(convertFromHTML("<p>uueggd</p>")) });
+    // console.log({ currentDiplome: EditorState.createWithContent(convertFromHTML("<p>uueggd</p>")) });
 
 
-    const editDiplome = () => {
+    const editDiplome = (data) => {
+        // !outlets, advantages,prerequisite
+        data.outlets = convertedOutlets
+        data.advantages = convertedAdvantages
+        data.prerequisite = convertedPrerequisite
+        // console.log({ data });
 
+        editBranche({ id: currentDiplome.faculty_id, data, token }).then((res: { status: number, data: { faculty: { id: number } } }) => {
+            // console.log({ res });
+            if (res.status >= 400) {
+                return
+            }
+            dispatch(setCurrentDiplome({ ...res.data, faculty_id: res.data.faculty.id }))
+            navigate(-1)
+        })
     }
 
     useEffect(() => {
         // !permet de convertir le contenu du wysiwyg en HTML
         // !outlets
-        let outletes: string = convertToHTML(outletsState.getCurrentContent());
+        let outletes: string = convertToHTML((outletsState.getCurrentContent()));
         setConvertedOutlets(outletes);
+        // console.log({ outletes });
 
         // !advantages
         let advantages: string = convertToHTML(advantagesState.getCurrentContent())
+
         setConvertedAdvantages(advantages)
 
         // !prerequisiteState
@@ -87,7 +113,7 @@ const ModifierDiplome = () => {
 
         // Modifier.insertText(outletsState.getCurrentContent(), outletsState.getSelection(), 'contesnt')
 
-    }, [outletsState]);
+    }, [outletsState, advantagesState, prerequisiteState]);
 
     return (
         <div>

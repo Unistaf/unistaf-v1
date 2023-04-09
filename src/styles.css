@@ -17,7 +17,7 @@ textarea {
   border-radius: 10px;
   outline: none;
 }
-select {
+select, button {
   cursor: pointer;
 }
 .bg-white{
@@ -81,6 +81,9 @@ select {
 }
 .mt-2 {
   margin-top: 1rem;
+}
+.mt-3{
+  margin-top: 2rem;
 }
 .mb-1 {
   margin-top: 0.5rem;
@@ -146,6 +149,21 @@ select {
   padding-left: 1rem;
   padding-right: 1rem;
   cursor: pointer;
+}
+.btn-delete{
+  background-color: rgb(242, 40, 40);
+  border: 1px solid #fff;
+  transition: all 200ms;
+  border-radius: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+.btn-delete:hover{
+  background-color: rgb(190, 29, 29);
+}
+.text-white{
+  color: white;
 }
 .btn-edit:hover{
   background-color: #0D0DA3;

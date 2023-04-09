@@ -26,8 +26,39 @@ const extendedBrancheApi = unistafapi.injectEndpoints({
             }),
             invalidatesTags: ['Branches']
         }),
+        editBranche: builder.mutation({
+            query: ({ id, data, token }) => {
+                // console.log({ data: JSON.stringify(data) });
+                return {
+                    url: `/branches/${id}`,
+                    method: 'PUT',
+                    body: data,
+                    // responseHandler: (response: { json: () => any }) => response.json(),
+                    headers: {
+                        'Content-type': 'application/json',
+                        "authorization": `bearer ${token}`
+                    }
+                }
+            },
+            invalidatesTags: ['Branches']
+        }),
+        deleteBranche: builder.mutation({
+            query: ({ id, token }) => {
+                // console.log({ data: JSON.stringify(data) });
+                return {
+                    url: `/branches/${id}`,
+                    method: 'DELETE',
+                    // responseHandler: (response: { json: () => any }) => response.json(),
+                    headers: {
+                        'Content-type': 'application/json',
+                        "authorization": `bearer ${token}`
+                    }
+                }
+            },
+            invalidatesTags: ['Branches']
+        })
 
     })
 })
 
-export const { useGetBranchesQuery, useAddBranchesMutation } = extendedBrancheApi
+export const { useGetBranchesQuery, useAddBranchesMutation, useEditBrancheMutation, useDeleteBrancheMutation } = extendedBrancheApi
