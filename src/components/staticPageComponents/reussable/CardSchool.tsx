@@ -18,21 +18,27 @@ function CardSchool({
     <div
       style={{
         display: 'flex',
+        gap: "24px",
         flexWrap: 'nowrap',
-        border:'1px solid #000000',
+        border: '1px solid #000000',
         borderRadius: '30px',
-        padding: '15px'
+        padding: '15px',
       }}
     >
-      <Box component="div">
+      <Box
+        component="div"
+        sx={{
+          width: '7vw',
+          height: '7vw',
+          borderRadius: '15px'
+        }}
+      >
         <img
           src={schoolLogo}
           alt={accronyme}
           style={{
-            width: '7vw',
-            height: '7vw',
-            borderRadius: '50%',
-            objectFit: "cover"
+            width: "100%",
+            objectFit: 'cover'
           }}
         />
       </Box>

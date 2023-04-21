@@ -378,13 +378,12 @@ a.nav{
   position: relative;
   font-weight: 700;
 }
-.nav.active::after{
+.nav.active::before{
   position: absolute;
   content: '';
-  width: 100%;
+  width: 110%;
   height: 5px;
-  bottom: 0;
-  left: 0;
+  bottom: -29px;
   background-color: var(--primary-color);
 }
 

@@ -9,7 +9,7 @@ import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded
  * -------------------------------------------
  */
 export const STATIC_HOME_PAGE_NAVIGATION = '/'
-export const SCHOOL_FIND_PAGE_NAVIGATION = 'trouver-mon-ecole'
+export const SCHOOL_FIND_PAGE_NAVIGATION = '/trouver-mon-ecole'
 
 
 /** ------------------------------------------
@@ -20,7 +20,7 @@ export const REGISTER_NAVIGATION = '/signup'
 export const LOGIN_NAVIGATION = '/login'
 
 /** ------------------------------------------
- *! SUPER-ADMIN NAVIGATION                          |
+ *! SUPER-ADMIN NAVIGATION                    |
  * -------------------------------------------
  */
 export const SUPER_ADMIN_DASHBOARD_NAVIGATION = '/dashboard'
