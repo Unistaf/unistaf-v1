@@ -9,7 +9,7 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import Connexion from './pages/auth/Connexion';
 import Signup from './pages/auth/Signup';
 import AddSchool from './components/admin/AddSchool';
-import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, ADMIN_SCHOOL_NAVIGATION, ADMIN_DIPLOMES_NAVIGATION, ADMIN_ADD_DIPLOMES_NAVIGATION, STATIC_HOME_PAGE } from './navigation_paths';
+import { ADMIN_FACULTIES_NAVIGATION, ADMIN_DASHBOARD_NAVIGATION, LOGIN_NAVIGATION, SUPER_ADMIN_CREATE_SCHOOL_NAVIGATION, SUPER_ADMIN_DASHBOARD_NAVIGATION, ADMIN_SCHOOL_NAVIGATION, ADMIN_DIPLOMES_NAVIGATION, ADMIN_ADD_DIPLOMES_NAVIGATION, SCHOOL_FIND_PAGE_NAVIGATION, STATIC_HOME_PAGE_NAVIGATION } from './navigation_paths';
 import AddFaculty from './pages/school/AddFaculty';
 import Home from './pages/superAdmin/Home';
 import MonEcole from './pages/school/components/MonEcole';
@@ -17,6 +17,7 @@ import Falculties from './pages/school/Falculties';
 import DiplomePage from './pages/diplomes/DiplomePage';
 import AjouterDiplome from './pages/diplomes/AjouterDiplome';
 import StaticHomePage from './pages/staticHomePage/StaticHomePage';
+import SchoolFindPage from './pages/staticHomePage/SchoolFindPage';
 
 const Loader = (Component) => (props) =>
 (
@@ -27,8 +28,12 @@ const Loader = (Component) => (props) =>
 
 export const routes: RouteObject[] = [
   {
-    path: STATIC_HOME_PAGE,
+    path: STATIC_HOME_PAGE_NAVIGATION,
     element: <StaticHomePage />
+  },
+  {
+    path: SCHOOL_FIND_PAGE_NAVIGATION,
+    element: <SchoolFindPage />
   },
   {
     path: LOGIN_NAVIGATION,

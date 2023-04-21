@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,11 +11,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import whiteLogo from '../../assets/img/logo-blanc.png';
+import { SCHOOL_FIND_PAGE_NAVIGATION } from 'src/navigation_paths';
+import { NavLink } from 'react-router-dom';
 
 interface Props {
   /**
@@ -26,7 +26,24 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = [
+  {
+    label: 'Acceuil',
+    path: ''
+  },
+  {
+    label: 'Ecole',
+    path: SCHOOL_FIND_PAGE_NAVIGATION
+  },
+  {
+    label: 'Formation',
+    path: 'test'
+  },
+  {
+    label: 'Actualités',
+    path: 'actu'
+  }
+];
 
 export default function NavBar(props: Props) {
   const { window } = props;
@@ -38,13 +55,15 @@ export default function NavBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <img src={whiteLogo} style={{ height: '112px' }} />
+      <img src={whiteLogo} style={{ height: '80px' }} />
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.label} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} sx={{ color: '#fff' }} />
+              <NavLink to={item.path} className="nav">
+                <ListItemText primary={item.label} sx={{ color: '#fff' }} />
+              </NavLink>
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,7 +89,7 @@ export default function NavBar(props: Props) {
           }}
         >
           <Box>
-            <img src={whiteLogo} style={{ height: '112px' }} />
+            <img src={whiteLogo} style={{ height: '80px' }} />
           </Box>
           <IconButton
             color="inherit"
@@ -83,8 +102,8 @@ export default function NavBar(props: Props) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
+              <Button key={item.label} sx={{ color: '#fff' }}>
+                <NavLink className="nav" to={item.path}>{item.label}</NavLink>
               </Button>
             ))}
           </Box>
