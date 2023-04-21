@@ -89,10 +89,11 @@ const AjouterDiplome = () => {
     return (
         <div>
             <header className='flex align-items-center gap-1'>
-                <h2>Mes diplomes</h2><MoreSharp />
-                <span>Ajouter un diplome</span>
+                {/* <h2>Mes diplomes</h2> */}
+                {/* <MoreSharp /> */}
+                {/* <span>Ajouter un diplome</span> */}
             </header>
-            <div>
+            <div className='mt-3'>
                 <form onSubmit={handleSubmit(addDiplome)} action="" className='gap-1 flex flex-column mb-3'>
                     <div className="form-row flex gap-1">
                         <Input

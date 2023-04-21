@@ -66,14 +66,17 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
         >
           <Box sx={{ padding: '1rem 1rem 5rem' }} display="block">
             {breadcrumbs.map(({ match, breadcrumb }) => {
-              console.log(match);
+              console.log(match.pathname.split('/')[0]);
 
-              // if (match.params.id) {
-              //   return null
-              // }
+              if (match.pathname === '/a') {
+                // console.log({ path: match.pathname });
+                return null
+              }
+              console.log({ path: match.pathname });
+
 
               return (
-                <NavLink to={match.pathname} className='pe-2' key={match.pathname}>{match.params.id ? "Details" : breadcrumb}</NavLink>
+                <NavLink to={match.params.id ? 'match.params' : match.pathname} className='pe-2' key={match.pathname}>/ {match.params.id ? "Details" : breadcrumb}</NavLink>
               )
             })}
 

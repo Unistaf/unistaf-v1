@@ -113,7 +113,7 @@ export const adminRoutes = [
       {
         path: ADMIN_DASHBOARD_NAVIGATION,
         element: <h1>Hello - Admin</h1>,
-        breadcrumb: "Acceuil"
+        breadcrumb: null
       },
       {
         path: ADMIN_SCHOOL_NAVIGATION,
@@ -133,7 +133,7 @@ export const adminRoutes = [
       {
         path: ADMIN_ADD_DIPLOMES_NAVIGATION,
         element: <AjouterDiplome />,
-        breadcrumb: "Ajouter"
+        breadcrumb: "Ajouter Diplome"
       },
       {
         path: ADMIN_DIPLOME_DETAILS_NAVIGATION + '/:id/' + 'details',
