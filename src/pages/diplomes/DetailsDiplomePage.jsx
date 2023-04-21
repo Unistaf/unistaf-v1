@@ -32,7 +32,7 @@ const DetailsDiplomePage = () => {
     }
 
   return (
-    <div className='bg-white h-100 p-3 my-2'>
+    <div className='bg-white h-10 p-3 my-2'>
 
         <ConfirmAction
             open={openDeleteConfirmation} 

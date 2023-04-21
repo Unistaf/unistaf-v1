@@ -66,7 +66,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
         >
           <Box sx={{ padding: '1rem 1rem 5rem' }} display="block">
             {breadcrumbs.map(({ match, breadcrumb }) => {
-              // console.log({ breadcrumb, match });
+              console.log(match);
 
               // if (match.params.id) {
               //   return null

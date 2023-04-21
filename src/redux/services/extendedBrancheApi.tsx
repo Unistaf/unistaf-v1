@@ -4,8 +4,9 @@ import { unistafapi } from "./unistafapi";
 const extendedBrancheApi = unistafapi.injectEndpoints({
     endpoints: (builder) => ({
         getBranches: builder.query({
-            query: ({ token }: { token: string }) => ({
-                url: `/branches`,
+            query: ({ school, token }: { school: number, token: string }) => ({
+                // branches/school/{school}
+                url: `/branches/school/${school}`,
                 headers: {
                     "accept": "application/json",
                     'content-type': 'application/json',
@@ -35,7 +36,7 @@ const extendedBrancheApi = unistafapi.injectEndpoints({
                     body: data,
                     // responseHandler: (response: { json: () => any }) => response.json(),
                     headers: {
-                        'Content-type': 'application/json',
+                        'Content-type': 'application/json; charset=UTF-8',
                         "authorization": `bearer ${token}`
                     }
                 }

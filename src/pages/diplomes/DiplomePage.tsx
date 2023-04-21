@@ -3,17 +3,21 @@ import { Link } from 'react-router-dom'
 import DiplomeCard from 'src/components/DiplomeCard'
 import ResourceDataMap from 'src/components/ResourceDataMap'
 import UnistafButton from 'src/components/reusable/UnistafButton'
+import { useCurrentUserId } from 'src/hooks/useCurrentUserId'
 import { useToken } from 'src/hooks/useToken'
 import { ADMIN_ADD_DIPLOMES_URL } from 'src/navigation_paths'
 import { useGetBranchesQuery } from 'src/redux/services/extendedBrancheApi'
 import { adminRoutes } from 'src/router'
 import { unistafColors } from 'src/utils/colors'
 import useBreadcrumbs from "use-react-router-breadcrumbs";
+import { useSchool } from '../../hooks/useShool';
 
 const DiplomePage = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false)
   const { token } = useToken()
-  const { data: branches } = useGetBranchesQuery({ token })
+  const { school } = useSchool()
+  const { data: branches } = useGetBranchesQuery({ school: school.id, token })
+
 
   // const breadcrumbs = useBreadcrumbs(adminRoutes);
   // console.log({ breadcrumbs });

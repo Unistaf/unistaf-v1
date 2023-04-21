@@ -53,6 +53,11 @@ const ModifierDiplome = () => {
             name: currentDiplome.name,
             description: currentDiplome.description,
             faculty_id: currentDiplome.faculty_id
+        },
+        values: {
+            name: currentDiplome.name,
+            description: currentDiplome.description,
+            faculty_id: currentDiplome.faculty_id
         }
     });
     const [addBranche] = useAddBranchesMutation()
@@ -77,13 +82,13 @@ const ModifierDiplome = () => {
         data.prerequisite = convertedPrerequisite
         // console.log({ data });
 
-        editBranche({ id: currentDiplome.faculty_id, data, token }).then((res: { status: number, data: { faculty: { id: number } } }) => {
-            // console.log({ res });
-            if (res.status >= 400) {
-                return
-            }
-            dispatch(setCurrentDiplome({ ...res.data, faculty_id: res.data?.faculty.id }))
-            navigate(-1)
+        editBranche({ id: currentDiplome.id, data, token }).then((res: { status: number, data: { faculty: { id: number } } }) => {
+            navigate(-2)
+            // if (Number(res.status) < 400) {
+            //     dispatch(setCurrentDiplome({ ...res.data, faculty_id: res.data?.faculty.id }))
+            //     navigate(-1)
+            //     return
+            // }
         })
     }
 
@@ -96,7 +101,6 @@ const ModifierDiplome = () => {
 
         // !advantages
         let advantages: string = convertToHTML(advantagesState.getCurrentContent())
-
         setConvertedAdvantages(advantages)
 
         // !prerequisiteState

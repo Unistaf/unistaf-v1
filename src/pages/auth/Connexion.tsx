@@ -89,8 +89,9 @@ const Connexion = () => {
     }
 
     dispatch(loginThunk(arg)).then(res => {
+
       if (res.type === 'user/login/fulfilled') {
-        if (res.payload.access_token && res.payload.user.slug) {
+        if (res.payload.access_token) {
           dispatch(setCurrentUser(res.payload))
           if (res.payload.user.user_type === 'super_admin') {
             return navigate(SUPER_ADMIN_DASHBOARD_NAVIGATION)

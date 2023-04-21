@@ -53,13 +53,14 @@ export const persistor = persistStore(store)
 
 export interface iStore {
   user: {
-    currentUser: object
+    currentUser: { user: { school: { id: number } } }
   },
   schools: {
     listSchools: []
   },
   diplomes: {
     currentDiplome: {
+      id: number,
       name: string,
       description: string,
       faculty_id: number,

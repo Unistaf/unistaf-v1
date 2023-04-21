@@ -71,6 +71,7 @@ const AjouterDiplome = () => {
 
         // !prerequisiteState
         let prerequisite: string = convertToHTML(prerequisiteState.getCurrentContent())
+
         setConvertedPrerequisite(prerequisite)
 
         // ! convertir le html en contenu du wysiwyg
@@ -83,7 +84,7 @@ const AjouterDiplome = () => {
 
         // Modifier.insertText(outletsState.getCurrentContent(), outletsState.getSelection(), 'contesnt')
 
-    }, [outletsState]);
+    }, [outletsState, prerequisiteState, advantagesState]);
 
     return (
         <div>
