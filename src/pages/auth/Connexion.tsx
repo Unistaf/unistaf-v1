@@ -18,7 +18,7 @@ import {
   Visibility,
   VisibilityOff
 } from '@mui/icons-material';
-import iconLogoTrans from '../../assets/img/icon-logo-trans.png';
+import iconLogoTrans from '../../assets/img/logo.png';
 import iconGoogle from '../../assets/img/google.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import students from '../../assets/img/students.png'
@@ -89,16 +89,17 @@ const Connexion = () => {
     }
 
     dispatch(loginThunk(arg)).then(res => {
+
       if (res.type === 'user/login/fulfilled') {
-        if (res.payload.access_token && res.payload.user.slug) {
+        if (res.payload.access_token) {
           dispatch(setCurrentUser(res.payload))
           if (res.payload.user.user_type === 'super_admin') {
             return navigate(SUPER_ADMIN_DASHBOARD_NAVIGATION)
           }
-          else if (res.payload.user.user_type === 'admin') {
+          else if (res.payload.user.user_type === 'school') {
             return navigate(ADMIN_DASHBOARD_NAVIGATION)
           }
-          else if(res.payload.user.user_type === 'student'){
+          else if (res.payload.user.user_type === 'student') {
             return navigate(USER_DASHBOARD_NAVIGATION)
           }
           // console.log(res.payload.user.user_type)
@@ -107,7 +108,6 @@ const Connexion = () => {
       if (res.type === 'user/login/rejected') {
         // console.log('rejected');
         if (!res.payload.response) {
-          console.log('network error');
 
           // setError('email', { type: 'custom', message: 'Verifier si vous vont identifiants sont corrects' });
           return setError('email', { type: 'custom', message: 'Erreur de connexion internet' });

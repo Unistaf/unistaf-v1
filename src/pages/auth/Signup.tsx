@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerThunk } from "src/redux/services/registerThunk";
 import { AppDispatch } from "src/redux/store";
-import iconLogoTrans from '../../assets/img/icon-logo-trans.png'
+import iconLogoTrans from '../../assets/img/logo.png'
 import '../../styles.css'
 import InputRegister from "../../components/reusable/InputRegister";
 import { useForm } from "react-hook-form";

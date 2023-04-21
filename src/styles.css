@@ -1,8 +1,9 @@
-:root {
-  --primary-color: #ffffff;
-  --secondary-color: #0d0da3;
-  --third-color: #000000;
-  --dark-light: #393c49;
+:root{
+    --primary-color: #ffffff;
+    --secondary-color: #0D0DA3;
+    --third-color: #000000;
+    --dark-light: #393C49;
+    --border-secondary: #DDDDDD
 }
 body {
   font-size: 1rem;
@@ -27,8 +28,11 @@ textarea {
   border-radius: 10px;
   outline: none;
 }
-select {
+select, button {
   cursor: pointer;
+}
+.bg-white{
+  background-color: white;
 }
 .h2--title {
   /* margin: 0 !important; */
@@ -74,8 +78,20 @@ select {
 .mx-auto {
   margin: auto;
 }
+.p-1{
+  padding: 0.5rem;
+}
 .p-2 {
   padding: 1rem;
+}
+.px-2{
+  padding: 1rem;
+}
+.pe-2{
+  padding: 1rem;
+}
+.p-3{
+  padding: 2rem;
 }
 .mt-1 {
   margin-top: 0.5rem;
@@ -83,11 +99,17 @@ select {
 .mt-2 {
   margin-top: 1rem;
 }
+.mt-3{
+  margin-top: 2rem;
+}
 .mb-1 {
   margin-top: 0.5rem;
 }
 .mb-2 {
   margin-top: 1rem;
+}
+.my-2{
+  margin: 1rem 0;
 }
 .link {
   margin: 0;
@@ -113,6 +135,12 @@ select {
 .gap-2 {
   gap: 20px;
 }
+.gap-3{
+  gap: 3rem;
+}
+.h-100{
+  height: 100vh;
+}
 .text-uppercase {
   text-transform: uppercase;
 }
@@ -127,9 +155,37 @@ select {
   color: rgb(235, 26, 26);
   font-size: 1rem;
 }
-
+/* ********************** btns ********************** */
 .btn--font-size {
   font-size: 1rem !important;
+}
+.btn-edit{
+  border: 1px solid gray;
+  transition: all 200ms;
+  border-radius: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+.btn-delete{
+  background-color: rgb(242, 40, 40);
+  border: 1px solid #fff;
+  transition: all 200ms;
+  border-radius: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+.btn-delete:hover{
+  background-color: rgb(190, 29, 29);
+}
+.text-white{
+  color: white;
+}
+.btn-edit:hover{
+  background-color: #0D0DA3;
+  color: white;
+  border: 1px solid #fff;
 }
 
 /* login */
@@ -379,6 +435,57 @@ a.nav{
 .pagination-btn .outlined {
   background-color: var(--primary-color);
   color: #0d0da3;
+}
+.form-row{
+    flex-wrap: wrap;
+}
+.form-row *{
+    flex: 1;
+}
+[aria-invalid="true"] {
+    border: 2px solid red;
+  }
+
+/* ******************************** WYSIWYG************************* */
+.wrapper-class {
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+  .editor-class {
+    background-color:lightgray;
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+  .toolbar-class {
+    border: 1px solid #ccc;
+  }
+
+
+
+.form-row input, select, textarea{
+    background-color: #ffffff !important;
+    border: 2px solid var(--border-secondary);
+    min-width: 200px;
+}
+.form-row textarea{
+    resize: none;
+}
+.checkbox-container label{
+    margin-left: -50px;
+}
+#anaqsup{
+    width: 50px !important;
+}
+/* #anaqsup::after{
+    content: "ANAQ SUP";
+    display: block;
+    width: 200px;
+} */
+fieldset input {
+    width: initial;
+}
+fieldset label{
+    margin-left: -90px;
 }
 
 @media screen and (max-width: 900px) {

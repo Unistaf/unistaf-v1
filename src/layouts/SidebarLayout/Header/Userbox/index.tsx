@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import unistafLogo from '../../../../assets/img/icon-logo-trans.png'
+import unistafLogo from '../../../../assets/img/logo.png'
 
 import {
   Avatar,

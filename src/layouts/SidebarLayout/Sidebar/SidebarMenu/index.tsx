@@ -189,11 +189,11 @@ function SidebarMenu() {
       <MenuWrapper>
         <List
           component="div"
-          // subheader={
-          //   <ListSubheader component="div" disableSticky>
-          //     Mon ecole
-          //   </ListSubheader>
-          // }
+        // subheader={
+        //   <ListSubheader component="div" disableSticky>
+        //     Mon ecole
+        //   </ListSubheader>
+        // }
         >
           <SubMenuWrapper>
             <List component="div">
@@ -210,8 +210,8 @@ function SidebarMenu() {
                       {item.label}
                     </Button>
                   </ListItem>
-                )) : 
-                currentUser?.user?.user_type === 'admin' ? (
+                )) :
+                currentUser?.user?.user_type === 'school' ? (
                   ADMIN_LINKS_NAVIGATION.map((item) => (
                     <ListItem key={item.label} component="div">
                       <Button

@@ -13,10 +13,10 @@ export const SCHOOL_FIND_PAGE_NAVIGATION = 'trouver-mon-ecole'
 
 
 /** ------------------------------------------
- *! AUTHENTICATION NAVIGATION                  |
+ *! AUTHENTICATION NAVIGATION                |
  * -------------------------------------------
  */
-export const REGISTER_NAVIGATION = 'signup'
+export const REGISTER_NAVIGATION = '/signup'
 export const LOGIN_NAVIGATION = '/login'
 
 /** ------------------------------------------
@@ -40,14 +40,16 @@ export const SUPER_ADMIN_LINKS_NAVIGATION = [
 ]
 
 /** ------------------------------------------
- *! ADMIN NAVIGATION                          |
+ *! ADMIN NAVIGATION                         |
  * -------------------------------------------
  */
-const ADMIN_NAVIGATION = 'a/'
+const ADMIN_NAVIGATION = '/a/'
 export const ADMIN_DASHBOARD_NAVIGATION = ADMIN_NAVIGATION + 'dashboard/'
 export const ADMIN_FACULTIES_NAVIGATION = ADMIN_NAVIGATION + 'faculties/'
 export const ADMIN_DIPLOMES_NAVIGATION = ADMIN_NAVIGATION + 'diplomes/'
 export const ADMIN_ADD_DIPLOMES_NAVIGATION = ADMIN_DIPLOMES_NAVIGATION + 'add/'
+export const ADMIN_DIPLOME_DETAILS_NAVIGATION = ADMIN_NAVIGATION + 'diplomes'  // + {id_diplome}+/details
+export const ADMIN_DIPLOME_EDIT_NAVIGATION = ADMIN_NAVIGATION + 'diplomes'  // + {id_diplome}+/edit
 export const ADMIN_ADD_DIPLOMES_URL = 'add/'
 export const ADMIN_SCHOOL_NAVIGATION = ADMIN_NAVIGATION + 'school/'
 //  export const ADMIN_ADD_FACULTY_NAVIGATION = 'add-faculty'
