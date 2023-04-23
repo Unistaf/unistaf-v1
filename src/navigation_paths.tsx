@@ -10,6 +10,7 @@ import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded
  */
 export const STATIC_HOME_PAGE_NAVIGATION = '/'
 export const SCHOOL_FIND_PAGE_NAVIGATION = '/trouver-mon-ecole'
+export const COURSES_FIND_PAGE_NAVIGATION = '/trouver-ma-formation'
 
 
 /** ------------------------------------------

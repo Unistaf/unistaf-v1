@@ -9,6 +9,7 @@ import {
   TextField
 } from '@mui/material';
 import React from 'react';
+import Footer from 'src/components/staticPageComponents/Footer';
 import NavBar from 'src/components/staticPageComponents/NavBar';
 import CardSchool from 'src/components/staticPageComponents/reussable/CardSchool';
 import { schoolDatas } from 'src/test_datas/datas';
@@ -81,6 +82,7 @@ function SchoolFindPage() {
           ))}
         </Grid>
       </Box>
+      <Footer />
     </div>
   );
 }

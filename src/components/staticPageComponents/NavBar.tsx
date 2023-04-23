@@ -14,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
 import whiteLogo from '../../assets/img/logo-blanc.png';
-import { SCHOOL_FIND_PAGE_NAVIGATION, STATIC_HOME_PAGE_NAVIGATION } from 'src/navigation_paths';
+import { SCHOOL_FIND_PAGE_NAVIGATION,COURSES_FIND_PAGE_NAVIGATION, STATIC_HOME_PAGE_NAVIGATION } from 'src/navigation_paths';
 import { NavLink } from 'react-router-dom';
 
 interface Props {
@@ -37,7 +37,7 @@ const navItems = [
   },
   {
     label: 'Formation',
-    path: 'test'
+    path: COURSES_FIND_PAGE_NAVIGATION
   },
   {
     label: 'Actualités',
