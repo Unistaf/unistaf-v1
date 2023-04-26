@@ -3,7 +3,7 @@ import { API } from 'src/routes/api'
 
 export const unistafapi = createApi({
   reducerPath: 'apiSlice',
-  tagTypes: ["Faculties"],
+  tagTypes: ["Faculties", "Domains", "Branches"],
   baseQuery: fetchBaseQuery({ baseUrl: API }),
   endpoints: () => ({}),
 })

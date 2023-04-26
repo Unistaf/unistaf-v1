@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import InputReuse from './reusable/InputReuse'
+import InputReuse from '../../components/reusable/InputReuse'
 import { Save } from '@mui/icons-material';
-import UnistafButton from './reusable/UnistafButton';
+import UnistafButton from '../../components/reusable/UnistafButton';
 import { unistafColors } from 'src/utils/colors';
-import { stringRegexFunc } from '../helpers/stringRegex';
+import { stringRegexFunc } from '../../helpers/stringRegex';
 import { useAddFacultiesMutation } from 'src/redux/services/extendedFacultyApi';
 import { useCurrentUserId } from 'src/hooks/useCurrentUserId';
-import { useToken } from '../hooks/useToken';
+import { useToken } from '../../hooks/useToken';
 import axios from 'axios';
 import { API } from 'src/routes/api';
+import { useGetDomainesQuery } from 'src/redux/services/extendedDomainsApi';
 
 interface State {
   name: string;
@@ -17,12 +18,13 @@ interface State {
   school_id: number | string;
 }
 
-const AddFacultyForm = ({setIsOpenDrawer}) => {
-  const { userId } = useCurrentUserId()
+const AddFacultyForm = ({ setIsOpenDrawer }) => {
   const { token } = useToken()
+  const { data: domaines } = useGetDomainesQuery({ token })
+  const { userId } = useCurrentUserId()
   const [addFaculty] = useAddFacultiesMutation()
   const [name, setName] = useState('')
-  const [domaine, setDomaine] = useState('')
+  const [domaine_id, setDomaineId] = useState<number>()
   const [description, setDescription] = useState('')
   const [error, setError] = useState({
     name: '',
@@ -30,9 +32,6 @@ const AddFacultyForm = ({setIsOpenDrawer}) => {
     description: '',
     school_id: ''
   })
-
-  // console.log({ userId });
-
 
   const handleSubmit = () => {
     if (!name) {
@@ -52,7 +51,9 @@ const AddFacultyForm = ({setIsOpenDrawer}) => {
       return
     }
 
-    const data = { name, description, school_id: userId }
+    const data = { name, description, school_id: userId, domain_id: domaine_id }
+    // console.log({data});
+
 
     // axios.post(API + '/faculties', data, {
     //   headers: {
@@ -67,16 +68,16 @@ const AddFacultyForm = ({setIsOpenDrawer}) => {
     //     console.log({ err });
 
     //   })
-    addFaculty({data, token})
-    // .unwrap()
-    .then(res => {
-      console.log({res});
-      setIsOpenDrawer(false)
-    })
-    .catch(error => {
-      console.log({error});
+    addFaculty({ data, token })
+      // .unwrap()
+      .then(res => {
+        // console.log({ res });
+        setIsOpenDrawer(false)
+      })
+      .catch(error => {
+        console.log({ error });
 
-    })
+      })
 
   }
 
@@ -103,15 +104,23 @@ const AddFacultyForm = ({setIsOpenDrawer}) => {
             error.name && <p className='error-text'>{error.name}</p>
           }
         </div>
-        {/* <div className="more-branches mt-2">
-          <select onChange={(e) => {
-            setDomaine(e.target.value)
-          }}
+        <div className="more-branches mt-2">
+          <select
+            onChange={(e) => {
+              setDomaineId(Number(e.target.value))
+            }}
+            required
             name=""
             id="">
-            <option value="">Domaine d'étude</option>
+            <option value="">Selectionner le domaine</option>
+            {
+              domaines?.data.length ?
+                domaines?.data.map((domaine: { id: number, name: string }) => {
+                  return <option key={domaine.id} value={domaine.id}>{domaine.name}</option>
+                }) : <p>Pas encore de domaine</p>
+            }
           </select>
-        </div> */}
+        </div>
         <div className="more-branches mt-2">
           <textarea
             value={description}

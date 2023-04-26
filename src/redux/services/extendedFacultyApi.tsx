@@ -19,7 +19,8 @@ const extendedFacultyApi = unistafapi.injectEndpoints({
                 method: 'POST',
                 body: data,
                 headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
+                    "accept": "application/json",
+                    // 'Content-type': 'application/json; charset=UTF-8',
                     "authorization": `bearer ${token}`
                 }
             }),

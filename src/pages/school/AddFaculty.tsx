@@ -1,7 +1,7 @@
 import React from 'react'
 import UnistafButton from 'src/components/reusable/UnistafButton'
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import AddFacultyForm from 'src/components/AddFacultyForm';
+import AddFacultyForm from 'src/pages/school/AddFacultyForm';
 
 const AddFaculty = () => {
   return (
