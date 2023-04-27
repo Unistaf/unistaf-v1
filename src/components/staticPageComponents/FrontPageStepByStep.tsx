@@ -3,6 +3,7 @@ import { Typography, Grid, Box } from '@mui/material';
 import courbeDebut from '../../assets/img/courbe-debut.svg';
 import courbeFin from '../../assets/img/courbe-fin.svg';
 import UnistafRoundedButton from '../reusable/UnistafRoundedButton';
+import Section from './reussable/Section';
 
 function Step() {
   const stepsDatas = [
@@ -72,7 +73,7 @@ function Step() {
 
 function FrontPageStepByStep() {
   return (
-    <Grid  sx = {{p:5}}>
+    <Section colors="#f5f5f580">
       <Grid
         sx={{
           pt: 5,
@@ -81,53 +82,94 @@ function FrontPageStepByStep() {
           alignItems: 'center'
         }}
       >
-        <Typography variant="h2" className="subtitle">
+        <Typography variant="h2" className="subtitle" textAlign="center">
           L'orientation pas à pas avec UNISTAF
         </Typography>
       </Grid>
       <Grid
         container
-        spacing={4}
+        rowSpacing={6}
+        columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         direction="row"
         justifyContent="space-between"
         alignItems="center"
         sx={{
           p: 5,
-          my: 3,
           textAlign: 'center',
           position: 'relative'
         }}
       >
-        <img
-          style={{
+        <Grid
+          item
+          sm={4}
+          sx={{
             position: 'absolute',
             top: 0,
-            right: 0,
-            transform: 'translate(-100%, 30%)',
-            zIndex: '100'
+            right: '18%',
+            zIndex: 100,
+            '@media (max-width: 960px)': {
+              transform: 'scale(0.7)',
+              right: '17%'
+            },
+            '@media (max-width: 600px)': {
+              transform: 'rotate(90deg)',
+              top: '60%',
+              right: '-20%'
+            },
+            '@media (max-width: 400px)': {
+              transform: 'rotate(90deg) scale(0.5)',
+              right: '-30%'
+            }
           }}
-          src={courbeFin}
-          alt=""
-        />
+        >
+          <img
+            style={{
+              width: '100%'
+            }}
+            src={courbeFin}
+            alt="curve arrow"
+          />
+        </Grid>
         <Step />
-        <img
-          style={{
+        <Grid
+          item
+          sm={4}
+          sx={{
             position: 'absolute',
             bottom: 0,
-            left: 0,
-            transform: 'translate(130%, 15%)',
-            zIndex: 2
+            left: '25%',
+            zIndex: 2,
+            '@media (max-width: 960px)': {
+              transform: 'scale(0.7)',
+              left: '17%'
+            },
+            '@media (max-width: 600px)': {
+              transform: 'rotate(90deg)',
+              bottom: '50%',
+              left: '-15%'
+            },
+            '@media (max-width: 400px)': {
+              transform: 'rotate(90deg) scale(0.5)',
+              bottom: '55%',
+              left: '-20%'
+            }
           }}
-          src={courbeDebut}
-          alt=""
-        />
+        >
+          <img
+            src={courbeDebut}
+            alt="curve arrow"
+            style={{
+              width: '100%'
+            }}
+          />
+        </Grid>
       </Grid>
       <Grid container justifyContent="center">
         <UnistafRoundedButton isOutlined={true}>
           Trouver un diplôme
         </UnistafRoundedButton>
       </Grid>
-    </Grid>
+    </Section>
   );
 }
 

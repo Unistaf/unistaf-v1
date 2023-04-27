@@ -5,6 +5,17 @@
     --dark-light: #393C49;
     --border-secondary: #DDDDDD
 }
+body {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 0.875rem;
+}
 /* !base classes */
 a {
   text-decoration: none;
@@ -359,11 +370,29 @@ select, button {
 
 /* *********************** Statics pages ************************ */
 /* *********************** Front page ************************ */
+a.nav{
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.nav.active{
+  position: relative;
+  font-weight: 700;
+}
+.nav.active::before{
+  position: absolute;
+  content: '';
+  width: 110%;
+  height: 5px;
+  bottom: -29px;
+  background-color: var(--primary-color);
+}
+
 .subtitle {
   position: relative;
   width: max-content;
   color: var(--secondary-color);
-  margin: 50px 0 !important;
+  margin: 50px auto !important;
+  text-align: center;
 }
 .subtitle::after {
   content: '';
@@ -506,6 +535,9 @@ fieldset label{
   }
   .text-700-center {
     text-align: center;
+  }
+  .subtitle{
+    width: auto;
   }
 }
 

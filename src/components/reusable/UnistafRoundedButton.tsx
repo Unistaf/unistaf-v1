@@ -10,6 +10,7 @@ interface CustomButtonProps extends ButtonProps {
   isOutlined?: boolean;
   to?: string;
   size?: 'small' | 'medium' | 'large';
+  largueur?: string;
 }
 
 const StyledButton = styled(Button)<CustomButtonProps>(
@@ -19,6 +20,7 @@ const StyledButton = styled(Button)<CustomButtonProps>(
     textColor = '#fff',
     borderColor = backgroundColor,
     isOutlined = false,
+    largueur = 'max-content',
     size
   }) => {
     const buttonTextColor =
@@ -27,7 +29,7 @@ const StyledButton = styled(Button)<CustomButtonProps>(
         ? theme.palette.getContrastText(backgroundColor)
         : undefined);
     const buttonBackgroundColor = isOutlined
-      ? '#ffffff'
+      ? 'transparent' || backgroundColor
       : backgroundColor || '#ffffff';
 
     let buttonPadding;
@@ -58,9 +60,10 @@ const StyledButton = styled(Button)<CustomButtonProps>(
       border: `1px solid ${borderColor || buttonTextColor}`,
       padding: buttonPadding,
       fontSize: buttonFontSize,
+      width: largueur,
       '&:hover': {
         backgroundColor: isOutlined ? borderColor : buttonTextColor,
-        color: buttonBackgroundColor
+        color: textColor || buttonBackgroundColor
       }
     };
   }
